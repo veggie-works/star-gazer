@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://duuuqcjdws3fs"]
+
+[ext_resource type="Script" path="res://scripts/input/input_manager.gd" id="1_ad7e8"]
+[ext_resource type="PackedScene" uid="uid://chl0ryppb2yc5" path="res://scenes/input/input_action.tscn" id="2_1u20b"]
+
+[node name="input_manager" type="Node"]
+editor_description = "Manager for a player's inputs."
+script = ExtResource("1_ad7e8")
+
+[node name="input_actions" type="Node" parent="."]
+editor_description = "Container for all child input actions."
+
+[node name="jump_action" parent="input_actions" instance=ExtResource("2_1u20b")]
+action_name = &"jump"

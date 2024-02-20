@@ -1,0 +1,30 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4apxkm0xtxpr"]
+
+[ext_resource type="PackedScene" uid="uid://vstl3bg568s7" path="res://scenes/levels/main_menu/main_menu.tscn" id="1_5cikp"]
+
+[node name="main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="screen_container" type="SubViewportContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="screen" type="SubViewport" parent="screen_container"]
+unique_name_in_owner = true
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(960, 540)
+render_target_update_mode = 4
+
+[node name="main_menu" parent="screen_container/screen" instance=ExtResource("1_5cikp")]

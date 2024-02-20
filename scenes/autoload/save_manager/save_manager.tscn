@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://gpkusswctka2"]
+
+[ext_resource type="Script" path="res://scripts/autoload/save_manager/save_manager.gd" id="1_tkd10"]
+
+[node name="save_manager" type="Node"]
+script = ExtResource("1_tkd10")
+
+[connection signal="tree_exiting" from="." to="." method="_on_tree_exiting"]

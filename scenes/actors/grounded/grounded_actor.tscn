@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://x1nnrls1fmdm"]
+
+[ext_resource type="PackedScene" uid="uid://dwibdkrqgbotj" path="res://scenes/actors/actor.tscn" id="1_y7557"]
+[ext_resource type="Script" path="res://scripts/actors/grounded/grounded_actor.gd" id="2_lvnct"]
+
+[node name="grounded_actor" instance=ExtResource("1_y7557")]
+script = ExtResource("2_lvnct")
+gravity_scale = 4.0
+jump_height = 200.0
+run_speed = 600.0
+
+[node name="ground_raycasts" type="Node2D" parent="." index="3"]
+editor_description = "Container for all ground ray casts."
+
+[node name="raycast0" type="RayCast2D" parent="ground_raycasts" index="0"]
+editor_description = "The first ground ray cast, or the leftmost one if the player's scale is positive."
+position = Vector2(-64, 64)
+target_position = Vector2(0, 1)
+
+[node name="raycast1" type="RayCast2D" parent="ground_raycasts" index="1"]
+editor_description = "The second ground ray cast, or the middle one if the player's scale is positive."
+position = Vector2(0, 64)
+target_position = Vector2(0, 1)
+
+[node name="raycast2" type="RayCast2D" parent="ground_raycasts" index="2"]
+editor_description = "The third ground ray cast, or the rightmost one if the player's scale is positive."
+position = Vector2(64, 64)
+target_position = Vector2(0, 1)
