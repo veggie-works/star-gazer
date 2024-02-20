@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://vstl3bg568s7"]
+[gd_scene load_steps=4 format=3 uid="uid://vstl3bg568s7"]
 
 [ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="1_7ds0w"]
 [ext_resource type="Script" path="res://scripts/levels/main_menu/main_menu.gd" id="1_wmvsf"]
+[ext_resource type="PackedScene" uid="uid://d5l2m2e8q2x4" path="res://scenes/ui/settings/settings_ui.tscn" id="3_dsu3g"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -10,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_wmvsf")
 
 [node name="animator" type="AnimationPlayer" parent="."]
@@ -38,4 +40,10 @@ text = "Start"
 layout_mode = 2
 text = "Settings"
 
+[node name="settings_ui" parent="." instance=ExtResource("3_dsu3g")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="margin_container/menu_buttons/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="margin_container/menu_buttons/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="hidden" from="settings_ui" to="." method="_on_settings_ui_hidden"]

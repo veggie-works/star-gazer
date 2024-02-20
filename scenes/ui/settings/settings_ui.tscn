@@ -1,0 +1,50 @@
+[gd_scene load_steps=4 format=3 uid="uid://d5l2m2e8q2x4"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings/settings_ui.gd" id="1_cgc55"]
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_62b7l"]
+[ext_resource type="PackedScene" uid="uid://ce5k56rlqcob4" path="res://scenes/ui/settings/input_bindings_panel/input_bindings_panel.tscn" id="3_cynhj"]
+
+[node name="settings_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_cgc55")
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_right = 960.0
+offset_bottom = 540.0
+size_flags_vertical = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="menu_buttons" type="VBoxContainer" parent="margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="input_bindings_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
+layout_mode = 2
+text = "Input Bindings"
+
+[node name="spacer" type="Control" parent="margin_container/menu_buttons"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="back_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
+layout_mode = 2
+text = "Back"
+
+[node name="input_bindings_panel" parent="." instance=ExtResource("3_cynhj")]
+visible = false
+layout_mode = 1
+
+[connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="pressed" from="margin_container/menu_buttons/input_bindings_button" to="." method="_on_input_bindings_button_pressed"]
+[connection signal="pressed" from="margin_container/menu_buttons/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="hidden" from="input_bindings_panel" to="." method="_on_input_bindings_panel_hidden"]

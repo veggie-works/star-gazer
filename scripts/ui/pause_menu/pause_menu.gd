@@ -5,8 +5,12 @@ class_name PauseMenu extends BaseUI
 @onready var animator: AnimationPlayer = $animator
 ## The texture that blurs when the pause menu appears
 @onready var background_blur: TextureRect = $background_blur
+## Parent container of menu buttons list
+@onready var margin_container: MarginContainer = $margin_container
 ## Parent of the main pause menu buttons
 @onready var menu_buttons: VBoxContainer = $margin_container/menu_buttons
+## UI for configuring game settings
+@onready var settings_ui: Control = $settings_ui
 ## A confirmation warning that appears when quitting the game
 @onready var quit_warning: VBoxContainer = $margin_container/quit_warning
 ## The viewport that the current level scene is a child of
@@ -26,6 +30,8 @@ func _input(event: InputEvent) -> void:
 			return
 			
 		if visible:
+			settings_ui.hide()
+			margin_container.show()
 			close()
 		else:
 			open()
@@ -51,7 +57,8 @@ func _on_resume_button_pressed() -> void:
 	close()
 
 func _on_settings_button_pressed() -> void:
-	pass
+	margin_container.hide()
+	settings_ui.show()
 
 func _on_quit_button_pressed() -> void:
 	menu_buttons.hide()
@@ -64,3 +71,6 @@ func _on_quit_confirm_pressed() -> void:
 func _on_quit_cancel_pressed() -> void:
 	quit_warning.hide()
 	menu_buttons.show()
+
+func _on_settings_ui_hidden():
+	margin_container.show()

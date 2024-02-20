@@ -1,5 +1,5 @@
 ## Panel for changing input bindings
-class_name InputBindingsPanel extends BaseUI
+class_name InputBindingsPanel extends Control
 
 ## The input rebinder prefab to spawn for each input binding
 @export var input_rebinder_prefab: PackedScene
@@ -15,4 +15,4 @@ func _ready() -> void:
 		rebinders_container.move_child(input_rebinder, rebinders_container.get_child_count() - 2)
 
 func _on_back_button_pressed() -> void:
-	close()
+	hide()

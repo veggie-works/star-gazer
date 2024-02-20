@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://ce5k56rlqcob4"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings/input_bindings_panel/input_bindings_panel.gd" id="1_6w3m7"]
-[ext_resource type="PackedScene" uid="uid://bniejhi1vxwtl" path="res://scenes/ui/input_bindings_panel/input_rebinder.tscn" id="2_f86ar"]
+[ext_resource type="PackedScene" uid="uid://bniejhi1vxwtl" path="res://scenes/ui/settings/input_bindings_panel/input_rebinder.tscn" id="2_f86ar"]
 
 [node name="input_bindings_panel" type="Control"]
 editor_description = "Panel for editing key/mouse and controller bindings."
