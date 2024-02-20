@@ -8,8 +8,8 @@
 [node name="level1" instance=ExtResource("1_1v3q0")]
 
 [node name="test_platform" parent="." index="0" instance=ExtResource("2_fpf12")]
-position = Vector2(183, 514)
-scale = Vector2(3.04, 0.429688)
+position = Vector2(240, 514)
+scale = Vector2(4.04, 0.429688)
 
 [node name="test_platform2" parent="." index="1" instance=ExtResource("2_fpf12")]
 position = Vector2(689, 382)
@@ -24,3 +24,15 @@ scale = Vector2(0.68, 2.12)
 target_scene = "res://scenes/levels/level_0.tscn"
 target_name = "door_right"
 enter_direction = "right"
+
+[node name="test_platform3" parent="." index="4" instance=ExtResource("2_fpf12")]
+position = Vector2(521, 485)
+scale = Vector2(0.417754, 1.50356)
+
+[node name="test_platform4" parent="." index="5" instance=ExtResource("2_fpf12")]
+position = Vector2(25, 154)
+scale = Vector2(0.659609, 3.04646)
+
+[node name="test_platform5" parent="." index="6" instance=ExtResource("2_fpf12")]
+position = Vector2(909, 158)
+scale = Vector2(-0.498646, 3.96361)

@@ -20,3 +20,15 @@ enter_direction = "left"
 
 [node name="save_point" parent="." index="2" instance=ExtResource("5_3qii8")]
 position = Vector2(306, 475)
+
+[node name="test_platform2" parent="." index="3" instance=ExtResource("2_0xigl")]
+position = Vector2(897, 131)
+scale = Vector2(1, 3)
+
+[node name="test_platform3" parent="." index="4" instance=ExtResource("2_0xigl")]
+position = Vector2(342, -4)
+scale = Vector2(7.8, 1)
+
+[node name="test_platform4" parent="." index="5" instance=ExtResource("2_0xigl")]
+position = Vector2(-39, 276)
+scale = Vector2(-0.894892, 3.72755)
