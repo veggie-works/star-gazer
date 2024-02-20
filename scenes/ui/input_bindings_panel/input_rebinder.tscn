@@ -1,0 +1,45 @@
+[gd_scene load_steps=2 format=3 uid="uid://bniejhi1vxwtl"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings/input_bindings_panel/input_rebinder.gd" id="1_j60hr"]
+
+[node name="input_rebinder" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+script = ExtResource("1_j60hr")
+
+[node name="rebinder_container" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="action_label" type="Label" parent="rebinder_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+text = "Action"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="rebind_key_or_mouse_button" type="Button" parent="rebinder_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Key/Mouse Button"
+
+[node name="rebind_joypad_button" type="Button" parent="rebinder_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+focus_mode = 0
+text = "Joypad Button"
+
+[connection signal="pressed" from="rebinder_container/rebind_key_or_mouse_button" to="." method="_on_rebind_key_or_mouse_button_pressed"]
+[connection signal="pressed" from="rebinder_container/rebind_joypad_button" to="." method="_on_rebind_joypad_button_pressed"]

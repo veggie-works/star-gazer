@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c3t7i680dmac2"]
+
+[ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_0dkf0"]
+[ext_resource type="PackedScene" uid="uid://ce5k56rlqcob4" path="res://scenes/ui/input_bindings_panel/input_bindings_panel.tscn" id="2_phoq6"]
+[ext_resource type="PackedScene" uid="uid://b5csifcrytegw" path="res://scenes/ui/pause_menu/pause_menu.tscn" id="3_wg14w"]
+[ext_resource type="PackedScene" uid="uid://b7efyr5igynpq" path="res://scenes/ui/fader/fader.tscn" id="4_t5kd5"]
+
+[node name="ui_manager" type="Control"]
+editor_description = "UI manager singleton that manages all user interfaces."
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0dkf0")
+ui_scenes = Array[PackedScene]([ExtResource("2_phoq6"), ExtResource("3_wg14w"), ExtResource("4_t5kd5")])
+
+[node name="ui_layer" type="CanvasLayer" parent="."]
+editor_description = "The canvas in which all user interfaces will be contained in."
