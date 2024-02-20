@@ -1,2 +1,2 @@
-# star-gazer-game
+# stargazer
 a game made in godot
