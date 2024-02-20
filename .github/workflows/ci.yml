@@ -1,0 +1,113 @@
+name: Export and Publish
+env:
+  BUTLER_CREDENTIALS: ${{ secrets.BUTLER_CREDENTIALS }}
+  ITCH_GAME: ${{ secrets.ITCH_GAME }}
+  ITCH_USER: ${{ secrets.ITCH_USER }}
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: main
+jobs:
+  export_game:
+    runs-on: ubuntu-latest
+    permissions: write-all
+    name: Export game
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Export
+        id: export
+        uses: firebelley/godot-export@v5.2.1
+        with:
+          godot_executable_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_linux.x86_64.zip
+          godot_export_templates_download_url: https://downloads.tuxfamily.org/godotengine/4.2.1/Godot_v4.2.1-stable_export_templates.tpz
+          relative_project_path: ./
+          archive_output: true
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: artifacts
+          path: ${{ steps.export.outputs.archive_directory }}/*
+      - name: Get Version
+        id: get_version
+        run: |
+          VERSION=$(grep "^## \[.*]" changelog.md | head -1 | sed -e 's/## \[//' | sed -e 's/\].*//')
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+      - name: Get ChangeLog
+        id: get_changelog
+        run: |
+          VERSIONS=$(grep "^## \[.*]" changelog.md)
+          FIRST_TWO=$(echo "$VERSIONS" | head -2)
+          START=$(echo "$FIRST_TWO" | head -1 | sed -e 's/[]\/$*.^[]/\\&/g')
+          END=$(echo "$FIRST_TWO" | tail -1 | sed -e 's/[]\/$*.^[]/\\&/g')
+          BODY=$(sed -n -r "/$START/,/$END/p" changelog.md | head -n -1)
+          echo 'CHANGELOG<<EOF' >> $GITHUB_OUTPUT
+          echo "$BODY" >> $GITHUB_OUTPUT
+          echo 'EOF' >> $GITHUB_OUTPUT
+      - name: Unzip Web artifact
+        run: unzip ${{ steps.export.outputs.archive_directory }}/Web.zip -d web
+      - name: Enable COEP/COOP headers
+        run: |
+          curl https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js -o web/coi-serviceworker.js
+          echo '<script src="coi-serviceworker.js"></script>' >> web/index.html
+      - name: Upload GitHub Pages artifact
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          name: github-pages
+          path: web
+      - name: Create release
+        uses: ncipollo/release-action@v1
+        with:
+          body: ${{ steps.get_changelog.outputs.CHANGELOG }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.get_version.outputs.VERSION }}
+          artifacts: ${{ steps.export.outputs.archive_directory }}/*
+  deploy-pages:
+    needs: export_game
+    permissions: write-all
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: github-pages
+          path: github-pages
+      - name: Upload Pages artifact
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: github-pages
+  deploy-itch:
+    needs: export_game
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: artifacts
+          path: ./
+      - name: Deploy Windows build
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          CHANNEL: windows
+          PACKAGE: Windows Desktop.zip
+      - name: Deploy Linux build
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          CHANNEL: linux
+          PACKAGE: LinuxX11.zip
+      - name: Deploy macOS build
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          CHANNEL: osx
+          PACKAGE: macOS.zip
+      - name: Deploy web build
+        uses: josephbmanley/butler-publish-itchio-action@master
+        env:
+          CHANNEL: html5
+          PACKAGE: Web.zip

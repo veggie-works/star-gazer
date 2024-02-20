@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://vstl3bg568s7"]
+
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="1_7ds0w"]
+[ext_resource type="Script" path="res://scripts/levels/main_menu/main_menu.gd" id="1_wmvsf"]
+
+[node name="main_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wmvsf")
+
+[node name="animator" type="AnimationPlayer" parent="."]
+
+[node name="margin_container" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="menu_buttons" type="VBoxContainer" parent="margin_container"]
+layout_mode = 2
+alignment = 1
+
+[node name="start_button" parent="margin_container/menu_buttons" instance=ExtResource("1_7ds0w")]
+layout_mode = 2
+text = "Start"
+
+[node name="settings_button" parent="margin_container/menu_buttons" instance=ExtResource("1_7ds0w")]
+layout_mode = 2
+text = "Settings"
+
+[connection signal="pressed" from="margin_container/menu_buttons/start_button" to="." method="_on_start_button_pressed"]

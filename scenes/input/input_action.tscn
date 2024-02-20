@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://chl0ryppb2yc5"]
+
+[ext_resource type="Script" path="res://scripts/input/input_action.gd" id="1_od5oj"]
+
+[node name="input_action" type="Node"]
+editor_description = "Represents an action triggered by the player's input."
+script = ExtResource("1_od5oj")
+
+[node name="buffer_timer" type="Timer" parent="."]
+editor_description = "Counts down the amount of time that the input action is buffered for."
+one_shot = true

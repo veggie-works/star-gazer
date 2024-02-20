@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://docmkvul38axu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3u0q3"]
+font_size = 18
+outline_size = 2
+outline_color = Color(0, 0, 0, 1)
+
+[node name="debug_panel" type="Control"]
+editor_description = "Displays debug information about a player."
+layout_mode = 3
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 256.0
+grow_vertical = 2
+size_flags_vertical = 3
+
+[node name="panel" type="Panel" parent="."]
+editor_description = "Debug panel background."
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="label" type="Label" parent="panel"]
+editor_description = "The label containing the actual data text of the player."
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Debug"
+label_settings = SubResource("LabelSettings_3u0q3")
+horizontal_alignment = 1
+vertical_alignment = 1
