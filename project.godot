@@ -52,9 +52,10 @@ move_right={
 
 [layer_names]
 
-2d_physics/layer_2="player"
-2d_physics/layer_3="terrain"
-2d_physics/layer_4="interactive"
+2d_physics/layer_1="player"
+2d_physics/layer_2="terrain"
+2d_physics/layer_3="interactive"
+2d_physics/layer_4="door"
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="player attack"
 2d_physics/layer_7="enemy attack"

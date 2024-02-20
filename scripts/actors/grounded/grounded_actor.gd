@@ -13,6 +13,8 @@ class_name GroundedActor extends Actor
 
 ## Emitted when the actor lands
 signal landed
+## Emitted when the actor arrives at the location it was instructed to move to
+signal arrived
 
 ## The project setting's gravity value
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -53,3 +55,12 @@ func land() -> void:
 ## Move the actor in the given horizontal direction
 func move(direction: float) -> void:
 	velocity.x = direction * run_speed
+
+## Move to a target x position
+func move_to(target_x: float) -> void:
+	move(sign(target_x - global_position.x))
+	while not abs(global_position.x - target_x) <= 1:
+		if not is_inside_tree():
+			break
+		await get_tree().process_frame
+	arrived.emit()

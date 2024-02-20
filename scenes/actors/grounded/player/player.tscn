@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=4 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpgtc"]
+size = Vector2(128, 128)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
 collision_layer = 1
@@ -12,3 +15,11 @@ script = ExtResource("2_d5awl")
 [node name="coyote_timer" type="Timer" parent="timers" index="0"]
 wait_time = 0.1
 one_shot = true
+
+[node name="triggers" type="Node2D" parent="." index="5"]
+
+[node name="door_trigger" type="Area2D" parent="triggers" index="0"]
+collision_mask = 0
+
+[node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
+shape = SubResource("RectangleShape2D_wpgtc")

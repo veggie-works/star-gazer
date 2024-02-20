@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://wne6neq8232w"]
+
+[ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_1v3q0"]
+[ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="2_fpf12"]
+[ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_iawra"]
+[ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_fjv6x"]
+
+[node name="level1" instance=ExtResource("1_1v3q0")]
+
+[node name="test_platform" parent="." index="0" instance=ExtResource("2_fpf12")]
+position = Vector2(183, 514)
+scale = Vector2(3.04, 0.429688)
+
+[node name="test_platform2" parent="." index="1" instance=ExtResource("2_fpf12")]
+position = Vector2(689, 382)
+scale = Vector2(3.04, 0.429688)
+
+[node name="save_point" parent="." index="2" instance=ExtResource("4_fjv6x")]
+position = Vector2(686, 323)
+
+[node name="door_left" parent="." index="3" instance=ExtResource("3_iawra")]
+position = Vector2(25, 419)
+scale = Vector2(0.68, 2.12)
+target_scene = "res://scenes/levels/level_0.tscn"
+target_name = "door_right"
+enter_direction = "right"

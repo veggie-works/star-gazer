@@ -1,3 +1,4 @@
+## The game's main menu
 class_name MainMenu extends BaseLevel
 
 ## Parent container of menu buttons list
@@ -14,8 +15,8 @@ func _on_settings_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	UIManager.create_ui(PauseMenu, true)
-	SceneManager.change_scene(BaseLevel)
-
+	SaveManager.load_game(0)
+	SceneManager.change_scene(SaveManager.save_data.save_scene)
 
 func _on_settings_ui_hidden():
 	margin_container.show()

@@ -2,7 +2,19 @@
 class_name Player extends GroundedActor
 
 ## Timer that counts down the time the player may still jump while in the air after walking off a ledge
-@onready var coyote_timer: Timer = $timers/coyote_timer;
+@onready var coyote_timer: Timer = $timers/coyote_timer
+## The area that triggers a door to start a scene transition
+@onready var door_trigger_collider: CollisionShape2D = $triggers/door_trigger/collision
+
+## Whether input should be disabled
+var disable_input: bool
+
+## Whether the player is currently in a cutscene
+var in_cutscene: bool:
+	set(value):
+		disable_input = value
+		door_trigger_collider.set_deferred("disabled", value)
+		
 
 ## Whether the player is still in coyote time
 var in_coyote_time: bool:
@@ -23,6 +35,9 @@ func update_coyote_time() -> void:
 
 ## Update the player jump
 func update_jump() -> void:
+	if disable_input:
+		return
+		
 	if InputManager.is_buffered("jump") and (is_grounded() or in_coyote_time):
 		coyote_timer.stop()
 		jump()
@@ -38,5 +53,8 @@ func update_land() -> void:
 
 ## Check for movement inputs and move the player accordingly
 func update_movement_inputs() -> void:
+	if disable_input:
+		return
+		
 	var direction = Input.get_axis("move_left", "move_right")
 	move(direction)

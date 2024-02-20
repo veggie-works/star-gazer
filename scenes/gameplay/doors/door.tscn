@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://da7mkw7n7ptqn"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/doors/door.gd" id="1_f28cp"]
+[ext_resource type="PackedScene" uid="uid://bmqoaf40cddce" path="res://scenes/actors/grounded/player/player.tscn" id="2_3k2lv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk1gj"]
+size = Vector2(64, 64)
+
+[node name="door" type="Area2D" groups=["doors"]]
+collision_layer = 8
+script = ExtResource("1_f28cp")
+player_prefab = ExtResource("2_3k2lv")
+target_name = null
+enter_direction = null
+
+[node name="collision" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_jk1gj")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
