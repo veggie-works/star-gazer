@@ -51,7 +51,7 @@ func delete_ui(ui: GDScript) -> void:
 		ui_layer.remove_child(ui_to_delete)
 		ui_to_delete.queue_free()
 		
-	instantiated_uis.erase(ui_to_delete.name)
+	instantiated_uis.erase(ui_to_delete)
 
 ## Fetch a UI instance
 func get_ui(ui: GDScript) -> BaseUI:

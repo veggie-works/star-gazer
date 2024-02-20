@@ -28,6 +28,10 @@ UIManager="*res://scenes/ui/ui_manager.tscn"
 window/size/viewport_width=960
 window/size/viewport_height=540
 
+[dotnet]
+
+project/assembly_name="Star Gazer"
+
 [input]
 
 jump={
