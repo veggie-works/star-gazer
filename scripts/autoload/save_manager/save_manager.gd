@@ -14,7 +14,7 @@ const SETTINGS_PATH: String = "user://settings.tres"
 var settings := Settings.new()
 
 ## The currently loaded save game data
-var save_data: SaveData
+var save_data := SaveData.new()
 
 ## The ID of the selected profile
 var selected_profile_id: int = 0
@@ -31,6 +31,7 @@ func _init() -> void:
 func load_game(profile_id: int = 0) -> void:
 	selected_profile_id = profile_id
 	save_data = load_game_data()
+	print("Loaded save data")
 
 ## Load game data from disk
 func load_game_data() -> SaveData:

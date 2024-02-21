@@ -10,6 +10,22 @@
 [ext_resource type="Texture2D" uid="uid://jga4ofmoqxd6" path="res://art/actors/player/run4.png" id="8_6q1s3"]
 [ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://art/actors/player/run5.png" id="9_ui3d5"]
 
+[sub_resource type="Animation" id="Animation_dqnjo"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ib1wq")]
+}
+
 [sub_resource type="Animation" id="Animation_gb0pr"]
 resource_name = "run"
 loop_mode = 1
@@ -25,22 +41,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("4_y4v2v"), ExtResource("5_w02ge"), ExtResource("6_mpqb6"), ExtResource("7_ttyxk"), ExtResource("8_6q1s3"), ExtResource("9_ui3d5")]
-}
-
-[sub_resource type="Animation" id="Animation_dqnjo"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("3_ib1wq")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xiqk2"]

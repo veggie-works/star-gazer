@@ -8,6 +8,8 @@ class_name MainMenu extends BaseLevel
 
 func _ready() -> void:
 	UIManager.delete_ui(PauseMenu)
+	if OS.is_debug_build():
+		UIManager.delete_ui(DebugPanel)
 
 func _on_settings_button_pressed() -> void:
 	margin_container.hide()
@@ -15,6 +17,8 @@ func _on_settings_button_pressed() -> void:
 
 func _on_start_button_pressed() -> void:
 	UIManager.create_ui(PauseMenu, true)
+	if OS.is_debug_build():
+		UIManager.create_ui(DebugPanel)
 	SaveManager.load_game(0)
 	SceneManager.change_scene(SaveManager.save_data.save_scene)
 

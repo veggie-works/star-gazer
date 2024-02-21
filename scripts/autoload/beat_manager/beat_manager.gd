@@ -8,7 +8,7 @@ extends Node
 signal beat
 
 ## The amount of time left before the next beat
-var time_left_before_beat: float:
+var time_to_next_beat: float:
 	get:
 		return beat_timer.time_left
 

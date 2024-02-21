@@ -48,6 +48,7 @@ func is_grounded() -> bool:
 func jump() -> void:
 	velocity.y = -sqrt(2 * Globals.gravity * gravity_scale * jump_height);
 
+## Jump from the actor's starting position to a target position
 func jump_to(target_position: Vector2, apex_height: float, jump_time: float) -> void:
 	var diff = target_position - global_position
 	velocity.x = diff.x / jump_time
