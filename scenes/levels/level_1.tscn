@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=3 uid="uid://wne6neq8232w"]
+[gd_scene load_steps=7 format=3 uid="uid://wne6neq8232w"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_1v3q0"]
 [ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="2_fpf12"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_iawra"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_fjv6x"]
+[ext_resource type="Script" path="res://scenes/levels/jump_trigger.gd" id="5_xcv55"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5rkf"]
+size = Vector2(64, 10)
 
 [node name="level1" instance=ExtResource("1_1v3q0")]
 
@@ -36,3 +40,17 @@ scale = Vector2(0.659609, 3.04646)
 [node name="test_platform5" parent="." index="6" instance=ExtResource("2_fpf12")]
 position = Vector2(909, 158)
 scale = Vector2(-0.498646, 3.96361)
+
+[node name="jump_trigger" type="Area2D" parent="." index="7"]
+position = Vector2(352, 481)
+collision_layer = 0
+script = ExtResource("5_xcv55")
+
+[node name="collision" type="CollisionShape2D" parent="jump_trigger" index="0"]
+position = Vector2(29, 0)
+shape = SubResource("RectangleShape2D_g5rkf")
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]
+zoom = Vector2(0.25, 0.25)
+
+[connection signal="body_entered" from="jump_trigger" to="jump_trigger" method="_on_body_entered"]

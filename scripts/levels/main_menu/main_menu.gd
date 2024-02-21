@@ -16,7 +16,7 @@ func _on_settings_button_pressed() -> void:
 func _on_start_button_pressed() -> void:
 	UIManager.create_ui(PauseMenu, true)
 	SaveManager.load_game(0)
-	await SceneManager.change_scene(SaveManager.save_data.save_scene)
+	SceneManager.change_scene(SaveManager.save_data.save_scene)
 
 func _on_settings_ui_hidden():
 	margin_container.show()

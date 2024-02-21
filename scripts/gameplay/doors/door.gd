@@ -26,15 +26,18 @@ func enter_from() -> void:
 	level_root.add_child(player)
 	player.in_cutscene = true
 	player.global_position = global_position
-	var target_sign: float = 1
-	match enter_direction:
-		"left":
-			target_sign = -1
-		"top", "bottom":
-			target_sign = 0
-	var target_x = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + player.get_node("collision").shape.get_rect().size.x / 2 + 4)
-	player.move_to(target_x)
-	await player.arrived
+	if enter_direction == "left" or enter_direction == "right":
+		var target_sign: float
+		match enter_direction:
+			"left":
+				target_sign = -1
+			"right":
+				target_sign = 1
+		var target_x = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + player.get_node("collision").shape.get_rect().size.x / 2 + 4)
+		player.move_to(target_x)
+		await player.arrived
+	else:
+		await player.landed
 	collision.disabled = false
 	player.in_cutscene = false
 
@@ -42,7 +45,8 @@ func _on_area_entered(area: Area2D) -> void:
 	var body: Node = area.get_owner()
 	if body is Player:
 		body.in_cutscene = true
-		var target_sign: float = sign(global_position.x - body.global_position.x)
-		var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
-		body.move_to(target_x)
+		if enter_direction == "left" or enter_direction == "right":
+			var target_sign: float = sign(global_position.x - body.global_position.x)
+			var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
+			body.move_to(target_x)
 		SceneManager.change_scene(target_scene, target_name)

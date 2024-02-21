@@ -1,10 +1,12 @@
 ## Base class for all player characters
 class_name Player extends GroundedActor
 
+## Controls the player's animations
+@onready var anim: AnimationPlayer = $animator
 ## Timer that counts down the time the player may still jump while in the air after walking off a ledge
 @onready var coyote_timer: Timer = $timers/coyote_timer
-## The area that triggers a door to start a scene transition
-@onready var door_trigger_collider: CollisionShape2D = $triggers/door_trigger/collision
+## Parent of areas that trigger certain objects
+@onready var triggers: Node2D = $triggers
 
 ## Whether input should be disabled
 var disable_input: bool
@@ -13,8 +15,10 @@ var disable_input: bool
 var in_cutscene: bool:
 	set(value):
 		disable_input = value
-		door_trigger_collider.set_deferred("disabled", value)
-		
+		for child in triggers.get_children():
+			var grandchild: Node2D = child.get_child(0)
+			if grandchild is CollisionShape2D:
+				grandchild.set_deferred("disabled", value)
 
 ## Whether the player is still in coyote time
 var in_coyote_time: bool:
@@ -27,6 +31,14 @@ func _process(delta: float) -> void:
 	update_land()
 	update_movement_inputs()
 	super._process(delta)
+	update_animation()
+
+## Update the player's current animation
+func update_animation() -> void:
+	if abs(velocity.x) > 0:
+		anim.play("run")
+	else:
+		anim.play("idle")
 
 ## Update whether coyote time should start
 func update_coyote_time() -> void:
@@ -48,8 +60,8 @@ func update_jump() -> void:
 ## Update whether the player has landed on the ground
 func update_land() -> void:
 	if is_grounded() and not was_grounded:
-		land()
 		coyote_timer.stop()
+	super.update_land()
 
 ## Check for movement inputs and move the player accordingly
 func update_movement_inputs() -> void:

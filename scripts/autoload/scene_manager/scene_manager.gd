@@ -10,7 +10,7 @@ extends Node
 ## Emitted whenever a scene changes
 signal scene_changed(old_scene: String, new_scene: String)
 
-## The currently loaded scene
+## The name of the currently loaded scene
 var current_scene: String
 
 ## Change to a new scene

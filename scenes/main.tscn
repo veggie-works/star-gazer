@@ -21,7 +21,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="screen" type="SubViewport" parent="screen_container"]
-unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
 size = Vector2i(960, 540)

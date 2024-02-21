@@ -6,6 +6,7 @@
 [node name="grounded_actor" instance=ExtResource("1_y7557")]
 script = ExtResource("2_lvnct")
 gravity_scale = 4.0
+falling_gravity_scale = 8.0
 jump_height = 200.0
 run_speed = 600.0
 

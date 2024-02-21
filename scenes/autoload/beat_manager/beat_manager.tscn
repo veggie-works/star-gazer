@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://c0846fym352fh"]
+
+[ext_resource type="Script" path="res://scripts/autoload/beat_manager/beat_manager.gd" id="1_jdjkt"]
+
+[node name="beat_manager" type="Node"]
+script = ExtResource("1_jdjkt")
+
+[node name="beat_timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="beat_timer" to="." method="_on_beat_timer_timeout"]

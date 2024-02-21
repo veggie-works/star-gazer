@@ -1,6 +1,9 @@
 ## Singleton containing miscellaneous constant values and helper functions
 extends Node
 
+## The default gravity value, in pixels per second squared
+var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+
 ## Recursively load scenes and fetch the one whose script that matches the script parameter
 func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> PackedScene:
 	var dir := DirAccess.open(search_dir)
