@@ -1,10 +1,13 @@
 ## Contains data about an actor's health
-class_name HealthManager extends Node
+class_name HealthManager extends Area2D
 
 ## The actor's maximum amount of health
 @export var max_health: float = 25
 ## Whether the actor is immune to damage
 @export var invincible: bool
+
+## The collision shape that triggers a damage event
+@onready var hurt_box: CollisionShape2D = $hurt_box
 
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
@@ -40,3 +43,9 @@ func take_damage(damage_amount: float) -> void:
 ## Actor death
 func die() -> void:
 	pass
+
+func _on_area_entered(area: DamageArea) -> void:
+	pass # Replace with function body.
+
+func _on_body_entered(body: Projectile) -> void:
+	pass # Replace with function body.
