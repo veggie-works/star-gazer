@@ -1,31 +1,13 @@
 [gd_scene load_steps=6 format=3 uid="uid://dwibdkrqgbotj"]
 
 [ext_resource type="Script" path="res://scripts/actors/actor.gd" id="1_qymhu"]
-[ext_resource type="Texture2D" uid="uid://b0hhru8ipkn71" path="res://art/actors/player/idle0.png" id="2_n8enj"]
-
-[sub_resource type="Animation" id="Animation_dqnjo"]
-resource_name = "idle"
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_n8enj")]
-}
+[ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="3_1bv52"]
+[ext_resource type="Script" path="res://scripts/fsm/state_machine.gd" id="3_cgdik"]
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuhk8"]
-_data = {
-"idle": SubResource("Animation_dqnjo")
-}
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6k56w"]
-size = Vector2(64, 64)
+size = Vector2(128, 128)
 
 [node name="actor" type="CharacterBody2D"]
 editor_description = "Base controller for all actors, e.g. players, enemies, NPCs."
@@ -41,8 +23,13 @@ libraries = {
 
 [node name="sprite" type="Sprite2D" parent="."]
 editor_description = "The actor's visual sprite."
-texture = ExtResource("2_n8enj")
+texture = ExtResource("3_1bv52")
 
 [node name="collision" type="CollisionShape2D" parent="."]
 editor_description = "The actor's collision shape."
 shape = SubResource("RectangleShape2D_6k56w")
+
+[node name="behaviors" type="Node" parent="."]
+
+[node name="fsm" type="Node" parent="."]
+script = ExtResource("3_cgdik")

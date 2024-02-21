@@ -29,16 +29,23 @@ func _process(delta: float) -> void:
 	update_coyote_time()
 	update_jump()
 	update_land()
-	update_movement_inputs()
 	super._process(delta)
-	update_animation()
 
-## Update the player's current animation
-func update_animation() -> void:
-	if abs(velocity.x) > 0:
-		anim.play("run")
-	else:
-		anim.play("idle")
+func _input(event: InputEvent) -> void:
+	check_perfect_inputs(event)
+
+## Check whether a perfect input has been executed
+func check_perfect_inputs(event: InputEvent) -> void:
+	if event.is_action_pressed("attack"):
+		if BeatManager.time_to_next_beat <= BeatManager.PERFECT_ATTACK_WINDOW:
+			pass # TODO: perfect attack
+		else:
+			pass # TODO: normal attack
+	elif event.is_action_pressed("dash"):
+		if BeatManager.time_to_next_beat <= BeatManager.PERFECT_DASH_WINDOW:
+			pass # TODO: perfect dash
+		else:
+			pass # TODO: normal dash
 
 ## Update whether coyote time should start
 func update_coyote_time() -> void:
@@ -52,21 +59,9 @@ func update_jump() -> void:
 		
 	if InputManager.is_buffered("jump") and (is_grounded() or in_coyote_time):
 		coyote_timer.stop()
-		jump()
-
-	if not Input.is_action_pressed("jump"):
-		velocity.y = max(0, velocity.y)
 
 ## Update whether the player has landed on the ground
 func update_land() -> void:
 	if is_grounded() and not was_grounded:
 		coyote_timer.stop()
 	super.update_land()
-
-## Check for movement inputs and move the player accordingly
-func update_movement_inputs() -> void:
-	if disable_input:
-		return
-		
-	var direction = Input.get_axis("move_left", "move_right")
-	move(direction)

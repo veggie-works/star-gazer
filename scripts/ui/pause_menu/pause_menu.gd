@@ -46,7 +46,8 @@ func open() -> void:
 	
 func close() -> void:
 	animator.play("close")
-	
+
+## Pause or unpause the game
 func pause(do_pause: bool = true) -> void:
 	get_tree().set_pause(do_pause)
 

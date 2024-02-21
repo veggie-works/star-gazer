@@ -18,6 +18,6 @@ func save() -> void:
 	SaveManager.save_data.save_scene = SceneManager.current_scene
 	SaveManager.save_data.save_position = global_position
 
-func _on_save_area_body_entered(body: PhysicsBody2D):
+func _on_save_area_body_entered(body: PhysicsBody2D) -> void:
 	if body is Player:
 		save()

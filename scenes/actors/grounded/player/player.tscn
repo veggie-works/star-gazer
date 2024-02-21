@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=19 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -9,8 +9,12 @@
 [ext_resource type="Texture2D" uid="uid://enyiaq7jeojg" path="res://art/actors/player/run3.png" id="7_ttyxk"]
 [ext_resource type="Texture2D" uid="uid://jga4ofmoqxd6" path="res://art/actors/player/run4.png" id="8_6q1s3"]
 [ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://art/actors/player/run5.png" id="9_ui3d5"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
+[ext_resource type="PackedScene" uid="uid://06uoxxol0swb" path="res://scenes/fsm/actors/player/player_idle_state.tscn" id="11_pg318"]
+[ext_resource type="PackedScene" uid="uid://b7he7bgi1ixkc" path="res://scenes/fsm/actors/player/player_jump_state.tscn" id="12_6obo7"]
+[ext_resource type="PackedScene" uid="uid://cpt3rupohxl7s" path="res://scenes/fsm/actors/player/player_run_state.tscn" id="13_00py2"]
 
-[sub_resource type="Animation" id="Animation_dqnjo"]
+[sub_resource type="Animation" id="Animation_fofbs"]
 resource_name = "idle"
 loop_mode = 1
 tracks/0/type = "value"
@@ -26,10 +30,9 @@ tracks/0/keys = {
 "values": [ExtResource("3_ib1wq")]
 }
 
-[sub_resource type="Animation" id="Animation_gb0pr"]
+[sub_resource type="Animation" id="Animation_umav7"]
 resource_name = "run"
 loop_mode = 1
-step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -37,35 +40,37 @@ tracks/0/path = NodePath("sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.17, 0.3333, 0.5, 0.6667, 0.83),
+"times": PackedFloat32Array(0, 0.1667, 0.3333, 0.5, 0.6667, 0.8333),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [ExtResource("4_y4v2v"), ExtResource("5_w02ge"), ExtResource("6_mpqb6"), ExtResource("7_ttyxk"), ExtResource("8_6q1s3"), ExtResource("9_ui3d5")]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_xiqk2"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs4"]
 _data = {
-"idle": SubResource("Animation_dqnjo"),
-"run": SubResource("Animation_gb0pr")
+"idle": SubResource("Animation_fofbs"),
+"run": SubResource("Animation_umav7")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_o6l4u"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbvw"]
 size = Vector2(64, 64)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_wpgtc"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
 size = Vector2(64, 64)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
-collision_layer = 1
 script = ExtResource("2_d5awl")
 
 [node name="animator" parent="." index="0"]
 libraries = {
-"": SubResource("AnimationLibrary_xiqk2")
+"": SubResource("AnimationLibrary_xmrs4")
 }
 
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("3_ib1wq")
+
 [node name="collision" parent="." index="2"]
-shape = SubResource("RectangleShape2D_o6l4u")
+shape = SubResource("RectangleShape2D_4dbvw")
 
 [node name="raycast0" parent="ground_raycasts" index="0"]
 position = Vector2(-32, 32)
@@ -76,16 +81,26 @@ position = Vector2(0, 32)
 [node name="raycast2" parent="ground_raycasts" index="2"]
 position = Vector2(32, 32)
 
-[node name="timers" type="Node" parent="." index="4"]
+[node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
+script = ExtResource("10_q18np")
+start_state = NodePath("player_idle_state")
+
+[node name="player_idle_state" parent="fsm" index="0" instance=ExtResource("11_pg318")]
+
+[node name="player_jump_state" parent="fsm" index="1" instance=ExtResource("12_6obo7")]
+
+[node name="player_run_state" parent="fsm" index="2" instance=ExtResource("13_00py2")]
+
+[node name="timers" type="Node" parent="." index="6"]
 
 [node name="coyote_timer" type="Timer" parent="timers" index="0"]
 wait_time = 0.1
 one_shot = true
 
-[node name="triggers" type="Node2D" parent="." index="5"]
+[node name="triggers" type="Node2D" parent="." index="7"]
 
 [node name="door_trigger" type="Area2D" parent="triggers" index="0"]
 collision_mask = 0
 
 [node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
-shape = SubResource("RectangleShape2D_wpgtc")
+shape = SubResource("RectangleShape2D_cl6t6")

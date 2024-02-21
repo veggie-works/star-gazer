@@ -16,6 +16,6 @@ func _on_input_bindings_button_pressed() -> void:
 func _on_input_bindings_panel_hidden() -> void:
 	margin_container.show()
 
-func _on_hidden():
+func _on_hidden() -> void:
 	margin_container.show()
 	input_bindings_panel.hide()

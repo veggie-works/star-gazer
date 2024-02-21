@@ -31,7 +31,6 @@ func _init() -> void:
 func load_game(profile_id: int = 0) -> void:
 	selected_profile_id = profile_id
 	save_data = load_game_data()
-	print("Loaded save data")
 
 ## Load game data from disk
 func load_game_data() -> SaveData:

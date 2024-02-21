@@ -5,8 +5,6 @@ class_name GroundedActor extends Actor
 @export var gravity_scale: float = 4
 ## The scale of gravity applied to this actor while they are falling
 @export var falling_gravity_scale: float = 8
-## The maximum height of the actor's jump, in pixels
-@export var jump_height: float = 200
 ## The speed at which this actor runs, in pixels per second
 @export var run_speed: float = 600
 
@@ -45,8 +43,8 @@ func is_grounded() -> bool:
 	return false
 
 ## Perform a jump
-func jump() -> void:
-	velocity.y = -sqrt(2 * Globals.gravity * gravity_scale * jump_height);
+func jump(height: float) -> void:
+	velocity.y = -sqrt(2 * Globals.gravity * gravity_scale * height);
 
 ## Jump from the actor's starting position to a target position
 func jump_to(target_position: Vector2, apex_height: float, jump_time: float) -> void:
@@ -73,13 +71,16 @@ func move(direction: float) -> void:
 
 ## Move to a target x position
 func move_to(target_x: float) -> void:
-	move(sign(target_x - global_position.x))
-	while not abs(global_position.x - target_x) <= 1:
+	var direction = sign(target_x - global_position.x)
+	move(direction)
+	while (direction < 0 and global_position.x > target_x) or \
+		(direction > 0 and global_position.x < target_x):
 		if not is_inside_tree():
 			break
 		await get_tree().process_frame
 	arrived.emit()
 
+## Update the actor's landing state
 func update_land() -> void:
 	if not was_grounded and is_grounded():
 		land()
