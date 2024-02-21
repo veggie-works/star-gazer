@@ -33,12 +33,12 @@ func set_state(new_state: State) -> void:
 	var old_state: State = current_state
 	if old_state != null:
 		old_state.exit()
-	current_state = new_state
-	current_state.enter()
+	new_state.enter()
 	state_history.append(new_state)
 	if len(state_history) > state_history_capacity:
 		state_history.pop_front()
 	state_changed.emit(old_state, new_state)
+	current_state = new_state
 
 ## Transition to a new state
 func transition_to(state_type: GDScript) -> void:

@@ -27,8 +27,6 @@ var in_coyote_time: bool:
 
 func _process(delta: float) -> void:
 	update_coyote_time()
-	update_jump()
-	update_land()
 	super._process(delta)
 
 func _input(event: InputEvent) -> void:
@@ -51,17 +49,5 @@ func check_perfect_inputs(event: InputEvent) -> void:
 func update_coyote_time() -> void:
 	if was_grounded and not is_grounded() and velocity.y >= 0 and not InputManager.is_buffered("jump"):
 		coyote_timer.start()
-
-## Update the player jump
-func update_jump() -> void:
-	if disable_input:
-		return
-		
-	if InputManager.is_buffered("jump") and (is_grounded() or in_coyote_time):
+	elif is_grounded() and not was_grounded and in_coyote_time:
 		coyote_timer.stop()
-
-## Update whether the player has landed on the ground
-func update_land() -> void:
-	if is_grounded() and not was_grounded:
-		coyote_timer.stop()
-	super.update_land()

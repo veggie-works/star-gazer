@@ -59,6 +59,8 @@ size = Vector2(64, 64)
 size = Vector2(64, 64)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
+collision_layer = 1
+collision_mask = 2
 script = ExtResource("2_d5awl")
 
 [node name="animator" parent="." index="0"]
@@ -74,12 +76,15 @@ shape = SubResource("RectangleShape2D_4dbvw")
 
 [node name="raycast0" parent="ground_raycasts" index="0"]
 position = Vector2(-32, 32)
+collision_mask = 2
 
 [node name="raycast1" parent="ground_raycasts" index="1"]
 position = Vector2(0, 32)
+collision_mask = 2
 
 [node name="raycast2" parent="ground_raycasts" index="2"]
 position = Vector2(32, 32)
+collision_mask = 2
 
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")
@@ -94,7 +99,7 @@ start_state = NodePath("player_idle_state")
 [node name="timers" type="Node" parent="." index="6"]
 
 [node name="coyote_timer" type="Timer" parent="timers" index="0"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
 
 [node name="triggers" type="Node2D" parent="." index="7"]
