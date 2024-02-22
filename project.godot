@@ -22,6 +22,7 @@ SaveManager="*res://scenes/autoload/save_manager/save_manager.tscn"
 InputManager="*res://scenes/input/input_manager.tscn"
 SceneManager="*res://scenes/autoload/scene_manager/scene_manager.tscn"
 UIManager="*res://scenes/ui/ui_manager.tscn"
+AudioManager="*res://scenes/audio/audio_manager.tscn"
 BeatManager="*res://scenes/autoload/beat_manager/beat_manager.tscn"
 
 [display]

@@ -1,6 +1,13 @@
 ## Base class for all levels in the game
 class_name BaseLevel extends Node
 
+## The music track played in this scene
+@export var music_track: MusicTrack
+
+func _ready() -> void:
+	AudioManager.play_music(music_track)
+
+## Load the save point in this scene
 func load_save_point() -> void:
 	var save_points: Array[Node] = get_tree().get_nodes_in_group("save_points")
 	for save_point in save_points:
