@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=21 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://enyiaq7jeojg" path="res://assets/art/actors/player/run3.png" id="7_fjjlt"]
 [ext_resource type="Texture2D" uid="uid://jga4ofmoqxd6" path="res://assets/art/actors/player/run4.png" id="8_1sfcy"]
 [ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://assets/art/actors/player/run5.png" id="9_1urep"]
+[ext_resource type="Shader" path="res://resources/shaders/color_key.gdshader" id="10_6bfho"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
 [ext_resource type="PackedScene" uid="uid://06uoxxol0swb" path="res://scenes/fsm/actors/player/player_idle_state.tscn" id="11_pg318"]
 [ext_resource type="PackedScene" uid="uid://b7he7bgi1ixkc" path="res://scenes/fsm/actors/player/player_jump_state.tscn" id="12_6obo7"]
@@ -52,6 +53,11 @@ _data = {
 "run": SubResource("Animation_umav7")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0ik5"]
+shader = ExtResource("10_6bfho")
+shader_parameter/key_color = Color(0.901961, 0.901961, 0.901961, 1)
+shader_parameter/replace_color = Color(0.392157, 0.627451, 1, 1)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbvw"]
 size = Vector2(64, 64)
 
@@ -69,6 +75,7 @@ libraries = {
 }
 
 [node name="sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_q0ik5")
 texture = ExtResource("3_ud3uo")
 
 [node name="collision" parent="." index="2"]

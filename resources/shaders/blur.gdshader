@@ -10,8 +10,7 @@ uniform sampler2D input_texture: hint_screen_texture;
 uniform float blur_radius: hint_range(1, 15) = 1;
 
 // Calculates the Gaussian of the given x and y
-float gaussian(float x, float y)
-{
+float gaussian(float x, float y) {
 	float sigma_squared = sigma * sigma;
 	float amplitude = 1.0 / (TAU * sigma_squared);
 	float exponent = -((x * x) + (y * y)) / (2.0 * sigma_squared);
@@ -33,15 +32,12 @@ vec4 blur13(sampler2D image, vec2 uv, vec2 resolution, vec2 direction) {
 	return color;
 }
 
-void fragment()
-{
+void fragment() {
 	float total_weight = 0.0;
 	vec4 color = vec4(0.0);
 
-	for (float x = -(blur_radius - 1.0) / 2.0; x <= (blur_radius - 1.0) / 2.0; x++)
-	{
-		for (float y = -(blur_radius - 1.0) / 2.0; y <= (blur_radius - 1.0) / 2.0; y++)
-		{
+	for (float x = -(blur_radius - 1.0) / 2.0; x <= (blur_radius - 1.0) / 2.0; x++) {
+		for (float y = -(blur_radius - 1.0) / 2.0; y <= (blur_radius - 1.0) / 2.0; y++) {
 			vec2 uv = vec2(SCREEN_UV.x + (x * TEXTURE_PIXEL_SIZE.x), SCREEN_UV.y + (y * TEXTURE_PIXEL_SIZE.y));
 			float weight = gaussian(uv.x, uv.y);
 			vec4 pixel_color = texture(input_texture, uv);

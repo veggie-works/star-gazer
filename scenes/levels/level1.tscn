@@ -53,7 +53,4 @@ position = Vector2(29, 0)
 shape = SubResource("RectangleShape2D_g5rkf")
 disabled = true
 
-[node name="Camera2D" type="Camera2D" parent="." index="8"]
-zoom = Vector2(0.25, 0.25)
-
 [connection signal="body_entered" from="jump_trigger" to="jump_trigger" method="_on_body_entered"]

@@ -19,7 +19,7 @@ func update_label() -> void:
 		Time to next beat: %0.3f
 		%s
 	""" % \
-	[BeatManager.time_to_next_beat, format_state_history()]
+	[AudioManager.time_to_next_beat, format_state_history()]
 
 func format_state_history() -> String:
 	var history_string: String = """State History"""

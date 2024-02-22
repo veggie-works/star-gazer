@@ -4,6 +4,7 @@
 [ext_resource type="Script" path="res://scenes/audio/music_track.gd" id="1_yy4au"]
 
 [resource]
+resource_local_to_scene = true
 script = ExtResource("1_yy4au")
 bpm = 90
 music_clip = ExtResource("1_t272k")

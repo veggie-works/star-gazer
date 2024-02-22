@@ -18,7 +18,6 @@ position = Vector2(896, 415)
 scale = Vector2(1, 2.8)
 target_scene = "res://scenes/levels/level1.tscn"
 target_name = "door_left"
-enter_direction = null
 
 [node name="save_point" parent="." index="2" instance=ExtResource("4_ky82b")]
 position = Vector2(306, 475)
