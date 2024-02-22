@@ -14,6 +14,9 @@ func enter() -> void:
 	# animator.play("jump")
 
 func update(delta: float) -> void:
+	if body.disable_input:
+		return
+		
 	var direction = Input.get_axis("move_left", "move_right")
 	body.velocity.x = direction * midair_move_speed
 	if not Input.is_action_pressed("jump"):

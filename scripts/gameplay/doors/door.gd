@@ -22,9 +22,9 @@ class_name Door extends Node2D
 ## Walk the player from this door into the scene
 func enter_from() -> void:
 	var player: Player = player_prefab.instantiate()
+	player.in_cutscene = true
 	collision.disabled = true
 	level_root.add_child(player)
-	player.in_cutscene = true
 	player.global_position = global_position
 	if enter_direction == "left" or enter_direction == "right":
 		var target_sign: float

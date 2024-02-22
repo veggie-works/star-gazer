@@ -15,10 +15,11 @@ var disable_input: bool
 var in_cutscene: bool:
 	set(value):
 		disable_input = value
-		for child in triggers.get_children():
-			var grandchild: Node2D = child.get_child(0)
-			if grandchild is CollisionShape2D:
-				grandchild.set_deferred("disabled", value)
+		if triggers != null:
+			for child in triggers.get_children():
+				var grandchild: Node2D = child.get_child(0)
+				if grandchild is CollisionShape2D:
+					grandchild.set_deferred("disabled", value)
 
 ## Whether the player is still in coyote time
 var in_coyote_time: bool:

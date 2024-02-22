@@ -42,7 +42,8 @@ func set_state(new_state: State) -> void:
 
 ## Transition to a new state
 func transition_to(state_type: GDScript) -> void:
-	set_state(get_state(state_type))
+	var state: State = get_state(state_type)
+	set_state(state)
 
 ## Fetch a state by its script
 func get_state(state_type: GDScript) -> State:

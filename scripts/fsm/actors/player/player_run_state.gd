@@ -8,6 +8,9 @@ func enter() -> void:
 	animator.play("run")
 
 func update(delta: float) -> void:
+	if body.disable_input:
+		return
+		
 	var direction = sign(Input.get_axis("move_left", "move_right"))
 	if abs(direction) <= 0:
 		fsm.transition_to(PlayerIdleState)
