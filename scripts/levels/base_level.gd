@@ -6,6 +6,7 @@ class_name BaseLevel extends Node
 
 func _ready() -> void:
 	AudioManager.play_music(music_track)
+	UIManager.open_ui(HUD)
 
 ## Load the save point in this scene
 func load_save_point() -> void:

@@ -9,6 +9,9 @@ func enter() -> void:
 	body.velocity.x = 0
 
 func update(delta: float) -> void:
+	if body.velocity.y > 0:
+		fsm.transition_to(PlayerFallState)
+		
 	if body.disable_input:
 		return
 		

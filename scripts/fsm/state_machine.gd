@@ -18,6 +18,13 @@ var state_history: Array[State] = []
 ## The FSM's current state
 var current_state: State
 
+## The previous state in the state history
+var previous_state: State:
+	get:
+		if len(state_history) < 2:
+			return null
+		return state_history[len(state_history) - 2]
+
 func _ready() -> void:
 	for child in get_children():
 		if child is State:

@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://byf21g036g36h"]
+[gd_scene load_steps=7 format=3 uid="uid://byf21g036g36h"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_tftho"]
 [ext_resource type="Resource" uid="uid://b7xpyw37rvn2" path="res://resources/music_tracks/level0.tres" id="2_4r7nn"]
 [ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="2_x2lan"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_c4d54"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_ky82b"]
+[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/enemies/test_enemy.tscn" id="6_wvwei"]
 
 [node name="level0" instance=ExtResource("1_tftho")]
 music_track = ExtResource("2_4r7nn")
@@ -33,3 +34,7 @@ scale = Vector2(7.8, 1)
 [node name="test_platform4" parent="." index="5" instance=ExtResource("2_x2lan")]
 position = Vector2(-39, 276)
 scale = Vector2(-0.894892, 3.72755)
+
+[node name="test_enemy" parent="enemies" index="0" instance=ExtResource("6_wvwei")]
+position = Vector2(611, 476)
+scale = Vector2(0.5, 0.5)

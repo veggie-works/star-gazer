@@ -26,6 +26,9 @@ var in_coyote_time: bool:
 	get:
 		return not coyote_timer.is_stopped()
 
+func _ready() -> void:
+	UIManager.get_ui(HUD).update_health()
+
 func _process(delta: float) -> void:
 	update_coyote_time()
 	super._process(delta)

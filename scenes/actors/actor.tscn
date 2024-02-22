@@ -11,8 +11,8 @@ size = Vector2(128, 128)
 
 [node name="actor" type="CharacterBody2D"]
 editor_description = "Base controller for all actors, e.g. players, enemies, NPCs."
-collision_layer = 8
-collision_mask = 3
+collision_layer = 16
+collision_mask = 2
 script = ExtResource("1_qymhu")
 
 [node name="animator" type="AnimationPlayer" parent="."]
@@ -29,7 +29,7 @@ texture = ExtResource("3_1bv52")
 editor_description = "The actor's collision shape."
 shape = SubResource("RectangleShape2D_6k56w")
 
-[node name="behaviors" type="Node" parent="."]
+[node name="behaviors" type="Node2D" parent="."]
 
 [node name="fsm" type="Node" parent="."]
 script = ExtResource("3_cgdik")

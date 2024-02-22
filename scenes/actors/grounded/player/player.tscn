@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=27 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -11,9 +11,14 @@
 [ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://assets/art/actors/player/run5.png" id="9_1urep"]
 [ext_resource type="Shader" path="res://resources/shaders/color_key.gdshader" id="10_6bfho"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
-[ext_resource type="PackedScene" uid="uid://06uoxxol0swb" path="res://scenes/fsm/actors/player/player_idle_state.tscn" id="11_pg318"]
-[ext_resource type="PackedScene" uid="uid://b7he7bgi1ixkc" path="res://scenes/fsm/actors/player/player_jump_state.tscn" id="12_6obo7"]
-[ext_resource type="PackedScene" uid="uid://cpt3rupohxl7s" path="res://scenes/fsm/actors/player/player_run_state.tscn" id="13_00py2"]
+[ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="11_xerj3"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="12_2ynoo"]
+[ext_resource type="PackedScene" uid="uid://snm1ka2smwxt" path="res://scenes/actors/behaviors/recoil_manager.tscn" id="12_7jm7a"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_run_state.gd" id="13_dg6tn"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
+[ext_resource type="Script" path="res://scenes/fsm/actors/player/player_hurt_state.gd" id="18_b8xn7"]
+[ext_resource type="Script" path="res://scenes/fsm/actors/player/player_recover_state.gd" id="19_dc7k0"]
 
 [sub_resource type="Animation" id="Animation_fofbs"]
 resource_name = "idle"
@@ -61,12 +66,15 @@ shader_parameter/replace_color = Color(0.392157, 0.627451, 1, 1)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbvw"]
 size = Vector2(64, 64)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvff"]
+size = Vector2(64, 64)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
 size = Vector2(64, 64)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
 collision_layer = 1
-collision_mask = 2
+collision_mask = 66
 script = ExtResource("2_d5awl")
 
 [node name="animator" parent="." index="0"]
@@ -88,17 +96,42 @@ position = Vector2(-32, 32)
 position = Vector2(0, 32)
 
 [node name="raycast2" parent="ground_raycasts" index="2"]
+visible = false
 position = Vector2(32, 32)
+
+[node name="health_manager" parent="behaviors" index="0" instance=ExtResource("11_xerj3")]
+collision_layer = 1
+collision_mask = 64
+max_health = 100.0
+
+[node name="hurt_box" parent="behaviors/health_manager" index="0"]
+shape = SubResource("RectangleShape2D_bbvff")
+
+[node name="recoil_manager" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state") instance=ExtResource("12_7jm7a")]
+state_machine = NodePath("../../fsm")
+recoil_state = NodePath("../../fsm/player_hurt_state")
 
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")
 start_state = NodePath("player_idle_state")
 
-[node name="player_idle_state" parent="fsm" index="0" instance=ExtResource("11_pg318")]
+[node name="player_idle_state" type="Node" parent="fsm" index="0"]
+script = ExtResource("12_2ynoo")
 
-[node name="player_jump_state" parent="fsm" index="1" instance=ExtResource("12_6obo7")]
+[node name="player_run_state" type="Node" parent="fsm" index="1"]
+script = ExtResource("13_dg6tn")
 
-[node name="player_run_state" parent="fsm" index="2" instance=ExtResource("13_00py2")]
+[node name="player_jump_state" type="Node" parent="fsm" index="2"]
+script = ExtResource("14_ygy2g")
+
+[node name="player_fall_state" type="Node" parent="fsm" index="3"]
+script = ExtResource("15_7k3jt")
+
+[node name="player_hurt_state" type="Node" parent="fsm" index="4"]
+script = ExtResource("18_b8xn7")
+
+[node name="player_recover_state" type="Node" parent="fsm" index="5"]
+script = ExtResource("19_dc7k0")
 
 [node name="timers" type="Node" parent="." index="6"]
 
@@ -113,3 +146,5 @@ collision_mask = 0
 
 [node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
 shape = SubResource("RectangleShape2D_cl6t6")
+
+[editable path="behaviors/health_manager"]

@@ -28,14 +28,20 @@ var previous_beats_played: int
 ## The number of beats into the current track
 var beats_played: int
 
+## The duration of a single beat
+var beat_length: float:
+	get:
+		if current_track == null:
+			return -1
+		return 60.0 / current_track.bpm
+
 ## Time to the next beat of the current song
 var time_to_next_beat: float:
 	get:
 		if current_track == null:
 			return INF
-		var sec_per_beat: float = 60.0 / current_track.bpm
 		var sec: float = current_music_player.get_playback_position()
-		return sec_per_beat - fposmod(sec, sec_per_beat)
+		return beat_length - fposmod(sec, beat_length)
 
 func _process(delta: float) -> void:
 	check_downbeat()

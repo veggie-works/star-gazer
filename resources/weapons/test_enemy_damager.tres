@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=2 format=3 uid="uid://24b54tb75xym"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/weapons/weapon.gd" id="1_wnym8"]
+
+[resource]
+script = ExtResource("1_wnym8")
+damage = 5.0
+attack_trigger_mask = 64
+parent_attack_to_spawner = false

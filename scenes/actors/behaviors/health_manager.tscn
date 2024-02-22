@@ -1,15 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bda0m15iq5yhd"]
 
-[ext_resource type="Script" path="res://scripts/actors/behaviors/health/health_manager.gd" id="1_6n3ui"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/health_manager.gd" id="1_1n2pw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cxsx6"]
 
 [node name="health_manager" type="Area2D"]
 collision_layer = 16
 collision_mask = 32
-script = ExtResource("1_6n3ui")
-max_health = null
-invincible = null
+script = ExtResource("1_1n2pw")
 
 [node name="hurt_box" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_cxsx6")

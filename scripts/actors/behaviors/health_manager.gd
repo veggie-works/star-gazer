@@ -12,7 +12,7 @@ class_name HealthManager extends Area2D
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
 ## Emitted when the actor takes damage
-signal took_damage(damage_amount: float)
+signal took_damage(attack: Attack)
 
 ## The actor's current health value
 var current_health: float = max_health
@@ -21,6 +21,10 @@ var current_health: float = max_health
 var is_dead: bool:
 	get:
 		return current_health <= 0
+
+var recoil_manager: RecoilManager:
+	get:
+		return get_node("../recoil_manager")
 
 ## Add to the player's health value
 func add_health(heal_amount: float) -> void:
@@ -32,20 +36,24 @@ func full_heal() -> void:
 	add_health(max_health - current_health)
 
 ## Take damage to the actor
-func take_damage(damage_amount: float) -> void:
+func take_damage(attack: Attack) -> void:
 	if invincible:
 		return
+	var damage_amount: float = attack.weapon.damage
 	current_health = max(0, current_health - damage_amount)
-	took_damage.emit(damage_amount)
+	took_damage.emit(attack)
 	if is_dead:
 		die()
+		return
+	if recoil_manager != null:
+		recoil_manager.recoil(attack.attack_angle, attack.attack_force)
 
 ## Actor death
 func die() -> void:
 	pass
 
 func _on_area_entered(area: DamageArea) -> void:
-	pass # Replace with function body.
+	take_damage(area)
 
 func _on_body_entered(body: Projectile) -> void:
-	pass # Replace with function body.
+	take_damage(body)
