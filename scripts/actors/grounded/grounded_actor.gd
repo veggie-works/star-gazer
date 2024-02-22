@@ -11,6 +11,9 @@ class_name GroundedActor extends Actor
 ## Parent node of raycasts used to detect the ground
 @onready var ground_raycasts: Node2D = $ground_raycasts
 
+## Whether or not this actor is currently touching a wall
+@onready var wall_raycasts: Node2D = $wall_raycasts
+
 ## Emitted when the actor lands
 signal landed
 ## Emitted when the actor arrives at the location it was instructed to move to
@@ -41,6 +44,14 @@ func is_grounded() -> bool:
 		if child is RayCast2D and child.is_colliding():
 			return true
 	return false
+
+## Check if the actor is colliding with a wall
+func is_colliding_with_wall() -> bool:
+	for child in wall_raycasts.get_children():
+		if child is RayCast2D and child.is_colliding():
+			return true
+	return false
+
 
 ## Perform a jump
 func jump(height: float) -> void:

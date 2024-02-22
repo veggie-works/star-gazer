@@ -30,6 +30,9 @@ func _process(delta: float) -> void:
 	update_coyote_time()
 	super._process(delta)
 
+	if is_colliding_with_wall():
+		print("colliding with wall")
+
 func _input(event: InputEvent) -> void:
 	check_perfect_inputs(event)
 
