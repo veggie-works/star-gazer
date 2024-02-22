@@ -1,4 +1,4 @@
-[gd_scene load_steps=2 format=3 uid="uid://csvjgisjrgdjs"]
+[gd_scene load_steps=2 format=3 uid="uid://bhcj4mdutvo04"]
 
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="1_5d3uh"]
 

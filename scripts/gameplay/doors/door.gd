@@ -34,7 +34,6 @@ func enter_from() -> void:
 			"right":
 				target_sign = 1
 		var target_x = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + player.get_node("collision").shape.get_rect().size.x / 2 + 4)
-		print("Target x: ", target_x)
 		player.move_to(target_x)
 		await player.arrived
 	else:

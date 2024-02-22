@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=28 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -13,12 +13,13 @@
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
 [ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="11_xerj3"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="12_2ynoo"]
-[ext_resource type="PackedScene" uid="uid://snm1ka2smwxt" path="res://scenes/actors/behaviors/recoil_manager.tscn" id="12_7jm7a"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/recoil_manager.gd" id="12_evo3r"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_run_state.gd" id="13_dg6tn"]
+[ext_resource type="Script" path="res://scripts/actors/grounded/player/combo_manager.gd" id="13_whb5f"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
-[ext_resource type="Script" path="res://scenes/fsm/actors/player/player_hurt_state.gd" id="18_b8xn7"]
-[ext_resource type="Script" path="res://scenes/fsm/actors/player/player_recover_state.gd" id="19_dc7k0"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
 
 [sub_resource type="Animation" id="Animation_fofbs"]
 resource_name = "idle"
@@ -107,12 +108,17 @@ max_health = 100.0
 [node name="hurt_box" parent="behaviors/health_manager" index="0"]
 shape = SubResource("RectangleShape2D_bbvff")
 
-[node name="recoil_manager" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state") instance=ExtResource("12_7jm7a")]
+[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state")]
+script = ExtResource("12_evo3r")
 state_machine = NodePath("../../fsm")
 recoil_state = NodePath("../../fsm/player_hurt_state")
 
-[node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
+[node name="combo_manager" type="Node" parent="behaviors" index="2"]
+script = ExtResource("13_whb5f")
+
+[node name="fsm" parent="." index="5" node_paths=PackedStringArray("combo_manager", "start_state")]
 script = ExtResource("10_q18np")
+combo_manager = NodePath("../behaviors/combo_manager")
 start_state = NodePath("player_idle_state")
 
 [node name="player_idle_state" type="Node" parent="fsm" index="0"]
@@ -128,10 +134,10 @@ script = ExtResource("14_ygy2g")
 script = ExtResource("15_7k3jt")
 
 [node name="player_hurt_state" type="Node" parent="fsm" index="4"]
-script = ExtResource("18_b8xn7")
+script = ExtResource("18_2rtci")
 
 [node name="player_recover_state" type="Node" parent="fsm" index="5"]
-script = ExtResource("19_dc7k0")
+script = ExtResource("19_c4jwa")
 
 [node name="timers" type="Node" parent="." index="6"]
 

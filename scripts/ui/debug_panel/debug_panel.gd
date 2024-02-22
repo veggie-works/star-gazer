@@ -24,12 +24,14 @@ func _process(_delta: float) -> void:
 ## Update the label with the latest debug information
 func update_label() -> void:
 	var coyote_time_remaining: float = 0.0 if player == null else player.coyote_timer.time_left
+	var combo_counter: int = 0 if player == null else player.get_node("behaviors/combo_manager").combo_counter
 	label.text = """
 		Time to next beat: %0.3f
-		Coyoyte time: %.3f
+		Coyote time: %.3f
+		Combo counter: %d
 		%s
 	""" % \
-	[AudioManager.time_to_next_beat, coyote_time_remaining, format_state_history()]
+	[AudioManager.time_to_next_beat, coyote_time_remaining, combo_counter, format_state_history()]
 
 ## Create a string of the player's state history
 func format_state_history() -> String:
