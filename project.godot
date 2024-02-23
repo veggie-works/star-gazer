@@ -23,12 +23,13 @@ InputManager="*res://scenes/input/input_manager.tscn"
 SceneManager="*res://scenes/autoload/scene_manager/scene_manager.tscn"
 UIManager="*res://scenes/ui/ui_manager.tscn"
 AudioManager="*res://scenes/audio/audio_manager.tscn"
+GameCamera="*res://scenes/gameplay/cameras/game_camera.tscn"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="viewport"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 
@@ -80,3 +81,4 @@ dodge={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+environment/defaults/default_clear_color=Color(0, 0, 0, 1)

@@ -117,6 +117,7 @@ unique_name_in_owner = true
 collision_layer = 1
 collision_mask = 64
 max_health = 100.0
+shake_camera = true
 
 [node name="hurt_box" parent="behaviors/health_manager" index="0"]
 shape = SubResource("RectangleShape2D_bbvff")

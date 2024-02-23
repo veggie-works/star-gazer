@@ -24,7 +24,7 @@ func _process(delta: float) -> void:
 		update_shake(delta)
 
 ## Begin camera shake
-func start_shake(amount: float, duration: float) -> void:
+func shake(amount: float, duration: float) -> void:
 	original_camera_position = global_position
 	current_shake_magnitude = amount
 	unshake_amount = amount / duration

@@ -25,6 +25,8 @@ var current_track: MusicTrack
 var previous_beats_played: int
 ## The number of beats into the current track
 var beats_played: int
+## The currently running tween for adjusting volume fade between music tracks
+var volume_tween: Tween
 
 ## The duration of a single beat
 var beat_length: float:
@@ -46,7 +48,7 @@ var perfect_attacked: bool:
 	get:
 		return time_to_next_beat < PERFECT_ATTACK_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_ATTACK_WINDOW / 2
 		
-## Whether a perfect recover was executed
+## Whether a perfect recovery was executed
 var perfect_recovery: bool:
 	get:
 		return time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2
@@ -85,16 +87,17 @@ func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false
 	elif (current_music_player.stream != null and track.music_clip.resource_path == current_music_player.stream.resource_path):
 		return
 	upcoming_music_player.set_stream(track.music_clip)
-	upcoming_music_player.play(current_music_player.get_playback_position())
-	upcoming_music_player.set_volume_db(-32)
-	var volume_tween: Tween = create_tween()
+	if volume_tween != null:
+		volume_tween.kill()
+	volume_tween = create_tween()
 	volume_tween.finished.connect(func():
 		current_music_player.set_stream(track.music_clip)
-		current_music_player.set_volume_db(0)
 		current_music_player.play(upcoming_music_player.get_playback_position())
-		upcoming_music_player.stop())
-	volume_tween.tween_property(current_music_player, "volume_db", -32, fade_time).from_current().set_trans(Tween.TRANS_CUBIC)
-	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", 0, fade_time).from_current().set_trans(Tween.TRANS_CUBIC)
+		upcoming_music_player.stop()
+		volume_tween.kill())
+	upcoming_music_player.play(current_music_player.get_playback_position())
+	volume_tween.tween_property(current_music_player, "volume_db", -32, fade_time).from(0).set_trans(Tween.TRANS_CUBIC)
+	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", 0, fade_time).from(-32).set_trans(Tween.TRANS_CUBIC)
 
 ## Stop the currently playing music
 func stop_music() -> void:

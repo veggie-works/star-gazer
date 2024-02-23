@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bt4hp2ye7flah"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/cameras/custom_camera.gd" id="1_4qe6i"]
+
+[node name="game_camera" type="Camera2D"]
+anchor_mode = 0
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource("1_4qe6i")

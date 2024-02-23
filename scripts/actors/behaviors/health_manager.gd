@@ -3,7 +3,8 @@ class_name HealthManager extends Area2D
 
 ## The actor's maximum amount of health
 @export var max_health: float = 25
-
+## Whether to shake the camera on hit
+@export var shake_camera: bool = false
 
 ## The sprite flashing behavior
 @onready var flasher: Flasher = %flasher
@@ -52,6 +53,8 @@ func take_damage(attack: Attack) -> void:
 	took_damage.emit(attack)
 	if flasher != null:
 		flasher.flash(Color.RED)
+	if shake_camera:
+		GameCamera.shake(50, 0.25)
 	if is_dead:
 		die()
 		return
