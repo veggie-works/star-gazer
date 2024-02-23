@@ -11,6 +11,7 @@ var player: Player:
 		if len(players) > 0 and players[0] is Player:
 			return players[0]
 		return null
+		
 ## The player instance's state machine
 var player_fsm: PlayerFSM:
 	get:

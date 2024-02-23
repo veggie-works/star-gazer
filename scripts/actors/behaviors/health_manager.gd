@@ -3,11 +3,14 @@ class_name HealthManager extends Area2D
 
 ## The actor's maximum amount of health
 @export var max_health: float = 25
-## Whether the actor is immune to damage
-@export var invincible: bool
 
+
+## The sprite flashing behavior
+@onready var flasher: Flasher = %flasher
 ## The collision shape that triggers a damage event
 @onready var hurt_box: CollisionShape2D = $hurt_box
+## Used to recoil the actor when taking damage
+@onready var recoil_manager: RecoilManager = %recoil_manager
 
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
@@ -17,14 +20,18 @@ signal took_damage(attack: Attack)
 ## The actor's current health value
 var current_health: float = max_health
 
+## The amount of damage most recently taken
+var last_damage_taken: float
+
+## Whether the actor is immune to damage
+var invincible: bool:
+	set(value):
+		hurt_box.set_deferred("disabled", value)
+
 ## Whether the actor is dead
 var is_dead: bool:
 	get:
 		return current_health <= 0
-
-var recoil_manager: RecoilManager:
-	get:
-		return get_node("../recoil_manager")
 
 ## Add to the player's health value
 func add_health(heal_amount: float) -> void:
@@ -41,7 +48,10 @@ func take_damage(attack: Attack) -> void:
 		return
 	var damage_amount: float = attack.weapon.damage
 	current_health = max(0, current_health - damage_amount)
+	last_damage_taken = damage_amount
 	took_damage.emit(attack)
+	if flasher != null:
+		flasher.flash(Color.RED)
 	if is_dead:
 		die()
 		return

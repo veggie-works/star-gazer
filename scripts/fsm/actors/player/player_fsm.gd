@@ -1,7 +1,7 @@
 ## Player-specific finite state machine
 class_name PlayerFSM extends StateMachine
 
-@export var combo_manager: ComboManager
+@onready var combo_manager: ComboManager = %combo_manager
 
 func _ready() -> void:
 	combo_manager.combo_started.connect(on_combo_start)
@@ -19,11 +19,6 @@ func check_perfect_inputs(event: InputEvent) -> void:
 			combo_manager.increment_combo()
 		else:
 			combo_manager.reset_combo()
-	elif event.is_action_pressed("block"):
-		if AudioManager.perfect_parried:
-			print("PERFECT PARRY")
-		else:
-			print("normal block")
 
 ## Callback for when a combo is started
 func on_combo_start() -> void:

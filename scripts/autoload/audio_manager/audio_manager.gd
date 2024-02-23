@@ -2,11 +2,9 @@ extends Node
 
 ## The window of time in which a perfect attack may be executed
 const PERFECT_ATTACK_WINDOW: float = 0.15
-## The window of time in which a perfect dash may be executed
+## The window of time in which a perfect dodge may be executed
 const PERFECT_DODGE_WINDOW: float = 0.2
-## The window of time in which a perfect parry may be executed
-const PERFECT_PARRY_WINDOW: float = 0.1
-## The window of time in which the player may recover from an attack
+## The window of time in which a perfect recovery may be executed
 const PERFECT_RECOVERY_WINDOW: float = 0.15
 
 ## The prefab to instantiate when playing a one shot clip
@@ -47,11 +45,11 @@ var time_to_next_beat: float:
 var perfect_attacked: bool:
 	get:
 		return time_to_next_beat < PERFECT_ATTACK_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_ATTACK_WINDOW / 2
-
-## Whether a perfect parry was executed
-var perfect_parried: bool:
+		
+## Whether a perfect recover was executed
+var perfect_recovery: bool:
 	get:
-		return time_to_next_beat < PERFECT_PARRY_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_PARRY_WINDOW / 2
+		return time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2
 
 func _process(delta: float) -> void:
 	check_downbeat()
@@ -76,7 +74,7 @@ func play_clip(clip: AudioStream) -> void:
 	audio_player.play()
 
 ## Play a music track, fading out from the current track into the new track
-func play_music(track: MusicTrack, fade_time: float = 5, immediate: bool = false) -> void:
+func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false) -> void:
 	# Immediately play music if nothing is currently playing (or if immediate specified)
 	current_track = track
 	if current_music_player.stream == null or immediate:

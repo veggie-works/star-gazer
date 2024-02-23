@@ -16,7 +16,8 @@ script = ExtResource("2_s4h03")
 
 [node name="damage_area" parent="." index="5" instance=ExtResource("2_00lbh")]
 weapon = ExtResource("4_so4oa")
-attack_angle = 135.0
+attack_force = 1500.0
+attack_angle = 110.0
 
 [node name="sprite" parent="damage_area" index="1"]
 visible = false

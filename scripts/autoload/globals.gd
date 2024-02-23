@@ -12,7 +12,6 @@ func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> Packed
 		var file_name = dir.get_next()
 		while file_name != "":
 			var file_path = "%s/%s" % [search_dir, file_name]
-			print("File path: ", file_path)
 			if dir.current_is_dir():
 				return find_scene_by_type(type, file_path)
 			else:
@@ -20,7 +19,10 @@ func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> Packed
 				var scene_state: SceneState = packed_scene.get_state()
 				for i in range(0, scene_state.get_node_property_count(0)):
 					var prop_value = scene_state.get_node_property_value(0, i)
-					print("Prop val: ", JSON.stringify(prop_value))
 					if prop_value is GDScript and prop_value == type:
 						return packed_scene
 	return null
+
+## Map a range of inputs to another
+func map(value: float, in_min: float, in_max: float, out_min: float, out_max: float) -> float:
+	return (value + in_min) * (out_max - out_min) / (in_max - in_min) + out_min;

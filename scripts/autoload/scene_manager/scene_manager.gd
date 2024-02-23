@@ -7,7 +7,7 @@ extends Node
 ## The screen viewport containing the current level
 @onready var screen: Viewport = get_node("/root/main/screen_container/screen")
 
-## Emitted whenever a scene changes
+## Emitted whenever a scene changes	
 signal scene_changed(old_scene: String, new_scene: String)
 
 ## The name of the currently loaded scene

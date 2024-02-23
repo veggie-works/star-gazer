@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://dru00p168sdmd"]
-
-[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_run_state.gd" id="1_mn6cc"]
-
-[node name="player_run_state" type="Node"]
-script = ExtResource("1_mn6cc")

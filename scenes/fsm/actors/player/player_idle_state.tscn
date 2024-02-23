@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://trff2xea08ns"]
-
-[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="1_hbnek"]
-
-[node name="player_idle_state" type="Node"]
-script = ExtResource("1_hbnek")
