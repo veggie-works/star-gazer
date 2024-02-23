@@ -19,14 +19,16 @@ config/icon="res://icon.svg"
 
 Globals="*res://scripts/autoload/globals.gd"
 SaveManager="*res://scenes/autoload/save_manager/save_manager.tscn"
-SceneManager="*res://scenes/autoload/scene_manager/scene_manager.tscn"
 InputManager="*res://scenes/input/input_manager.tscn"
+SceneManager="*res://scenes/autoload/scene_manager/scene_manager.tscn"
 UIManager="*res://scenes/ui/ui_manager.tscn"
+AudioManager="*res://scenes/audio/audio_manager.tscn"
 
 [display]
 
-window/size/viewport_width=960
-window/size/viewport_height=540
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/stretch/mode="viewport"
 
 [dotnet]
 
@@ -49,12 +51,28 @@ move_right={
 "events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194321,"key_label":0,"unicode":0,"echo":false,"script":null)
 ]
 }
+attack={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":88,"key_label":0,"unicode":120,"echo":false,"script":null)
+]
+}
+block={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":76,"key_label":0,"unicode":108,"echo":false,"script":null)
+]
+}
+dodge={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194325,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
 
 [layer_names]
 
-2d_physics/layer_2="player"
-2d_physics/layer_3="terrain"
-2d_physics/layer_4="interactive"
+2d_physics/layer_1="player"
+2d_physics/layer_2="terrain"
+2d_physics/layer_3="interactive"
+2d_physics/layer_4="door"
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="player attack"
 2d_physics/layer_7="enemy attack"

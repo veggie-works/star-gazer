@@ -1,4 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://docmkvul38axu"]
+[gd_scene load_steps=3 format=3 uid="uid://docmkvul38axu"]
+
+[ext_resource type="Script" path="res://scripts/ui/debug_panel/debug_panel.gd" id="1_0m8vm"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3u0q3"]
 font_size = 18
@@ -13,6 +15,7 @@ anchor_bottom = 1.0
 offset_right = 256.0
 grow_vertical = 2
 size_flags_vertical = 3
+script = ExtResource("1_0m8vm")
 
 [node name="panel" type="Panel" parent="."]
 editor_description = "Debug panel background."

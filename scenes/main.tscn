@@ -21,10 +21,9 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="screen" type="SubViewport" parent="screen_container"]
-unique_name_in_owner = true
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(960, 540)
+size = Vector2i(1920, 1080)
 render_target_update_mode = 4
 
 [node name="main_menu" parent="screen_container/screen" instance=ExtResource("1_5cikp")]

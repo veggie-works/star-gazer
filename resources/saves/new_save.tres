@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3 uid="uid://bpq25ufu805u1"]
+
+[ext_resource type="Script" path="res://scripts/autoload/save_manager/save_data.gd" id="1_plc0g"]
+
+[resource]
+script = ExtResource("1_plc0g")
+save_scene = "res://scenes/levels/level0.tscn"
+save_position = Vector2(306, 475)

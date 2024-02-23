@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="MusicTrack" load_steps=3 format=3 uid="uid://b7xpyw37rvn2"]
+
+[ext_resource type="AudioStream" uid="uid://ds4jmit5eguki" path="res://assets/music/bpm60.wav" id="1_pax1l"]
+[ext_resource type="Script" path="res://scenes/audio/music_track.gd" id="1_tf83j"]
+
+[resource]
+script = ExtResource("1_tf83j")
+bpm = 60
+music_clip = ExtResource("1_pax1l")

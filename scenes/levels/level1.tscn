@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://bavwuvs5ypi0c"]
+
+[ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_ljwkj"]
+[ext_resource type="Resource" uid="uid://b26fpa887igk5" path="res://resources/music_tracks/level1.tres" id="2_y012l"]
+[ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="3_qssn7"]
+[ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_e4t6x"]
+[ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="5_blkad"]
+[ext_resource type="Script" path="res://scenes/levels/jump_trigger.gd" id="6_kbdpv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5rkf"]
+size = Vector2(64, 10)
+
+[node name="level1" instance=ExtResource("1_ljwkj")]
+music_track = ExtResource("2_y012l")
+
+[node name="test_platform" parent="." index="0" instance=ExtResource("3_qssn7")]
+position = Vector2(240, 514)
+scale = Vector2(4.04, 0.429688)
+
+[node name="test_platform2" parent="." index="1" instance=ExtResource("3_qssn7")]
+position = Vector2(689, 382)
+scale = Vector2(3.04, 0.429688)
+
+[node name="save_point" parent="." index="2" instance=ExtResource("4_e4t6x")]
+position = Vector2(686, 323)
+
+[node name="door_left" parent="." index="3" instance=ExtResource("5_blkad")]
+position = Vector2(25, 419)
+scale = Vector2(0.68, 2.12)
+target_scene = "res://scenes/levels/level0.tscn"
+target_name = "door_right"
+enter_direction = "right"
+
+[node name="test_platform3" parent="." index="4" instance=ExtResource("3_qssn7")]
+position = Vector2(521, 485)
+scale = Vector2(0.417754, 1.50356)
+
+[node name="test_platform4" parent="." index="5" instance=ExtResource("3_qssn7")]
+position = Vector2(25, 154)
+scale = Vector2(0.659609, 3.04646)
+
+[node name="test_platform5" parent="." index="6" instance=ExtResource("3_qssn7")]
+position = Vector2(909, 158)
+scale = Vector2(-0.498646, 3.96361)
+
+[node name="jump_trigger" type="Area2D" parent="." index="7"]
+position = Vector2(352, 481)
+collision_layer = 0
+script = ExtResource("6_kbdpv")
+
+[node name="collision" type="CollisionShape2D" parent="jump_trigger" index="0"]
+position = Vector2(29, 0)
+shape = SubResource("RectangleShape2D_g5rkf")
+disabled = true
+
+[connection signal="body_entered" from="jump_trigger" to="jump_trigger" method="_on_body_entered"]

@@ -1,14 +1,175 @@
-[gd_scene load_steps=3 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=30 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
+[ext_resource type="Texture2D" uid="uid://b0hhru8ipkn71" path="res://assets/art/actors/player/idle0.png" id="3_ud3uo"]
+[ext_resource type="Texture2D" uid="uid://cprq8wcxqa22v" path="res://assets/art/actors/player/run0.png" id="4_s6uqa"]
+[ext_resource type="Texture2D" uid="uid://bf4cwrnqpfc1x" path="res://assets/art/actors/player/run1.png" id="5_ntmye"]
+[ext_resource type="Texture2D" uid="uid://d32o1fdoj85rv" path="res://assets/art/actors/player/run2.png" id="6_gnw7f"]
+[ext_resource type="Texture2D" uid="uid://enyiaq7jeojg" path="res://assets/art/actors/player/run3.png" id="7_fjjlt"]
+[ext_resource type="Texture2D" uid="uid://jga4ofmoqxd6" path="res://assets/art/actors/player/run4.png" id="8_1sfcy"]
+[ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://assets/art/actors/player/run5.png" id="9_1urep"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
+[ext_resource type="Shader" path="res://resources/shaders/color_key_flash.gdshader" id="11_0p73h"]
+[ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="11_xerj3"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="12_2ynoo"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/recoil_manager.gd" id="12_evo3r"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_run_state.gd" id="13_dg6tn"]
+[ext_resource type="Script" path="res://scripts/actors/grounded/player/combo_manager.gd" id="13_whb5f"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="14_iulkx"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w3g6"]
+shader = ExtResource("11_0p73h")
+shader_parameter/key_color = Color(1, 0, 1, 1)
+shader_parameter/replace_color = Color(1, 1, 1, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="Animation" id="Animation_fofbs"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_ud3uo")]
+}
+
+[sub_resource type="Animation" id="Animation_umav7"]
+resource_name = "run"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1667, 0.3333, 0.5, 0.6667, 0.8333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_s6uqa"), ExtResource("5_ntmye"), ExtResource("6_gnw7f"), ExtResource("7_fjjlt"), ExtResource("8_1sfcy"), ExtResource("9_1urep")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs4"]
+_data = {
+"idle": SubResource("Animation_fofbs"),
+"run": SubResource("Animation_umav7")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0ik5"]
+shader = ExtResource("11_0p73h")
+shader_parameter/key_color = Color(0.901961, 0.901961, 0.901961, 1)
+shader_parameter/replace_color = Color(1, 0.168627, 0, 1)
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbvw"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvff"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
+size = Vector2(64, 64)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
+material = SubResource("ShaderMaterial_6w3g6")
 collision_layer = 1
+collision_mask = 66
 script = ExtResource("2_d5awl")
 
-[node name="timers" type="Node" parent="." index="4"]
+[node name="animator" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_xmrs4")
+}
+
+[node name="sprite" parent="." index="1"]
+material = SubResource("ShaderMaterial_q0ik5")
+use_parent_material = true
+texture = ExtResource("3_ud3uo")
+
+[node name="collision" parent="." index="2"]
+shape = SubResource("RectangleShape2D_4dbvw")
+
+[node name="raycast0" parent="ground_raycasts" index="0"]
+position = Vector2(-32, 32)
+
+[node name="raycast1" parent="ground_raycasts" index="1"]
+position = Vector2(0, 32)
+
+[node name="raycast2" parent="ground_raycasts" index="2"]
+visible = false
+position = Vector2(32, 32)
+
+[node name="health_manager" parent="behaviors" index="0" instance=ExtResource("11_xerj3")]
+unique_name_in_owner = true
+collision_layer = 1
+collision_mask = 64
+max_health = 100.0
+
+[node name="hurt_box" parent="behaviors/health_manager" index="0"]
+shape = SubResource("RectangleShape2D_bbvff")
+
+[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state")]
+unique_name_in_owner = true
+script = ExtResource("12_evo3r")
+state_machine = NodePath("../../fsm")
+recoil_state = NodePath("../../fsm/player_hurt_state")
+
+[node name="combo_manager" type="Node" parent="behaviors" index="2"]
+unique_name_in_owner = true
+script = ExtResource("13_whb5f")
+
+[node name="flasher" type="Node2D" parent="behaviors" index="3"]
+unique_name_in_owner = true
+script = ExtResource("14_iulkx")
+
+[node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
+script = ExtResource("10_q18np")
+start_state = NodePath("player_idle_state")
+
+[node name="player_idle_state" type="Node" parent="fsm" index="0"]
+script = ExtResource("12_2ynoo")
+
+[node name="player_run_state" type="Node" parent="fsm" index="1"]
+script = ExtResource("13_dg6tn")
+
+[node name="player_jump_state" type="Node" parent="fsm" index="2"]
+script = ExtResource("14_ygy2g")
+
+[node name="player_fall_state" type="Node" parent="fsm" index="3"]
+script = ExtResource("15_7k3jt")
+
+[node name="player_hurt_state" type="Node" parent="fsm" index="4"]
+script = ExtResource("18_2rtci")
+
+[node name="player_recover_state" type="Node" parent="fsm" index="5"]
+script = ExtResource("19_c4jwa")
+perfect_recovery_invincibility_time = 4.545
+
+[node name="timers" type="Node" parent="." index="6"]
 
 [node name="coyote_timer" type="Timer" parent="timers" index="0"]
-wait_time = 0.1
+wait_time = 0.05
 one_shot = true
+
+[node name="triggers" type="Node2D" parent="." index="7"]
+
+[node name="door_trigger" type="Area2D" parent="triggers" index="0"]
+collision_mask = 0
+
+[node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
+shape = SubResource("RectangleShape2D_cl6t6")
+
+[editable path="behaviors/health_manager"]

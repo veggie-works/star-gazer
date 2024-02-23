@@ -3,7 +3,6 @@ class_name Fader extends BaseUI
 
 ## Emitted when the fader finishes fading in
 signal faded_in
-
 ## Emitted when the fader finishes fading out
 signal faded_out
 

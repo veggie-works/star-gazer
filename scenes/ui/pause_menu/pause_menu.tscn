@@ -82,6 +82,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_78msb")
+main_menu_scene = "res://scenes/levels/main_menu/main_menu.tscn"
 
 [node name="animator" type="AnimationPlayer" parent="."]
 libraries = {

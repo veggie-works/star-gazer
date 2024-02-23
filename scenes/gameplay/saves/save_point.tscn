@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://cnri2gdmg878w"]
+
+[ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="1_8lhm6"]
+[ext_resource type="Script" path="res://scripts/gameplay/save/save_point.gd" id="1_gv0sa"]
+[ext_resource type="PackedScene" uid="uid://bmqoaf40cddce" path="res://scenes/actors/grounded/player/player.tscn" id="2_5qw78"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cosb7"]
+size = Vector2(64, 10)
+
+[node name="save_point" type="Node2D" groups=["save_points"]]
+script = ExtResource("1_gv0sa")
+player_prefab = ExtResource("2_5qw78")
+
+[node name="sprite" type="Sprite2D" parent="."]
+position = Vector2(0, -64)
+scale = Vector2(0.5, 1.5)
+texture = ExtResource("1_8lhm6")
+
+[node name="save_area" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="collision" type="CollisionShape2D" parent="save_area"]
+position = Vector2(0, 27)
+shape = SubResource("RectangleShape2D_cosb7")
+
+[connection signal="body_entered" from="save_area" to="." method="_on_save_area_body_entered"]
