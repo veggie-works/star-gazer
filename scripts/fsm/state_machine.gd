@@ -37,6 +37,7 @@ func _process(delta: float) -> void:
 
 ## Set the FSM's current state to a new state
 func set_state(new_state: State) -> void:
+	current_state = new_state
 	var old_state: State = current_state
 	if old_state != null:
 		old_state.exit()
@@ -45,7 +46,6 @@ func set_state(new_state: State) -> void:
 	if len(state_history) > state_history_capacity:
 		state_history.pop_front()
 	state_changed.emit(old_state, new_state)
-	current_state = new_state
 
 ## Transition to a new state
 func transition_to(state_type: GDScript) -> void:

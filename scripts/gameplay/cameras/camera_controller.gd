@@ -10,24 +10,9 @@ extends Camera2D
 ## Whether to track targets along the vertical axis
 @export var track_y: bool = true
 
-## The current amount of shake applied to the camera
-var current_shake_magnitude: float
-## The position of the camera before it began shaking
-var original_camera_position: Vector2
-## The amount of shake to remove every frame
-var unshake_amount: float
-
 func _process(delta: float) -> void:
 	if len(targets) > 0:
 		track(delta)
-	if current_shake_magnitude > 0:
-		update_shake(delta)
-
-## Begin camera shake
-func shake(amount: float, duration: float) -> void:
-	original_camera_position = global_position
-	current_shake_magnitude = amount
-	unshake_amount = amount / duration
 
 ## Track targets
 func track(delta: float) -> void:
@@ -50,8 +35,3 @@ func track(delta: float) -> void:
 		-INF)
 		center_y = min_y + (max_y - min_y) / 2
 	global_position = global_position.lerp(Vector2(center_x, center_y), track_speed * delta)
-
-## Update the camera shake
-func update_shake(delta: float) -> void:
-	global_position = original_camera_position + Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized() * current_shake_magnitude
-	current_shake_magnitude -= unshake_amount * delta

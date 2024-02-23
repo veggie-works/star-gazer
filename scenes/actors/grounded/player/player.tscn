@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=31 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -18,6 +18,7 @@
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/combo_manager.gd" id="13_whb5f"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="14_iulkx"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/pulser.gd" id="15_1mbkm"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
@@ -118,6 +119,7 @@ collision_layer = 1
 collision_mask = 64
 max_health = 100.0
 shake_camera = true
+invincibility_time = 0.65
 
 [node name="hurt_box" parent="behaviors/health_manager" index="0"]
 shape = SubResource("RectangleShape2D_bbvff")
@@ -135,6 +137,10 @@ script = ExtResource("13_whb5f")
 [node name="flasher" type="Node2D" parent="behaviors" index="3"]
 unique_name_in_owner = true
 script = ExtResource("14_iulkx")
+
+[node name="pulser" type="Node2D" parent="behaviors" index="4"]
+unique_name_in_owner = true
+script = ExtResource("15_1mbkm")
 
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")
@@ -157,7 +163,7 @@ script = ExtResource("18_2rtci")
 
 [node name="player_recover_state" type="Node" parent="fsm" index="5"]
 script = ExtResource("19_c4jwa")
-perfect_recovery_invincibility_time = 4.545
+perfect_recovery_invincibility_time = 1.25
 
 [node name="timers" type="Node" parent="." index="6"]
 
