@@ -1,12 +1,14 @@
 ## Player attacking state
 class_name PlayerAttackState extends PlayerState
 
-func _ready() -> void:
+@onready var weapon_manager: WeaponManager = %weapon_manager
+
+func enter() -> void:
 	if body.is_grounded():
-		pass
+		weapon_manager.attack()
 		#animator.play("attack")
 		#await animator.animation_finished
 	else:
-		pass
+		weapon_manager.attack()
 		#animator.play("air_attack")
 		#await animator.animation_finished

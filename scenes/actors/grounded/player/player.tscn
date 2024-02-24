@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=34 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -20,8 +20,11 @@
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/pulser.gd" id="15_1mbkm"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/weapon_manager.gd" id="16_sqfty"]
+[ext_resource type="Resource" uid="uid://cx0lqtmn61oof" path="res://resources/weapons/player_weapon.tres" id="17_l4tnu"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_attack_state.gd" id="24_inykr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6w3g6"]
 shader = ExtResource("11_0p73h")
@@ -142,6 +145,12 @@ script = ExtResource("14_iulkx")
 unique_name_in_owner = true
 script = ExtResource("15_1mbkm")
 
+[node name="weapon_manager" type="Node2D" parent="behaviors" index="5"]
+unique_name_in_owner = true
+position = Vector2(49, 0)
+script = ExtResource("16_sqfty")
+weapon = ExtResource("17_l4tnu")
+
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")
 start_state = NodePath("player_idle_state")
@@ -164,6 +173,9 @@ script = ExtResource("18_2rtci")
 [node name="player_recover_state" type="Node" parent="fsm" index="5"]
 script = ExtResource("19_c4jwa")
 perfect_recovery_invincibility_time = 1.25
+
+[node name="player_attack_state" type="Node" parent="fsm" index="6"]
+script = ExtResource("24_inykr")
 
 [node name="timers" type="Node" parent="." index="6"]
 

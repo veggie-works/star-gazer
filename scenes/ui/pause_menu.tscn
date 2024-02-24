@@ -1,9 +1,10 @@
 [gd_scene load_steps=9 format=3 uid="uid://b5csifcrytegw"]
 
-[ext_resource type="Script" path="res://scripts/ui/pause_menu/pause_menu.gd" id="1_78msb"]
+[ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_78msb"]
 [ext_resource type="Shader" path="res://resources/shaders/blur.gdshader" id="2_bgr1x"]
 [ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_ig7np"]
 [ext_resource type="PackedScene" uid="uid://d5l2m2e8q2x4" path="res://scenes/ui/settings/settings_ui.tscn" id="4_mtpwx"]
+
 
 [sub_resource type="Animation" id="Animation_bcgww"]
 resource_name = "close"

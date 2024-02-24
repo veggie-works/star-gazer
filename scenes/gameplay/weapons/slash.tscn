@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://ugt2rm3wxjku"]
+
+[ext_resource type="PackedScene" uid="uid://bclby8x5hnel7" path="res://scenes/gameplay/weapons/damage_area.tscn" id="1_2ichq"]
+[ext_resource type="Texture2D" uid="uid://bnkay31itcm21" path="res://assets/art/actors/player/slash0.png" id="2_2mgsf"]
+[ext_resource type="Texture2D" uid="uid://djugupm5nqdxq" path="res://assets/art/actors/player/slash_end_down_0.png" id="3_7rhkv"]
+
+[sub_resource type="Animation" id="Animation_3isol"]
+resource_name = "attack"
+length = 0.3333
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("2_2mgsf"), ExtResource("3_7rhkv")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("collision:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [PackedVector2Array(-48, -40, 32, -72, 72, 0, 24, 72, -48, 48), PackedVector2Array()]
+}
+
+[sub_resource type="Animation" id="Animation_5plmx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("collision:polygon")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [PackedVector2Array(-48, -40, 32, -72, 72, 0, 24, 72, -48, 48)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lkarp"]
+_data = {
+"RESET": SubResource("Animation_5plmx"),
+"attack": SubResource("Animation_3isol")
+}
+
+[node name="slash" instance=ExtResource("1_2ichq")]
+collision_layer = 32
+collision_mask = 80
+attack_force = 750.0
+attack_angle = 45.0
+
+[node name="animator" parent="." index="0"]
+libraries = {
+"": SubResource("AnimationLibrary_lkarp")
+}
+
+[node name="sprite" parent="." index="1"]
+texture = ExtResource("2_2mgsf")
+
+[node name="collision" parent="." index="2"]
+polygon = PackedVector2Array(-48, -40, 32, -72, 72, 0, 24, 72, -48, 48)

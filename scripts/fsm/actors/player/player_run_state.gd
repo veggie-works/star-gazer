@@ -14,7 +14,7 @@ func update(delta: float) -> void:
 	if body.disable_input:
 		return
 		
-	body.velocity.x = 0
+	body.velocity.x = 0	
 	var direction = sign(Input.get_axis("move_left", "move_right"))
 	if abs(direction) <= 0:
 		fsm.transition_to(PlayerIdleState)

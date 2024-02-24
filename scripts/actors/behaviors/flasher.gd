@@ -46,3 +46,7 @@ func flash(color := Color.WHITE, peak_flash_amount: float = 1.0, ramp_down_time:
 	current_ramp_up_time = 0.0
 	current_ramp_down_time = 0.0
 	is_flashing = true
+
+## Restore object's color to its original state
+func reset_color() -> void:
+	owner_material.set_shader_parameter("flash_amount", 0.0)

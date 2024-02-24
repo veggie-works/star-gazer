@@ -7,6 +7,7 @@ class_name MainMenu extends BaseLevel
 @onready var settings_ui: Control = $settings_ui
 
 func _ready() -> void:
+	AudioManager.stop_music()
 	UIManager.delete_ui(PauseMenu)
 	if OS.is_debug_build():
 		UIManager.delete_ui(DebugPanel)

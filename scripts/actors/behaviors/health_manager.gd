@@ -18,6 +18,8 @@ class_name HealthManager extends Area2D
 @onready var pulser: Pulser = %pulser
 ## Used to recoil the actor when taking damage
 @onready var recoil_manager: RecoilManager = %recoil_manager
+## Used to shake the actor on damage
+@onready var shaker: Shaker = %shaker
 
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
@@ -72,6 +74,8 @@ func take_damage(attack: Attack) -> void:
 		return
 	if recoil_manager != null:
 		recoil_manager.recoil(attack.attack_angle, attack.attack_force)
+	if shaker != null:
+		shaker.shake(15, 0.25)
 
 ## Actor death
 func die() -> void:
@@ -80,7 +84,7 @@ func die() -> void:
 ## Set actor as invincible (setter doesn't work)
 func set_invincible(value: bool = true) -> void:
 	invincible = value
-	hurt_box.disabled = value
+	hurt_box.set_deferred("disabled", value)
 	if value:
 		invincible_time = 0.0
 		if pulser != null:
