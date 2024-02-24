@@ -37,7 +37,7 @@ func open() -> void:
 	for player in players:
 		if player is Player:
 			player.in_cutscene = true
-			player.move(0)
+			player.run(0)
 
 func close() -> void:
 	super.close()

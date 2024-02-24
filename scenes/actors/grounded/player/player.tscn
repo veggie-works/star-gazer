@@ -113,7 +113,6 @@ position = Vector2(-32, 32)
 position = Vector2(0, 32)
 
 [node name="raycast2" parent="ground_raycasts" index="2"]
-visible = false
 position = Vector2(32, 32)
 
 [node name="health_manager" parent="behaviors" index="0" instance=ExtResource("11_xerj3")]
@@ -127,10 +126,9 @@ invincibility_time = 0.65
 [node name="hurt_box" parent="behaviors/health_manager" index="0"]
 shape = SubResource("RectangleShape2D_bbvff")
 
-[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state")]
+[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("recoil_state")]
 unique_name_in_owner = true
 script = ExtResource("12_evo3r")
-state_machine = NodePath("../../fsm")
 recoil_state = NodePath("../../fsm/player_hurt_state")
 
 [node name="combo_manager" type="Node" parent="behaviors" index="2"]
@@ -189,6 +187,12 @@ one_shot = true
 collision_mask = 0
 
 [node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
+shape = SubResource("RectangleShape2D_cl6t6")
+
+[node name="interact_trigger" type="Area2D" parent="triggers" index="1"]
+collision_mask = 4
+
+[node name="collision" type="CollisionShape2D" parent="triggers/interact_trigger" index="0"]
 shape = SubResource("RectangleShape2D_cl6t6")
 
 [editable path="behaviors/health_manager"]

@@ -26,6 +26,8 @@ position = Vector2(0, 56)
 [node name="collision" parent="interact_area" index="0"]
 shape = SubResource("RectangleShape2D_t751s")
 
+[connection signal="area_entered" from="interact_area" to="." method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="interact_area" to="." method="_on_interact_area_area_exited"]
 [connection signal="interact" from="interact_area" to="." method="_on_interact_area_interact"]
 
 [editable path="interact_area"]

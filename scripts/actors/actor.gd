@@ -9,6 +9,10 @@ func _process(_delta: float) -> void:
 func flip() -> void:
 	transform.x.x *= -1
 
+## Move the actor
+func move(move_vector: Vector2) -> void:
+	velocity = move_vector
+
 ## Update the direction that the actor is facing
 func update_direction() -> void:
 	if velocity.x < 0 and transform.x.x > 0 or velocity.x > 0 and transform.x.x < 0:

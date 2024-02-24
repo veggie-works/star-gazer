@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cyx5odv1hxxeo"]
+
+[ext_resource type="Script" path="res://scripts/actors/behaviors/line_of_sight.gd" id="1_pdf75"]
+
+[node name="line_of_sight" type="Node2D"]
+script = ExtResource("1_pdf75")
+target_group = "players"
+
+[node name="raycast" type="RayCast2D" parent="."]
+collision_mask = 3

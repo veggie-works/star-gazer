@@ -79,7 +79,7 @@ func take_damage(attack: Attack) -> void:
 
 ## Actor death
 func die() -> void:
-	pass
+	owner.queue_free()
 
 ## Set actor as invincible (setter doesn't work)
 func set_invincible(value: bool = true) -> void:

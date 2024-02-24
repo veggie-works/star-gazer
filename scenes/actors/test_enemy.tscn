@@ -1,0 +1,76 @@
+[gd_scene load_steps=14 format=3 uid="uid://r28wdqjlisvt"]
+
+[ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_8tp4w"]
+[ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="2_0tlod"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="3_0akbf"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/shaker.gd" id="4_2dnbe"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_idle_state.gd" id="5_1xvgx"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_fsm.gd" id="5_joodl"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_wander_state.gd" id="6_2q811"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_alert_state.gd" id="7_2be4c"]
+[ext_resource type="PackedScene" uid="uid://bclby8x5hnel7" path="res://scenes/gameplay/weapons/damage_area.tscn" id="8_c4csd"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_chase_ground_state.gd" id="9_b4bug"]
+[ext_resource type="Resource" uid="uid://24b54tb75xym" path="res://resources/weapons/test_enemy_damager.tres" id="9_u6nk4"]
+[ext_resource type="PackedScene" uid="uid://cyx5odv1hxxeo" path="res://scenes/actors/enemies/line_of_sight.tscn" id="10_26ks4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22msy"]
+size = Vector2(128, 128)
+
+[node name="test_enemy" instance=ExtResource("1_8tp4w")]
+run_speed = 100.0
+
+[node name="health_manager" parent="behaviors" index="0" instance=ExtResource("2_0tlod")]
+unique_name_in_owner = true
+
+[node name="hurt_box" parent="behaviors/health_manager" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_22msy")
+
+[node name="flasher" type="Node2D" parent="behaviors" index="1"]
+unique_name_in_owner = true
+script = ExtResource("3_0akbf")
+
+[node name="shaker" type="Node2D" parent="behaviors" index="2"]
+unique_name_in_owner = true
+script = ExtResource("4_2dnbe")
+
+[node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
+script = ExtResource("5_joodl")
+start_state = NodePath("idle_state")
+
+[node name="idle_state" type="Node" parent="fsm" index="0"]
+script = ExtResource("5_1xvgx")
+idle_timeout_next_state = ExtResource("6_2q811")
+
+[node name="wander_state" type="Node" parent="fsm" index="1"]
+script = ExtResource("6_2q811")
+
+[node name="alert_state" type="Node" parent="fsm" index="2"]
+script = ExtResource("7_2be4c")
+chase_state = ExtResource("9_b4bug")
+
+[node name="chase_state" type="Node" parent="fsm" index="3"]
+script = ExtResource("9_b4bug")
+
+[node name="damage_area" parent="." index="7" instance=ExtResource("8_c4csd")]
+weapon = ExtResource("9_u6nk4")
+attack_force = 1000.0
+attack_angle = 110.0
+
+[node name="idle_timer" type="Timer" parent="." index="8"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="wander_timer" type="Timer" parent="." index="9"]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="line_of_sight" parent="." index="10" instance=ExtResource("10_26ks4")]
+unique_name_in_owner = true
+sight_length = 1000.0
+
+[connection signal="animation_finished" from="animator" to="fsm/alert_state" method="_on_animator_animation_finished"]
+[connection signal="timeout" from="idle_timer" to="fsm/idle_state" method="_on_idle_timer_timeout"]
+[connection signal="timeout" from="wander_timer" to="fsm/idle_state" method="_on_idle_timer_timeout"]
+
+[editable path="behaviors/health_manager"]

@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="2_x2lan"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_c4d54"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_ky82b"]
-[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/enemies/test_enemy.tscn" id="6_wvwei"]
+[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/test_enemy.tscn" id="6_dvvoi"]
 [ext_resource type="PackedScene" uid="uid://ca4hofmt5120j" path="res://scenes/actors/npcs/npc.tscn" id="7_qy8ep"]
 
 [node name="level0" instance=ExtResource("1_tftho")]
@@ -28,17 +28,25 @@ position = Vector2(306, 475)
 position = Vector2(897, 131)
 scale = Vector2(1, 3)
 
-[node name="test_platform3" parent="." index="4" instance=ExtResource("2_x2lan")]
+[node name="test_platform5" parent="." index="4" instance=ExtResource("2_x2lan")]
+position = Vector2(1014, 349)
+scale = Vector2(1, 3)
+
+[node name="test_platform3" parent="." index="5" instance=ExtResource("2_x2lan")]
 position = Vector2(342, -4)
 scale = Vector2(7.8, 1)
 
-[node name="test_platform4" parent="." index="5" instance=ExtResource("2_x2lan")]
+[node name="test_platform4" parent="." index="6" instance=ExtResource("2_x2lan")]
 position = Vector2(-39, 276)
 scale = Vector2(-0.894892, 3.72755)
 
-[node name="test_enemy" parent="enemies" index="0" instance=ExtResource("6_wvwei")]
-position = Vector2(611, 476)
+[node name="test_platform6" parent="." index="7" instance=ExtResource("2_x2lan")]
+position = Vector2(488, 425)
+scale = Vector2(-0.534894, 1.28755)
+
+[node name="test_enemy" parent="enemies" index="0" instance=ExtResource("6_dvvoi")]
+position = Vector2(679, 471)
 scale = Vector2(0.5, 0.5)
 
-[node name="npc" parent="." index="8" instance=ExtResource("7_qy8ep")]
+[node name="npc" parent="." index="10" instance=ExtResource("7_qy8ep")]
 position = Vector2(127, 442)
