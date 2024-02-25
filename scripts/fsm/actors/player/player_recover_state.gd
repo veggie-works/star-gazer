@@ -10,7 +10,7 @@ class_name PlayerRecoverState extends PlayerState
 @onready var pulser: Pulser = %pulser
 
 func enter() -> void:
-	if AudioManager.perfect_recovery:
+	if BeatManager.perfect_recovery:
 		perfect_recovery()
 	body.velocity = Vector2.ZERO
 	#animator.play("recover")

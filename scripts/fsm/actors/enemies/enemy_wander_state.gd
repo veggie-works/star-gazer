@@ -4,30 +4,26 @@ class_name EnemyWanderState extends EnemyState
 ## The animation to play while wandering
 @export var wander_animation: String = "wander"
 ## The speed at which the enemy wanders
-@export var wander_speed: float = 200
-## The time for which the enemy wanders for
-@export var wander_time: float = 3
-## Controls how long the enemy should wander for
-@onready var wander_timer: Timer = %wander_timer
+@export var wander_speed: float = 75
+## The number of beats that the enemy wanders for
+@export var wander_beats: int = 3
 
-func _ready() -> void:
-	if wander_timer != null:
-		wander_timer.timeout.connect(on_wander_timer_timeout)
+## The current number of beats that have occurred
+var beat_count: int
 
 func enter() -> void:
+	beat_count = 0
+	if not AudioManager.downbeat.is_connected(on_downbeat):
+		AudioManager.downbeat.connect(on_downbeat)
 	if animator.has_animation(wander_animation):
 		animator.play(wander_animation)
 	body.move(Vector2([-1, 1][randi_range(0, 1)] * wander_speed, 0))
-	if wander_timer != null:
-		wander_timer.start(wander_time)
 
 func exit() -> void:
-	wander_timer.stop()
+	if AudioManager.downbeat.is_connected(on_downbeat):
+		AudioManager.downbeat.disconnect(on_downbeat)
 
-func update(delta: float) -> void:
-	if fsm.current_target != null:
-		fsm.transition_to(EnemyAlertState)
-
-## Callback for when the wander timer expires
-func on_wander_timer_timeout() -> void:
-	fsm.transition_to(EnemyIdleState)
+func on_downbeat() -> void:
+	beat_count += 1
+	if beat_count >= wander_beats:
+		fsm.transition_to(EnemyIdleState)

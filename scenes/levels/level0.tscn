@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="2_x2lan"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_c4d54"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_ky82b"]
-[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/test_enemy.tscn" id="6_dvvoi"]
+[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/enemies/test_enemy.tscn" id="6_dvvoi"]
 [ext_resource type="PackedScene" uid="uid://ca4hofmt5120j" path="res://scenes/actors/npcs/npc.tscn" id="7_qy8ep"]
 
 [node name="level0" instance=ExtResource("1_tftho")]

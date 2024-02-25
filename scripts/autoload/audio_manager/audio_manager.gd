@@ -1,12 +1,5 @@
 extends Node
 
-## The window of time in which a perfect attack may be executed
-const PERFECT_ATTACK_WINDOW: float = 0.15
-## The window of time in which a perfect dodge may be executed
-const PERFECT_DODGE_WINDOW: float = 0.2
-## The window of time in which a perfect recovery may be executed
-const PERFECT_RECOVERY_WINDOW: float = 0.15
-
 ## The prefab to instantiate when playing a one shot clip
 @export var audio_player_prefab: PackedScene
 
@@ -42,16 +35,6 @@ var time_to_next_beat: float:
 			return INF
 		var sec: float = current_music_player.get_playback_position()
 		return beat_length - fposmod(sec, beat_length)
-
-## Whether a perfect attack was executed
-var perfect_attacked: bool:
-	get:
-		return time_to_next_beat < PERFECT_ATTACK_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_ATTACK_WINDOW / 2
-		
-## Whether a perfect recovery was executed
-var perfect_recovery: bool:
-	get:
-		return time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2 or beat_length - time_to_next_beat < PERFECT_RECOVERY_WINDOW / 2
 
 func _process(delta: float) -> void:
 	check_downbeat()

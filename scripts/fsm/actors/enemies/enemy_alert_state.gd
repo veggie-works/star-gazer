@@ -2,11 +2,12 @@
 class_name EnemyAlertState extends EnemyState
 
 ## The state for when the enemy is chasing a target
-@export var chase_state: GDScript
+@export var chase_state: EnemyState
 
 func enter() -> void:
+	print("ALERTED")
 	body.velocity.x = 0
 	if animator.has_animation("alert"):
 		animator.play("alert")
 		await animator.animation_finished
-	fsm.transition_to(chase_state)
+	fsm.set_state(chase_state)

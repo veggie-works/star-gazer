@@ -1,6 +1,9 @@
 ## An enemy's state machine
 class_name EnemyFSM extends StateMachine
 
+## The state to transition to when the enemy has been alerted
+@export var alert_state: EnemyState
+
 ## The enemy's line of sight
 @onready var line_of_sight: LineOfSight = %line_of_sight
 
@@ -12,6 +15,7 @@ func _ready() -> void:
 	if line_of_sight != null:
 		line_of_sight.seen.connect(on_seen)
 
-## Callback for when the player has seen a player
+## Callback for when the enemy has seen a player
 func on_seen(target: Player) -> void:
 	current_target = target
+	set_state(alert_state)

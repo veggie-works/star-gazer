@@ -21,7 +21,7 @@ func _input(event: InputEvent) -> void:
 ## Check whether a perfect input has been executed
 func check_perfect_inputs(event: InputEvent) -> void:
 	if event.is_action_pressed("attack"):
-		if AudioManager.perfect_attacked:
+		if BeatManager.perfect_attacked:
 			combo_manager.increment_combo()
 		else:
 			combo_manager.reset_combo()

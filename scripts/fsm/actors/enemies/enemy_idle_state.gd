@@ -1,28 +1,33 @@
 ## When the enemy is idling
 class_name EnemyIdleState extends EnemyState
 
-## The minimum duration that the enemy can be idle for
-@export var idle_time_min: float = 1
-## The maximum duration that the enemy can be idle for
-@export var idle_time_max: float = 2
+## The minimum number of beats that the enemy can be idle for
+@export var idle_beats_min: int = 2
+## The maximum number of beats that the enemy can be idle for
+@export var idle_beats_max: int = 3
 ## The next state that the enemy should transition after being idle
-@export var idle_timeout_next_state: GDScript
+@export var next_state: GDScript
 
-## Controls how long the enemy should be idle for
-@onready var idle_timer: Timer = %idle_timer
+## The current number of beats counted
+var beat_count: int
+## The number of beats until the transition to the next state
+var idle_beats: int
 
 func enter() -> void:
+	if not AudioManager.downbeat.is_connected(on_downbeat):
+		AudioManager.downbeat.connect(on_downbeat)
 	if animator.has_animation("idle"):
 		animator.play("idle")
 	body.velocity.x = 0
-	idle_timer.start(randf_range(idle_time_min, idle_time_max))
+	beat_count = 0
+	idle_beats = randi_range(idle_beats_min, idle_beats_max)
 
 func exit() -> void:
-	idle_timer.stop()
+	if AudioManager.downbeat.is_connected(on_downbeat):
+		AudioManager.downbeat.disconnect(on_downbeat)
 
-func update(delta: float) -> void:
-	if fsm.current_target != null:
-		fsm.transition_to(EnemyAlertState)
-
-func _on_idle_timer_timeout() -> void:
-	fsm.transition_to(idle_timeout_next_state)
+## Callback for when a downbeat occurs
+func on_downbeat() -> void:
+	beat_count += 1
+	if beat_count >= idle_beats:
+		fsm.transition_to(EnemyWanderState)

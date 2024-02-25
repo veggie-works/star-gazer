@@ -19,12 +19,13 @@ config/icon="res://icon.svg"
 [autoload]
 
 Globals="*res://scripts/autoload/globals.gd"
-SaveManager="*res://scenes/autoload/save_manager/save_manager.tscn"
+SaveManager="*res://scenes/autoload/save_manager.tscn"
 InputManager="*res://scenes/input/input_manager.tscn"
-SceneManager="*res://scenes/autoload/scene_manager/scene_manager.tscn"
+SceneManager="*res://scenes/autoload/scene_manager.tscn"
 UIManager="*res://scenes/ui/ui_manager.tscn"
 AudioManager="*res://scenes/audio/audio_manager.tscn"
 GameCamera="*res://scenes/gameplay/cameras/game_camera.tscn"
+BeatManager="*res://scripts/autoload/beat_manager.gd"
 
 [display]
 
