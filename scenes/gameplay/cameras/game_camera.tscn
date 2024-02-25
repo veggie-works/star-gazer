@@ -4,7 +4,8 @@
 [ext_resource type="Script" path="res://scripts/actors/behaviors/shaker.gd" id="2_5o5m5"]
 
 [node name="game_camera" type="Camera2D"]
-anchor_mode = 0
+enabled = false
+zoom = Vector2(2, 2)
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("1_4qe6i")

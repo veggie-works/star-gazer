@@ -7,10 +7,7 @@ class_name BaseLevel extends Node
 func _ready() -> void:
 	AudioManager.play_music(music_track)
 	UIManager.open_ui(HUD)
-	GameCamera.targets.clear()
-	for player in get_tree().get_nodes_in_group("players"):
-		if player is Player:
-			GameCamera.targets.append(player)
+	GameCamera.enabled = true
 
 ## Load the save point in this scene
 func load_save_point() -> void:

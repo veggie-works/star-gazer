@@ -23,6 +23,7 @@ func exit() -> void:
 	if AudioManager.downbeat.is_connected(on_downbeat):
 		AudioManager.downbeat.disconnect(on_downbeat)
 
+## Callback for when a downbeat occurs
 func on_downbeat() -> void:
 	beat_count += 1
 	if beat_count >= wander_beats:

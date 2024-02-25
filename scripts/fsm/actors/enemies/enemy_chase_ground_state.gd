@@ -5,7 +5,6 @@ class_name EnemyChaseGroundState extends EnemyState
 @export var chase_speed: float = 150
 
 func enter() -> void:
-	print("START CHASE")
 	if animator.has_animation("chase"):
 		animator.play("chase")
 		

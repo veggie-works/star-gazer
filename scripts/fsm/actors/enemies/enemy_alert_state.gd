@@ -5,7 +5,6 @@ class_name EnemyAlertState extends EnemyState
 @export var chase_state: EnemyState
 
 func enter() -> void:
-	print("ALERTED")
 	body.velocity.x = 0
 	if animator.has_animation("alert"):
 		animator.play("alert")

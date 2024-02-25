@@ -8,6 +8,7 @@ class_name MainMenu extends BaseLevel
 
 func _ready() -> void:
 	AudioManager.stop_music()
+	GameCamera.enabled = false
 	UIManager.delete_ui(PauseMenu)
 	if OS.is_debug_build():
 		UIManager.delete_ui(DebugPanel)

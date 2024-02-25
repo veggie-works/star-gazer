@@ -33,6 +33,7 @@ func change_scene(scene_path: String, door_name: String = "") -> void:
 		var save_points = get_tree().get_nodes_in_group("save_points").filter(func(point): 
 			return (point.global_position - SaveManager.save_data.save_position).length() <= 0.1
 		)
+		print("Save points: ", JSON.stringify(save_points))
 		if len(save_points) > 0 and save_points[0] is SavePoint:
 			save_points[0].load_save()
 	fader.close()
