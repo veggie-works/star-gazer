@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=35 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://scripts/actors/behaviors/weapon_manager.gd" id="16_sqfty"]
 [ext_resource type="Resource" uid="uid://cx0lqtmn61oof" path="res://resources/weapons/player_weapon.tres" id="17_l4tnu"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
+[ext_resource type="PackedScene" uid="uid://cmwuu8ltbfye7" path="res://scenes/actors/behaviors/after_image/after_image_manager.tscn" id="18_vk3k7"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_attack_state.gd" id="24_inykr"]
 
@@ -88,6 +89,7 @@ size = Vector2(64, 64)
 size = Vector2(64, 64)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
+z_index = 1
 material = SubResource("ShaderMaterial_6w3g6")
 collision_layer = 1
 collision_mask = 66
@@ -148,6 +150,9 @@ unique_name_in_owner = true
 position = Vector2(49, 0)
 script = ExtResource("16_sqfty")
 weapon = ExtResource("17_l4tnu")
+
+[node name="after_image_manager" parent="behaviors" index="6" node_paths=PackedStringArray("reference_sprite") instance=ExtResource("18_vk3k7")]
+reference_sprite = NodePath("../../sprite")
 
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")

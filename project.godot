@@ -37,6 +37,10 @@ window/stretch/scale_mode="integer"
 
 project/assembly_name="Star Gazer"
 
+[editor_plugins]
+
+enabled=PackedStringArray()
+
 [input]
 
 jump={

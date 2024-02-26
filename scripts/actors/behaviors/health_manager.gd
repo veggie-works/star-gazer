@@ -13,13 +13,13 @@ class_name HealthManager extends Area2D
 ## The collision shape that triggers a damage event
 @onready var hurt_box: CollisionShape2D = $hurt_box
 ## Controls flashiing after taking damage
-@onready var flasher: Flasher = %flasher
+@onready var flasher: Flasher = $"../flasher"
 ## Controls pulsing while invincible after taking damage
-@onready var pulser: Pulser = %pulser
+@onready var pulser: Pulser = $"../pulser"
 ## Used to recoil the actor when taking damage
-@onready var recoil_manager: RecoilManager = %recoil_manager
+@onready var recoil_manager: RecoilManager = $"../recoil_manager"
 ## Used to shake the actor on damage
-@onready var shaker: Shaker = %shaker
+@onready var shaker: Shaker = $"../shaker"
 
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
@@ -68,7 +68,7 @@ func take_damage(attack: Attack) -> void:
 	last_damage_taken = damage_amount
 	took_damage.emit(attack)
 	if shake_camera:
-		GameCamera.get_node("shaker").shake(25, 0.25)
+		GameCamera.shake(25, 0.25)
 	if is_dead:
 		die()
 		return

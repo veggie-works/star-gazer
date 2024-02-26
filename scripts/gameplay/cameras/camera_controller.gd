@@ -10,9 +10,17 @@ extends Camera2D
 ## Whether to track targets along the vertical axis
 @export var track_y: bool = true
 
+## Controls camera shake
+@onready var shaker: Shaker = $shaker
+
 func _process(delta: float) -> void:
 	if len(targets) > 0:
 		track(delta)
+
+## Shake the camera
+func shake(amount: float, duration: float) -> void:
+	if shaker != null:
+		shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
 
 ## Track targets
 func track(delta: float) -> void:

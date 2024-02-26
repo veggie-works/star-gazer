@@ -2,7 +2,7 @@
 class_name Pulser extends Node2D
 
 ## The flasher component to use for the color pulse
-@onready var flasher: Flasher = %flasher
+@onready var flasher: Flasher = $"../flasher"
 
 ## The color to pulse
 var pulse_color: Color

@@ -28,6 +28,70 @@ layout_mode = 2
 theme_override_constants/separation = 4
 alignment = 1
 
+[node name="master_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
+layout_mode = 2
+
+[node name="master_volume_label" type="Label" parent="margin_container/menu_buttons/master_volume_container"]
+layout_mode = 2
+text = "Master Volume "
+
+[node name="master_volume_slider" type="HSlider" parent="margin_container/menu_buttons/master_volume_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="value_label" type="Label" parent="margin_container/menu_buttons/master_volume_container"]
+layout_mode = 2
+
+[node name="music_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
+layout_mode = 2
+
+[node name="music_volume_label" type="Label" parent="margin_container/menu_buttons/music_volume_container"]
+layout_mode = 2
+text = "Music Volume   "
+
+[node name="music_volume_slider" type="HSlider" parent="margin_container/menu_buttons/music_volume_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="value_label" type="Label" parent="margin_container/menu_buttons/music_volume_container"]
+layout_mode = 2
+
+[node name="sfx_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
+layout_mode = 2
+
+[node name="sfx_volume_label" type="Label" parent="margin_container/menu_buttons/sfx_volume_container"]
+layout_mode = 2
+text = "SFX Volume        "
+
+[node name="sfx_volume_slider" type="HSlider" parent="margin_container/menu_buttons/sfx_volume_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="value_label" type="Label" parent="margin_container/menu_buttons/sfx_volume_container"]
+layout_mode = 2
+
+[node name="screen_shake_intensity_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
+layout_mode = 2
+
+[node name="screen_shake_intensity_label" type="Label" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
+layout_mode = 2
+text = "Screen Shake     "
+
+[node name="screen_shake_intensity_slider" type="HSlider" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="value_label" type="Label" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
+layout_mode = 2
+
 [node name="input_bindings_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
 layout_mode = 2
 text = "Input Bindings"
@@ -45,6 +109,10 @@ visible = false
 layout_mode = 1
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
+[connection signal="value_changed" from="margin_container/menu_buttons/master_volume_container/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
+[connection signal="value_changed" from="margin_container/menu_buttons/music_volume_container/music_volume_slider" to="." method="_on_music_volume_slider_value_changed"]
+[connection signal="value_changed" from="margin_container/menu_buttons/sfx_volume_container/sfx_volume_slider" to="." method="_on_sfx_volume_slider_value_changed"]
+[connection signal="value_changed" from="margin_container/menu_buttons/screen_shake_intensity_container/screen_shake_intensity_slider" to="." method="_on_screen_shake_intensity_slider_value_changed"]
 [connection signal="pressed" from="margin_container/menu_buttons/input_bindings_button" to="." method="_on_input_bindings_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/back_button" to="." method="_on_back_button_pressed"]
 [connection signal="hidden" from="input_bindings_panel" to="." method="_on_input_bindings_panel_hidden"]

@@ -2,9 +2,9 @@
 class_name PlayerFSM extends StateMachine
 
 ## The player's local combo manager
-@onready var combo_manager: ComboManager = %combo_manager
+@onready var combo_manager: ComboManager = $"../behaviors/combo_manager"
 ## The player's local weapon manager
-@onready var weapon_manager: WeaponManager = %weapon_manager
+@onready var weapon_manager: WeaponManager = $"../behaviors/weapon_manager"
 
 
 func _ready() -> void:

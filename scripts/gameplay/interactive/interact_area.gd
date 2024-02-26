@@ -17,7 +17,7 @@ func _input(event: InputEvent) -> void:
 		interact_with(player)
 
 ## Interact with a player
-func interact_with(player: Player) -> void:
+func interact_with(body: Player) -> void:
 	interact.emit()
 
 func _on_body_entered(body: Actor) -> void:

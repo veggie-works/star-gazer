@@ -31,6 +31,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_coyote_time()
+	if Input.is_action_just_pressed("dodge"):
+		$behaviors/after_image_manager.start_creating_after_images()
 	super._process(delta)
 
 ## Update whether coyote time should start
