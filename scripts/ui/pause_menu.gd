@@ -16,8 +16,6 @@ class_name PauseMenu extends BaseUI
 @onready var settings_ui: Control = $settings_ui
 ## A confirmation warning that appears when quitting the game
 @onready var quit_warning: VBoxContainer = $margin_container/quit_warning
-## The viewport that the current level scene is a child of
-@onready var viewport: SubViewport = get_node("/root/main/screen_container/screen")
 
 ## Only allow closing while an animation is not playing
 var can_toggle: bool:
@@ -25,7 +23,8 @@ var can_toggle: bool:
 		return not animator.is_playing()
 
 func _ready() -> void:
-	background_blur.texture = viewport.get_texture()
+	var viewport_texture: ViewportTexture = get_viewport().get_texture()
+	background_blur.texture = ImageTexture.create_from_image(viewport_texture.get_image())
 	
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_cancel"):

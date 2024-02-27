@@ -14,16 +14,25 @@ extends Camera2D
 @onready var shaker: Shaker = $shaker
 
 func _process(delta: float) -> void:
-	if len(targets) > 0:
+	if targets.all(func(target): return target != null):
 		track(delta)
 
+## Add a target for this camera to track
+func add_target(target: Node2D) -> void:
+	targets.append(target)
+	global_position = get_target_pos()
+	
 ## Shake the camera
 func shake(amount: float, duration: float) -> void:
-	if shaker != null:
+	if shaker:
 		shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
 
 ## Track targets
 func track(delta: float) -> void:
+	global_position = global_position.lerp(get_target_pos(), track_speed * delta)
+
+## Fetch the position that the camera should track to
+func get_target_pos() -> Vector2:
 	var center_x: float = global_position.x
 	var center_y: float = global_position.y
 	if track_x:
@@ -42,4 +51,4 @@ func track(delta: float) -> void:
 			return target.global_position.y if target.global_position.y > y else y,
 		-INF)
 		center_y = min_y + (max_y - min_y) / 2
-	global_position = global_position.lerp(Vector2(center_x, center_y), track_speed * delta)
+	return Vector2(center_x, center_y)

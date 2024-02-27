@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="Star Gazer"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/levels/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://resources/bus_layouts/default_bus_layout.tres"
 
 [autoload]
 
@@ -31,7 +35,6 @@ BeatManager="*res://scripts/autoload/beat_manager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [dotnet]
@@ -41,6 +44,10 @@ project/assembly_name="Star Gazer"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[gui]
+
+theme/custom="res://resources/themes/default_theme.tres"
 
 [input]
 
@@ -98,3 +105,4 @@ dodge={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

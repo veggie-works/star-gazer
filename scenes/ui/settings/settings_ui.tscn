@@ -14,9 +14,12 @@ grow_vertical = 2
 script = ExtResource("1_cgc55")
 
 [node name="margin_container" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 960.0
-offset_bottom = 540.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_vertical = 3
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
@@ -49,7 +52,7 @@ layout_mode = 2
 
 [node name="music_volume_label" type="Label" parent="margin_container/menu_buttons/music_volume_container"]
 layout_mode = 2
-text = "Music Volume   "
+text = "Music Volume  "
 
 [node name="music_volume_slider" type="HSlider" parent="margin_container/menu_buttons/music_volume_container"]
 layout_mode = 2
@@ -65,7 +68,7 @@ layout_mode = 2
 
 [node name="sfx_volume_label" type="Label" parent="margin_container/menu_buttons/sfx_volume_container"]
 layout_mode = 2
-text = "SFX Volume        "
+text = "SFX Volume    "
 
 [node name="sfx_volume_slider" type="HSlider" parent="margin_container/menu_buttons/sfx_volume_container"]
 layout_mode = 2
@@ -81,7 +84,7 @@ layout_mode = 2
 
 [node name="screen_shake_intensity_label" type="Label" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
 layout_mode = 2
-text = "Screen Shake     "
+text = "Screen Shake  "
 
 [node name="screen_shake_intensity_slider" type="HSlider" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
 layout_mode = 2

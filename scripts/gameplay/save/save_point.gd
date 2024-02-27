@@ -13,11 +13,11 @@ func load_save() -> void:
 	level_root.add_child(player)
 	player.global_position = SaveManager.save_data.save_position
 	GameCamera.targets.clear()
-	GameCamera.targets.append(player)
+	GameCamera.add_target(player)
 	
 ## Save the game
 func save() -> void:
-	SaveManager.save_data.save_scene = SceneManager.current_scene
+	SaveManager.save_data.save_scene = get_tree().current_scene.scene_file_path
 	SaveManager.save_data.save_position = global_position
 
 func _on_save_area_body_entered(body: PhysicsBody2D) -> void:

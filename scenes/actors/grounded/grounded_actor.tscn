@@ -8,6 +8,7 @@ script = ExtResource("2_lvnct")
 gravity_scale = 4.0
 falling_gravity_scale = 8.0
 run_speed = 600.0
+terminal_velocity = 600.0
 
 [node name="ground_raycasts" type="Node2D" parent="." index="3"]
 editor_description = "Container for all ground ray casts."

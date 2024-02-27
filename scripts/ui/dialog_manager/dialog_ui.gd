@@ -21,7 +21,7 @@ var current_char_index: int
 ## Whether text is still being printed out
 var is_printing: bool:
 	get:
-		return current_dialog != null and dialog_label.text != current_page
+		return current_dialog and dialog_label.text != current_page
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("ui_accept") or event.is_action_pressed("jump"):

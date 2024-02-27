@@ -83,12 +83,12 @@ func play_clip(clip: AudioStream, pitch_min: float = 1, pitch_max: float = 1) ->
 func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false) -> void:
 	# Immediately play music if nothing is currently playing (or if immediate specified)
 	current_track = track
-	if current_music_player.stream == null or immediate:
+	if not current_music_player.stream or immediate:
 		current_music_player.set_stream(track.music_clip)
 		current_music_player.play()
 		return
 	# Don't fade in and out of the same music track
-	elif current_music_player.stream != null and track.music_clip.resource_path == current_music_player.stream.resource_path:
+	elif current_music_player.stream and track.music_clip.resource_path == current_music_player.stream.resource_path:
 		return
 	upcoming_music_player.set_stream(track.music_clip)
 	if volume_tween and volume_tween.is_running():
