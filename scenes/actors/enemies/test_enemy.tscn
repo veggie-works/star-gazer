@@ -1,25 +1,70 @@
-[gd_scene load_steps=5 format=3 uid="uid://r28wdqjlisvt"]
+[gd_scene load_steps=14 format=3 uid="uid://r28wdqjlisvt"]
 
-[ext_resource type="PackedScene" uid="uid://dwibdkrqgbotj" path="res://scenes/actors/actor.tscn" id="1_nixnp"]
-[ext_resource type="PackedScene" uid="uid://bclby8x5hnel7" path="res://scenes/gameplay/weapons/damage_area.tscn" id="2_00lbh"]
-[ext_resource type="Script" path="res://scripts/fsm/state.gd" id="2_s4h03"]
-[ext_resource type="Resource" uid="uid://24b54tb75xym" path="res://resources/weapons/test_enemy_damager.tres" id="4_so4oa"]
+[ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_w2i0m"]
+[ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="2_k1k5w"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="3_futby"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/shaker.gd" id="4_gp7c3"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_fsm.gd" id="5_surf5"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_idle_state.gd" id="6_gp1yr"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_wander_state.gd" id="7_4atx6"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_alert_state.gd" id="8_y74fe"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/enemies/enemy_chase_ground_state.gd" id="9_346ga"]
+[ext_resource type="PackedScene" uid="uid://bclby8x5hnel7" path="res://scenes/gameplay/weapons/damage_area.tscn" id="10_riphe"]
+[ext_resource type="Resource" uid="uid://24b54tb75xym" path="res://resources/weapons/test_enemy_damager.tres" id="11_x27lj"]
+[ext_resource type="PackedScene" uid="uid://cyx5odv1hxxeo" path="res://scenes/actors/enemies/line_of_sight.tscn" id="12_0ldor"]
 
-[node name="test_enemy" instance=ExtResource("1_nixnp")]
-collision_mask = 34
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_22msy"]
+size = Vector2(128, 128)
 
-[node name="fsm" parent="." index="4" node_paths=PackedStringArray("start_state")]
-start_state = NodePath("default_state")
+[node name="test_enemy" instance=ExtResource("1_w2i0m")]
+scale = Vector2(0.125, 0.125)
+gravity_scale = 1.0
+falling_gravity_scale = 2.0
+run_speed = 50.0
 
-[node name="default_state" type="Node" parent="fsm" index="0"]
-script = ExtResource("2_s4h03")
+[node name="health_manager" parent="behaviors" index="0" instance=ExtResource("2_k1k5w")]
+unique_name_in_owner = true
 
-[node name="damage_area" parent="." index="5" instance=ExtResource("2_00lbh")]
-weapon = ExtResource("4_so4oa")
-attack_force = 1500.0
+[node name="hurt_box" parent="behaviors/health_manager" index="0"]
+position = Vector2(1, 0)
+shape = SubResource("RectangleShape2D_22msy")
+
+[node name="flasher" type="Node2D" parent="behaviors" index="1"]
+unique_name_in_owner = true
+script = ExtResource("3_futby")
+
+[node name="shaker" type="Node2D" parent="behaviors" index="2"]
+unique_name_in_owner = true
+script = ExtResource("4_gp7c3")
+
+[node name="fsm" parent="." index="5" node_paths=PackedStringArray("alert_state", "start_state")]
+script = ExtResource("5_surf5")
+alert_state = NodePath("alert_state")
+start_state = NodePath("idle_state")
+
+[node name="idle_state" type="Node" parent="fsm" index="0"]
+script = ExtResource("6_gp1yr")
+next_state = ExtResource("7_4atx6")
+
+[node name="wander_state" type="Node" parent="fsm" index="1"]
+script = ExtResource("7_4atx6")
+wander_speed = 25.0
+
+[node name="alert_state" type="Node" parent="fsm" index="2" node_paths=PackedStringArray("chase_state")]
+script = ExtResource("8_y74fe")
+chase_state = NodePath("../chase_state")
+
+[node name="chase_state" type="Node" parent="fsm" index="3"]
+script = ExtResource("9_346ga")
+chase_speed = 65.0
+
+[node name="damage_area" parent="." index="7" instance=ExtResource("10_riphe")]
+weapon = ExtResource("11_x27lj")
+attack_force = 1000.0
 attack_angle = 110.0
 
-[node name="sprite" parent="damage_area" index="1"]
-visible = false
+[node name="line_of_sight" parent="." index="8" instance=ExtResource("12_0ldor")]
+unique_name_in_owner = true
+sight_length = 1000.0
 
-[editable path="damage_area"]
+[editable path="behaviors/health_manager"]

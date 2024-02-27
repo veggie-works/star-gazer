@@ -8,7 +8,7 @@ class_name PlayerJumpState extends PlayerState
 
 func enter() -> void:
 	body.jump(jump_height)
-	# animator.play("jump")
+	animator.play("jump")
 
 func update(delta: float) -> void:
 	body.velocity.x = 0

@@ -53,7 +53,7 @@ func is_colliding_with_wall() -> bool:
 	return false
 
 
-## Perform a jump
+## PAerform a jump
 func jump(height: float) -> void:
 	velocity.y = -sqrt(2 * Globals.gravity * gravity_scale * height);
 
@@ -76,14 +76,14 @@ func jump_to(target_position: Vector2, apex_height: float, jump_time: float) -> 
 func land() -> void:
 	landed.emit()
 
-## Move the actor in the given horizontal direction
-func move(direction: float) -> void:
-	velocity.x = direction * run_speed
+## Have the actor run in the given horizontal direction
+func run(direction: float) -> void:
+	move(Vector2(direction * run_speed, 0))
 
 ## Move to a target x position
 func move_to(target_x: float) -> void:
 	var direction = sign(target_x - global_position.x)
-	move(direction)
+	run(direction)
 	while (direction < 0 and global_position.x > target_x) or \
 		(direction > 0 and global_position.x < target_x):
 		if not is_inside_tree():

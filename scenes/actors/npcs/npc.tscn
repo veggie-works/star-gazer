@@ -1,0 +1,34 @@
+[gd_scene load_steps=7 format=3 uid="uid://ca4hofmt5120j"]
+
+[ext_resource type="PackedScene" uid="uid://dwibdkrqgbotj" path="res://scenes/actors/actor.tscn" id="1_ictci"]
+[ext_resource type="Script" path="res://scripts/actors/npcs/npc.gd" id="2_w1uxi"]
+[ext_resource type="Resource" uid="uid://dcgdvnqsmo5rm" path="res://resources/dialog/test_npc_dialog.tres" id="3_3xbx2"]
+[ext_resource type="PackedScene" uid="uid://tmwqa2gkqll6" path="res://scenes/gameplay/interactive/interact_area.tscn" id="3_on1w8"]
+[ext_resource type="Script" path="res://scripts/fsm/state.gd" id="4_v3mgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t751s"]
+size = Vector2(128, 8)
+
+[node name="npc" instance=ExtResource("1_ictci")]
+scale = Vector2(0.25, 0.25)
+collision_layer = 4
+script = ExtResource("2_w1uxi")
+dialog = ExtResource("3_3xbx2")
+
+[node name="fsm" parent="." index="4" node_paths=PackedStringArray("start_state")]
+start_state = NodePath("default_state")
+
+[node name="default_state" type="Node" parent="fsm" index="0"]
+script = ExtResource("4_v3mgf")
+
+[node name="interact_area" parent="." index="5" instance=ExtResource("3_on1w8")]
+position = Vector2(0, 56)
+
+[node name="collision" parent="interact_area" index="0"]
+shape = SubResource("RectangleShape2D_t751s")
+
+[connection signal="area_entered" from="interact_area" to="." method="_on_interact_area_area_entered"]
+[connection signal="area_exited" from="interact_area" to="." method="_on_interact_area_area_exited"]
+[connection signal="interact" from="interact_area" to="." method="_on_interact_area_interact"]
+
+[editable path="interact_area"]

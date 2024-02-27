@@ -1,37 +1,65 @@
-[gd_scene load_steps=30 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=58 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
-[ext_resource type="Texture2D" uid="uid://b0hhru8ipkn71" path="res://assets/art/actors/player/idle0.png" id="3_ud3uo"]
-[ext_resource type="Texture2D" uid="uid://cprq8wcxqa22v" path="res://assets/art/actors/player/run0.png" id="4_s6uqa"]
-[ext_resource type="Texture2D" uid="uid://bf4cwrnqpfc1x" path="res://assets/art/actors/player/run1.png" id="5_ntmye"]
-[ext_resource type="Texture2D" uid="uid://d32o1fdoj85rv" path="res://assets/art/actors/player/run2.png" id="6_gnw7f"]
-[ext_resource type="Texture2D" uid="uid://enyiaq7jeojg" path="res://assets/art/actors/player/run3.png" id="7_fjjlt"]
-[ext_resource type="Texture2D" uid="uid://jga4ofmoqxd6" path="res://assets/art/actors/player/run4.png" id="8_1sfcy"]
-[ext_resource type="Texture2D" uid="uid://bxcdsdwsea3h4" path="res://assets/art/actors/player/run5.png" id="9_1urep"]
+[ext_resource type="Texture2D" uid="uid://pj1qkgfccy18" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_0.png" id="4_nxbpc"]
+[ext_resource type="Texture2D" uid="uid://dhc70m5k3v65e" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_1.png" id="5_xnqlw"]
+[ext_resource type="Texture2D" uid="uid://cvw2bxnvek48d" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_2.png" id="6_15f6q"]
+[ext_resource type="Texture2D" uid="uid://bot5i5kd6bwhc" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_3.png" id="7_jksri"]
+[ext_resource type="Texture2D" uid="uid://bhht1xl38qg2f" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_4.png" id="8_mvaog"]
+[ext_resource type="Texture2D" uid="uid://cj2jnxibib8oi" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_5.png" id="9_vwxn8"]
+[ext_resource type="Texture2D" uid="uid://heykjfnxwcqo" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_6.png" id="10_2atxa"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
 [ext_resource type="Shader" path="res://resources/shaders/color_key_flash.gdshader" id="11_0p73h"]
+[ext_resource type="Texture2D" uid="uid://b0ucvdtk10nhl" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_7.png" id="11_eujky"]
 [ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="11_xerj3"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="12_2ynoo"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/recoil_manager.gd" id="12_evo3r"]
+[ext_resource type="Texture2D" uid="uid://cpduwapll8dsu" path="res://assets/art/actors/player/Run/HeroKnight_Run_0.png" id="12_lpugu"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_run_state.gd" id="13_dg6tn"]
+[ext_resource type="Texture2D" uid="uid://chrki8du8n6wt" path="res://assets/art/actors/player/Run/HeroKnight_Run_1.png" id="13_huosg"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/combo_manager.gd" id="13_whb5f"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="14_iulkx"]
+[ext_resource type="Texture2D" uid="uid://b3e5vb2ywnxmk" path="res://assets/art/actors/player/Run/HeroKnight_Run_2.png" id="14_urf0e"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_jump_state.gd" id="14_ygy2g"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/pulser.gd" id="15_1mbkm"]
+[ext_resource type="Texture2D" uid="uid://b4037bt8xqwug" path="res://assets/art/actors/player/Run/HeroKnight_Run_3.png" id="15_4a5ls"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fall_state.gd" id="15_7k3jt"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/weapon_manager.gd" id="16_sqfty"]
+[ext_resource type="Texture2D" uid="uid://dv5fce7e5h7kw" path="res://assets/art/actors/player/Run/HeroKnight_Run_4.png" id="16_wqw43"]
+[ext_resource type="Resource" uid="uid://cx0lqtmn61oof" path="res://resources/weapons/player_weapon.tres" id="17_l4tnu"]
+[ext_resource type="Texture2D" uid="uid://kd6vsi4wdkg1" path="res://assets/art/actors/player/Run/HeroKnight_Run_5.png" id="17_s2qvw"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_hurt_state.gd" id="18_2rtci"]
+[ext_resource type="Texture2D" uid="uid://cw3hynpl8sp3m" path="res://assets/art/actors/player/Run/HeroKnight_Run_6.png" id="18_qwlp7"]
+[ext_resource type="PackedScene" uid="uid://cmwuu8ltbfye7" path="res://scenes/actors/behaviors/after_image/after_image_manager.tscn" id="18_vk3k7"]
+[ext_resource type="Texture2D" uid="uid://bm2jec80rw6v6" path="res://assets/art/actors/player/Run/HeroKnight_Run_7.png" id="19_355kb"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_recover_state.gd" id="19_c4jwa"]
+[ext_resource type="Texture2D" uid="uid://bk2qhlqjq41as" path="res://assets/art/actors/player/Run/HeroKnight_Run_8.png" id="20_2d7nm"]
+[ext_resource type="Texture2D" uid="uid://dxerrbwwcrbb0" path="res://assets/art/actors/player/Run/HeroKnight_Run_9.png" id="21_l5mf2"]
+[ext_resource type="Texture2D" uid="uid://b7eeatcj3ido3" path="res://assets/art/actors/player/Jump/HeroKnight_Jump_0.png" id="22_kqefx"]
+[ext_resource type="Texture2D" uid="uid://nc3l0qxovbth" path="res://assets/art/actors/player/Jump/HeroKnight_Jump_1.png" id="23_3c7h4"]
+[ext_resource type="Texture2D" uid="uid://dj43744jqlx6d" path="res://assets/art/actors/player/Jump/HeroKnight_Jump_2.png" id="23_mrsry"]
+[ext_resource type="Script" path="res://scripts/fsm/actors/player/player_attack_state.gd" id="24_inykr"]
+[ext_resource type="Texture2D" uid="uid://dk4rhqs7u0pl2" path="res://assets/art/actors/player/Fall/HeroKnight_Fall_0.png" id="25_lgruc"]
+[ext_resource type="Texture2D" uid="uid://cl8ayj4oe6g81" path="res://assets/art/actors/player/Fall/HeroKnight_Fall_1.png" id="26_wli04"]
+[ext_resource type="Texture2D" uid="uid://bvhsco5gsfq6s" path="res://assets/art/actors/player/Fall/HeroKnight_Fall_2.png" id="27_uohbm"]
+[ext_resource type="Texture2D" uid="uid://cv1sbtqr3gwnn" path="res://assets/art/actors/player/Fall/HeroKnight_Fall_3.png" id="28_0halg"]
+[ext_resource type="Texture2D" uid="uid://dirm6onim56fl" path="res://assets/art/actors/player/Hurt/HeroKnight_Hurt_1.png" id="29_r11vq"]
+[ext_resource type="Texture2D" uid="uid://we52wo75176p" path="res://assets/art/actors/player/Hurt/HeroKnight_Hurt_2.png" id="30_jp3mp"]
+[ext_resource type="Resource" uid="uid://wik7l4lbr1dv" path="res://resources/random_clips/footstep_grass.tres" id="42_cp2bi"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_6w3g6"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_weryg"]
 shader = ExtResource("11_0p73h")
-shader_parameter/key_color = Color(1, 0, 1, 1)
+shader_parameter/key_color = Color(0.196078, 0.117647, 0.0588235, 1)
 shader_parameter/replace_color = Color(1, 1, 1, 1)
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
 [sub_resource type="Animation" id="Animation_fofbs"]
 resource_name = "idle"
+length = 0.9333
 loop_mode = 1
+step = 0.0001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -39,14 +67,27 @@ tracks/0/path = NodePath("sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8169),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("3_ud3uo")]
+"values": [ExtResource("4_nxbpc"), ExtResource("5_xnqlw"), ExtResource("6_15f6q"), ExtResource("7_jksri"), ExtResource("8_mvaog"), ExtResource("9_vwxn8"), ExtResource("10_2atxa"), ExtResource("11_eujky")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/replace_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8162, 0.9333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0.976471, 1, 0, 1), Color(1, 0.419608, 0, 1), Color(1, 0, 0.105882, 1), Color(1, 0, 0.956863, 1), Color(0.494118, 0, 1, 1), Color(0.0117647, 0, 1, 1), Color(0, 1, 1, 1), Color(0, 1, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_umav7"]
 resource_name = "run"
+length = 0.9333
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -55,39 +96,91 @@ tracks/0/path = NodePath("sprite:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1667, 0.3333, 0.5, 0.6667, 0.8333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.0933, 0.1866, 0.2799, 0.3732, 0.4665, 0.5598, 0.6531, 0.7464, 0.8397),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [ExtResource("4_s6uqa"), ExtResource("5_ntmye"), ExtResource("6_gnw7f"), ExtResource("7_fjjlt"), ExtResource("8_1sfcy"), ExtResource("9_1urep")]
+"values": [ExtResource("12_lpugu"), ExtResource("13_huosg"), ExtResource("14_urf0e"), ExtResource("15_4a5ls"), ExtResource("16_wqw43"), ExtResource("17_s2qvw"), ExtResource("18_qwlp7"), ExtResource("19_355kb"), ExtResource("20_2d7nm"), ExtResource("21_l5mf2")]
+}
+
+[sub_resource type="Animation" id="Animation_0d5oq"]
+resource_name = "jump"
+length = 0.3111
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1037, 0.2074),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("22_kqefx"), ExtResource("23_3c7h4"), ExtResource("23_mrsry")]
+}
+
+[sub_resource type="Animation" id="Animation_04ier"]
+resource_name = "fall"
+length = 0.4148
+loop_mode = 1
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1037, 0.2074, 0.3111),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("25_lgruc"), ExtResource("26_wli04"), ExtResource("27_uohbm"), ExtResource("28_0halg")]
+}
+
+[sub_resource type="Animation" id="Animation_g0o1i"]
+resource_name = "hurt"
+length = 0.2074
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1037),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("29_r11vq"), ExtResource("30_jp3mp")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs4"]
 _data = {
+"fall": SubResource("Animation_04ier"),
+"hurt": SubResource("Animation_g0o1i"),
 "idle": SubResource("Animation_fofbs"),
+"jump": SubResource("Animation_0d5oq"),
 "run": SubResource("Animation_umav7")
 }
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q0ik5"]
-shader = ExtResource("11_0p73h")
-shader_parameter/key_color = Color(0.901961, 0.901961, 0.901961, 1)
-shader_parameter/replace_color = Color(1, 0.168627, 0, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_amount = 0.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4dbvw"]
-size = Vector2(64, 64)
+size = Vector2(16, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvff"]
-size = Vector2(64, 64)
+size = Vector2(12, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
-size = Vector2(64, 64)
+size = Vector2(20, 37)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
-material = SubResource("ShaderMaterial_6w3g6")
+z_index = 1
+material = SubResource("ShaderMaterial_weryg")
 collision_layer = 1
 collision_mask = 66
 script = ExtResource("2_d5awl")
+gravity_scale = 1.0
+falling_gravity_scale = 2.0
+run_speed = 100.0
 
 [node name="animator" parent="." index="0"]
 libraries = {
@@ -95,36 +188,38 @@ libraries = {
 }
 
 [node name="sprite" parent="." index="1"]
-material = SubResource("ShaderMaterial_q0ik5")
 use_parent_material = true
-texture = ExtResource("3_ud3uo")
+position = Vector2(0, -7)
+texture = ExtResource("4_nxbpc")
 
 [node name="collision" parent="." index="2"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_4dbvw")
 
 [node name="raycast0" parent="ground_raycasts" index="0"]
-position = Vector2(-32, 32)
+position = Vector2(-11, 18.5)
 
 [node name="raycast1" parent="ground_raycasts" index="1"]
-position = Vector2(0, 32)
+position = Vector2(0, 18.5)
 
 [node name="raycast2" parent="ground_raycasts" index="2"]
-visible = false
-position = Vector2(32, 32)
+position = Vector2(9, 18.5)
 
 [node name="health_manager" parent="behaviors" index="0" instance=ExtResource("11_xerj3")]
 unique_name_in_owner = true
 collision_layer = 1
 collision_mask = 64
 max_health = 100.0
+shake_camera = true
+invincibility_time = 0.65
 
 [node name="hurt_box" parent="behaviors/health_manager" index="0"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_bbvff")
 
-[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("state_machine", "recoil_state")]
+[node name="recoil_manager" type="Node" parent="behaviors" index="1" node_paths=PackedStringArray("recoil_state")]
 unique_name_in_owner = true
 script = ExtResource("12_evo3r")
-state_machine = NodePath("../../fsm")
 recoil_state = NodePath("../../fsm/player_hurt_state")
 
 [node name="combo_manager" type="Node" parent="behaviors" index="2"]
@@ -135,6 +230,19 @@ script = ExtResource("13_whb5f")
 unique_name_in_owner = true
 script = ExtResource("14_iulkx")
 
+[node name="pulser" type="Node2D" parent="behaviors" index="4"]
+unique_name_in_owner = true
+script = ExtResource("15_1mbkm")
+
+[node name="weapon_manager" type="Node2D" parent="behaviors" index="5"]
+unique_name_in_owner = true
+position = Vector2(49, 0)
+script = ExtResource("16_sqfty")
+weapon = ExtResource("17_l4tnu")
+
+[node name="after_image_manager" parent="behaviors" index="6" node_paths=PackedStringArray("reference_sprite") instance=ExtResource("18_vk3k7")]
+reference_sprite = NodePath("../../sprite")
+
 [node name="fsm" parent="." index="5" node_paths=PackedStringArray("start_state")]
 script = ExtResource("10_q18np")
 start_state = NodePath("player_idle_state")
@@ -144,19 +252,30 @@ script = ExtResource("12_2ynoo")
 
 [node name="player_run_state" type="Node" parent="fsm" index="1"]
 script = ExtResource("13_dg6tn")
+footstep_clip_table = ExtResource("42_cp2bi")
+footstep_interval = 0.467
+run_speed = 100.0
+
+[node name="footstep_timer" type="Timer" parent="fsm/player_run_state" index="0"]
 
 [node name="player_jump_state" type="Node" parent="fsm" index="2"]
 script = ExtResource("14_ygy2g")
+jump_height = 75.0
+midair_move_speed = 50.0
 
 [node name="player_fall_state" type="Node" parent="fsm" index="3"]
 script = ExtResource("15_7k3jt")
+midair_move_speed = 50.0
 
 [node name="player_hurt_state" type="Node" parent="fsm" index="4"]
 script = ExtResource("18_2rtci")
 
 [node name="player_recover_state" type="Node" parent="fsm" index="5"]
 script = ExtResource("19_c4jwa")
-perfect_recovery_invincibility_time = 4.545
+perfect_recovery_invincibility_time = 1.25
+
+[node name="player_attack_state" type="Node" parent="fsm" index="6"]
+script = ExtResource("24_inykr")
 
 [node name="timers" type="Node" parent="." index="6"]
 
@@ -170,6 +289,14 @@ one_shot = true
 collision_mask = 0
 
 [node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_cl6t6")
+
+[node name="interact_trigger" type="Area2D" parent="triggers" index="1"]
+collision_mask = 4
+
+[node name="collision" type="CollisionShape2D" parent="triggers/interact_trigger" index="0"]
+position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_cl6t6")
 
 [editable path="behaviors/health_manager"]

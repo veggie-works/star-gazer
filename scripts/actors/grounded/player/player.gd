@@ -15,7 +15,7 @@ var disable_input: bool
 var in_cutscene: bool:
 	set(value):
 		disable_input = value
-		if triggers != null:
+		if triggers:
 			for child in triggers.get_children():
 				var grandchild: Node2D = child.get_child(0)
 				if grandchild is CollisionShape2D:
@@ -31,6 +31,8 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	update_coyote_time()
+	if Input.is_action_just_pressed("dodge"):
+		$behaviors/after_image_manager.start_creating_after_images()
 	super._process(delta)
 
 ## Update whether coyote time should start

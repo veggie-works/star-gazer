@@ -1,83 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bclby8x5hnel7"]
+[gd_scene load_steps=3 format=3 uid="uid://bclby8x5hnel7"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/weapons/damage_area.gd" id="1_k8ged"]
 
-[sub_resource type="Animation" id="Animation_3isol"]
-resource_name = "attack"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [null]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("collision:polygon")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array(67, -65, 67, 65, -67, 66, -64, -68)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath(".:attack_angle")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath(".:attack_force")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [250.0]
-}
-
-[sub_resource type="Animation" id="Animation_2rtmh"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("collision:polygon")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [PackedVector2Array(67, -65, 67, 65, -67, 66, -64, -68)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ev6eh"]
-_data = {
-"RESET": SubResource("Animation_2rtmh"),
-"attack": SubResource("Animation_3isol")
-}
 
 [node name="damage_area" type="Area2D"]
 collision_layer = 64
 collision_mask = 33
 script = ExtResource("1_k8ged")
+attack_force = 250.0
 
 [node name="animator" type="AnimationPlayer" parent="."]
 libraries = {

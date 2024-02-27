@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmqoaf40cddce" path="res://scenes/actors/grounded/player/player.tscn" id="2_3k2lv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jk1gj"]
-size = Vector2(64, 64)
+size = Vector2(10, 24)
 
 [node name="door" type="Area2D" groups=["doors"]]
 collision_layer = 8

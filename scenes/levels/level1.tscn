@@ -1,56 +1,25 @@
-[gd_scene load_steps=8 format=3 uid="uid://bavwuvs5ypi0c"]
+[gd_scene load_steps=6 format=3 uid="uid://bavwuvs5ypi0c"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_ljwkj"]
 [ext_resource type="Resource" uid="uid://b26fpa887igk5" path="res://resources/music_tracks/level1.tres" id="2_y012l"]
-[ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="3_qssn7"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_e4t6x"]
+[ext_resource type="TileSet" uid="uid://dm4qttwlwkcjx" path="res://resources/tilesets/test_tile_set.tres" id="5_26qwn"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="5_blkad"]
-[ext_resource type="Script" path="res://scenes/levels/jump_trigger.gd" id="6_kbdpv"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_g5rkf"]
-size = Vector2(64, 10)
 
 [node name="level1" instance=ExtResource("1_ljwkj")]
 music_track = ExtResource("2_y012l")
 
-[node name="test_platform" parent="." index="0" instance=ExtResource("3_qssn7")]
-position = Vector2(240, 514)
-scale = Vector2(4.04, 0.429688)
+[node name="save_point" parent="." index="0" instance=ExtResource("4_e4t6x")]
+position = Vector2(208, 61)
 
-[node name="test_platform2" parent="." index="1" instance=ExtResource("3_qssn7")]
-position = Vector2(689, 382)
-scale = Vector2(3.04, 0.429688)
-
-[node name="save_point" parent="." index="2" instance=ExtResource("4_e4t6x")]
-position = Vector2(686, 323)
-
-[node name="door_left" parent="." index="3" instance=ExtResource("5_blkad")]
-position = Vector2(25, 419)
+[node name="door_left" parent="." index="1" instance=ExtResource("5_blkad")]
+position = Vector2(14, 106)
 scale = Vector2(0.68, 2.12)
 target_scene = "res://scenes/levels/level0.tscn"
 target_name = "door_right"
 enter_direction = "right"
 
-[node name="test_platform3" parent="." index="4" instance=ExtResource("3_qssn7")]
-position = Vector2(521, 485)
-scale = Vector2(0.417754, 1.50356)
-
-[node name="test_platform4" parent="." index="5" instance=ExtResource("3_qssn7")]
-position = Vector2(25, 154)
-scale = Vector2(0.659609, 3.04646)
-
-[node name="test_platform5" parent="." index="6" instance=ExtResource("3_qssn7")]
-position = Vector2(909, 158)
-scale = Vector2(-0.498646, 3.96361)
-
-[node name="jump_trigger" type="Area2D" parent="." index="7"]
-position = Vector2(352, 481)
-collision_layer = 0
-script = ExtResource("6_kbdpv")
-
-[node name="collision" type="CollisionShape2D" parent="jump_trigger" index="0"]
-position = Vector2(29, 0)
-shape = SubResource("RectangleShape2D_g5rkf")
-disabled = true
-
-[connection signal="body_entered" from="jump_trigger" to="jump_trigger" method="_on_body_entered"]
+[node name="tile_map" type="TileMap" parent="." index="4"]
+tile_set = ExtResource("5_26qwn")
+format = 2
+layer_0/tile_data = PackedInt32Array(524288, 65536, 0, 524289, 65536, 0, 524290, 65536, 0, 524291, 65536, 0, 524292, 65536, 0, 524293, 65536, 0, 524294, 65536, 0, 524295, 393216, 2, 524296, 65536, 1, 524297, 65536, 1, 524298, 65536, 1, 524299, 65536, 1, 458759, 0, 1, 393223, 0, 1, 327687, 0, 0, 393224, 65536, 1, 458760, 65536, 1, 589832, 65536, 1, 393225, 65536, 1, 458761, 65536, 1, 589833, 65536, 1, 393226, 65536, 1, 458762, 65536, 1, 589834, 65536, 1, 393227, 65536, 1, 458763, 65536, 1, 589835, 65536, 1, 393228, 65536, 1, 458764, 65536, 1, 524300, 65536, 1, 589836, 65536, 1, 393229, 65536, 1, 458765, 65536, 1, 524301, 65536, 1, 589837, 65536, 1, 393230, 65536, 1, 458766, 65536, 1, 524302, 65536, 1, 589838, 65536, 1, 589824, 65536, 1, 655360, 65536, 1, 589825, 65536, 1, 655361, 65536, 1, 589826, 65536, 1, 655362, 65536, 1, 589827, 65536, 1, 655363, 65536, 1, 589828, 65536, 1, 655364, 65536, 1, 589829, 65536, 1, 655365, 65536, 1, 589830, 65536, 1, 655366, 65536, 1, 589831, 65536, 1, 655367, 65536, 1, 655368, 65536, 1, 655369, 65536, 1, 655370, 65536, 1, 655371, 65536, 1, 655372, 65536, 1, 655373, 65536, 1, 655374, 65536, 1, 655358, 65536, 1, 720894, 65536, 1, 786430, 65536, 1, 655359, 65536, 1, 720895, 65536, 1, 786431, 65536, 1, 720896, 65536, 1, 720897, 65536, 1, 720898, 65536, 1, 720899, 65536, 1, 720900, 65536, 1, 720901, 65536, 1, 720902, 65536, 1, 720903, 65536, 1, 720904, 65536, 1, 720905, 65536, 1, 720906, 65536, 1, 720907, 65536, 1, 720908, 65536, 1, 720909, 65536, 1, 720910, 65536, 1, 589823, 65536, 0, 589822, 65536, 0, 327688, 65536, 0, 327689, 65536, 0, 327690, 65536, 0, 327691, 65536, 0, 327692, 65536, 0, 327693, 65536, 0, 327694, 65536, 0, 327695, 131072, 0, 393231, 131072, 1, 458767, 131072, 1, 524303, 131072, 1, 589839, 131072, 1, 655375, 131072, 1, 720911, 131072, 1, 786447, 131072, 2, 851967, 65536, 2, 786432, 65536, 2, 786433, 65536, 2, 786434, 65536, 2, 786435, 65536, 2, 786436, 65536, 2, 786437, 65536, 2, 786438, 65536, 2, 786439, 65536, 2, 786440, 65536, 2, 786441, 65536, 2, 786442, 65536, 2, 786443, 65536, 2, 786444, 65536, 2, 786445, 65536, 2, 786446, 65536, 2, 851966, 65536, 2, 262142, 65536, 1, 327678, 65536, 2, 262143, 65536, 1, 327679, 65536, 2, 196608, 65536, 1, 262144, 65536, 2, 196609, 65536, 1, 262145, 65536, 2, 196610, 65536, 1, 262146, 65536, 2, 196611, 65536, 1, 262147, 65536, 2, 196612, 131072, 1, 262148, 131072, 2, 131076, 131072, 1, 196606, 65536, 1, 196607, 65536, 1, 131072, 65536, 1, 131073, 65536, 1, 131074, 65536, 1, 131075, 65536, 1, 65543, 65536, 2, 65544, 65536, 2, 65545, 65536, 2, 65546, 65536, 2, 65547, 65536, 2, 65548, 65536, 2, 65549, 65536, 2, 65550, 65536, 2, 65551, 65536, 2, -2, 65536, 1, 65534, 65536, 1, -1, 65536, 1, 65535, 65536, 1, -65536, 65536, 1, 0, 65536, 1, -65535, 65536, 1, 1, 65536, 1, -65534, 65536, 1, 2, 65536, 1, -65533, 65536, 1, 3, 65536, 1, -65532, 65536, 1, 4, 65536, 1, -65531, 65536, 1, 5, 65536, 1, -65530, 65536, 1, 6, 65536, 1, -65529, 65536, 1, 7, 65536, 1, -65528, 65536, 1, 8, 65536, 1, -65527, 65536, 1, 9, 65536, 1, -65526, 65536, 1, 10, 65536, 1, -65525, 65536, 1, 11, 65536, 1, -65524, 65536, 1, 12, 65536, 1, -65523, 65536, 1, 13, 65536, 1, -65522, 65536, 1, 14, 65536, 1, -65521, 65536, 1, 15, 65536, 1, 131070, 65536, 1, 131071, 65536, 1, 65536, 65536, 1, 65537, 65536, 1, 65538, 65536, 1, 65539, 65536, 1, 65540, 327680, 1, 65541, 65536, 2, 65542, 65536, 2)

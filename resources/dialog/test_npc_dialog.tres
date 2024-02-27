@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="Dialog" load_steps=2 format=3 uid="uid://dcgdvnqsmo5rm"]
+
+[ext_resource type="Script" path="res://scripts/ui/dialog_manager/dialog.gd" id="1_5hqos"]
+
+[resource]
+script = ExtResource("1_5hqos")
+pages = Array[String](["Hello, I'm an NPC.", "Here's some really long, contrived dialog explaining the lore of the game and really just filling up the dialog UI. You can skip the typewriter effect by pressing the \"jump\" button."])

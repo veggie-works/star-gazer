@@ -46,7 +46,7 @@ func create_ui(ui: GDScript, start_closed: bool = false) -> BaseUI:
 ## Delete a UI from the scene tree
 func delete_ui(ui: GDScript) -> void:
 	var ui_to_delete: BaseUI = get_ui(ui)
-	if ui_to_delete != null:
+	if ui_to_delete:
 		ui_to_delete.close()
 		ui_layer.remove_child(ui_to_delete)
 		ui_to_delete.queue_free()

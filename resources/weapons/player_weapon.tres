@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="Weapon" load_steps=3 format=3 uid="uid://cx0lqtmn61oof"]
+
+[ext_resource type="PackedScene" uid="uid://ugt2rm3wxjku" path="res://scenes/gameplay/weapons/slash.tscn" id="1_h1u4f"]
+[ext_resource type="Script" path="res://scripts/gameplay/weapons/weapon.gd" id="2_wuggw"]
+
+[resource]
+script = ExtResource("2_wuggw")
+damage = 5.0
+attack_prefab = ExtResource("1_h1u4f")
+attack_trigger_mask = 32
+parent_attack_to_spawner = false

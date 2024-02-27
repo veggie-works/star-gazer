@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cmwuu8ltbfye7"]
+
+[ext_resource type="Script" path="res://scripts/actors/behaviors/after_images/after_image_manager.gd" id="1_7o8e0"]
+[ext_resource type="PackedScene" uid="uid://bnn5vkhuspsn2" path="res://scenes/actors/behaviors/after_image/after_image.tscn" id="2_i1f68"]
+
+[node name="after_image_manager" type="Timer"]
+script = ExtResource("1_7o8e0")
+after_image_prefab = ExtResource("2_i1f68")
+
+[connection signal="timeout" from="." to="." method="_on_timeout"]

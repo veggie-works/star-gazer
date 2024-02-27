@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://vstl3bg568s7"]
+[gd_scene load_steps=5 format=3 uid="uid://vstl3bg568s7"]
 
 [ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="1_7ds0w"]
 [ext_resource type="Script" path="res://scripts/levels/main_menu/main_menu.gd" id="1_wmvsf"]
 [ext_resource type="PackedScene" uid="uid://d5l2m2e8q2x4" path="res://scenes/ui/settings/settings_ui.tscn" id="3_dsu3g"]
+[ext_resource type="PackedScene" uid="uid://8agf2mc41tgx" path="res://scenes/ui/quit_warning.tscn" id="3_eripy"]
 
 [node name="main_menu" type="Control"]
 layout_mode = 3
@@ -40,10 +41,28 @@ text = "Start"
 layout_mode = 2
 text = "Settings"
 
+[node name="exit_button" parent="margin_container/menu_buttons" instance=ExtResource("1_7ds0w")]
+layout_mode = 2
+text = "Exit Game"
+
 [node name="settings_ui" parent="." instance=ExtResource("3_dsu3g")]
 visible = false
 layout_mode = 1
 
+[node name="exit_warning" parent="." instance=ExtResource("3_eripy")]
+visible = false
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 32.0
+offset_top = 32.0
+offset_right = 1856.0
+offset_bottom = 1016.0
+
 [connection signal="pressed" from="margin_container/menu_buttons/start_button" to="." method="_on_start_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="margin_container/menu_buttons/exit_button" to="." method="_on_exit_button_pressed"]
 [connection signal="hidden" from="settings_ui" to="." method="_on_settings_ui_hidden"]
+[connection signal="quit_canceled" from="exit_warning" to="." method="_on_exit_warning_quit_canceled"]
+[connection signal="quit_confirmed" from="exit_warning" to="." method="_on_exit_warning_quit_confirmed"]

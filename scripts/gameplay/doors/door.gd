@@ -26,6 +26,8 @@ func enter_from() -> void:
 	collision.disabled = true
 	level_root.add_child(player)
 	player.global_position = global_position
+	GameCamera.targets.clear()
+	GameCamera.targets.append(player)
 	if enter_direction == "left" or enter_direction == "right":
 		var target_sign: float
 		match enter_direction:
