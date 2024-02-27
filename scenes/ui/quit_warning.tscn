@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://8agf2mc41tgx"]
+
+[ext_resource type="Script" path="res://scripts/ui/quit_warning.gd" id="1_0hhcf"]
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="1_u1lk2"]
+
+[node name="quit_warning" type="VBoxContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 64
+alignment = 1
+script = ExtResource("1_0hhcf")
+
+[node name="quit_warning" type="RichTextLabel" parent="."]
+layout_mode = 2
+size_flags_vertical = 3
+bbcode_enabled = true
+text = "[center]
+
+
+Are you sure you want to quit?[/center]"
+
+[node name="center_container" type="CenterContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="quit_buttons" type="HBoxContainer" parent="center_container"]
+layout_mode = 2
+theme_override_constants/separation = 64
+
+[node name="quit_confirm" parent="center_container/quit_buttons" instance=ExtResource("1_u1lk2")]
+layout_mode = 2
+text = "Yes"
+
+[node name="quit_cancel" parent="center_container/quit_buttons" instance=ExtResource("1_u1lk2")]
+layout_mode = 2
+text = "No"
+
+[connection signal="pressed" from="center_container/quit_buttons/quit_confirm" to="." method="_on_quit_confirm_pressed"]
+[connection signal="pressed" from="center_container/quit_buttons/quit_cancel" to="." method="_on_quit_cancel_pressed"]

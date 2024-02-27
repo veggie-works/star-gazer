@@ -8,11 +8,15 @@ process_mode = 3
 script = ExtResource("1_us30y")
 audio_player_prefab = ExtResource("2_yi06v")
 
-[node name="current_music_player" type="AudioStreamPlayer2D" parent="."]
+[node name="audio_players" type="Node" parent="."]
+
+[node name="music_players" type="Node" parent="."]
+
+[node name="current_music_player" type="AudioStreamPlayer2D" parent="music_players"]
 bus = &"Music"
 
-[node name="upcoming_music_player" type="AudioStreamPlayer2D" parent="."]
+[node name="upcoming_music_player" type="AudioStreamPlayer2D" parent="music_players"]
 bus = &"Music"
 
-[connection signal="finished" from="current_music_player" to="." method="_on_current_music_player_finished"]
-[connection signal="finished" from="upcoming_music_player" to="." method="_on_upcoming_music_player_finished"]
+[connection signal="finished" from="music_players/current_music_player" to="." method="_on_current_music_player_finished"]
+[connection signal="finished" from="music_players/upcoming_music_player" to="." method="_on_upcoming_music_player_finished"]

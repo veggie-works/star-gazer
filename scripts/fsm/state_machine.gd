@@ -44,7 +44,7 @@ func _process(delta: float) -> void:
 func set_state(new_state: State) -> void:
 	var old_state: State = current_state
 	current_state = new_state
-	if old_state != null:
+	if old_state:
 		old_state.exit()
 	new_state.enter()
 	state_history.append(new_state)

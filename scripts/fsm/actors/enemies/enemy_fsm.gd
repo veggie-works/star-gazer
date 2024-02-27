@@ -12,7 +12,7 @@ var current_target: Player
 
 func _ready() -> void:
 	super._ready()
-	if line_of_sight != null:
+	if line_of_sight:
 		line_of_sight.seen.connect(on_seen)
 
 ## Callback for when the enemy has seen a player

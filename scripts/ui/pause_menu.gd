@@ -68,13 +68,13 @@ func _on_quit_button_pressed() -> void:
 	menu_buttons.hide()
 	quit_warning.show()
 
-func _on_quit_confirm_pressed() -> void:
+func _on_settings_ui_hidden():
+	margin_container.show()
+
+func _on_quit_warning_quit_confirmed() -> void:
 	close()
 	SceneManager.change_scene(main_menu_scene)
 
-func _on_quit_cancel_pressed() -> void:
+func _on_quit_warning_quit_canceled() -> void:
 	quit_warning.hide()
 	menu_buttons.show()
-
-func _on_settings_ui_hidden():
-	margin_container.show()

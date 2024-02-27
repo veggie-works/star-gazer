@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_plc0g")
 save_scene = "res://scenes/levels/level0.tscn"
-save_position = Vector2(306, 483)
+save_position = Vector2(59, 109)

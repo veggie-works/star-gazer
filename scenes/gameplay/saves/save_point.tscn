@@ -13,11 +13,12 @@ script = ExtResource("1_gv0sa")
 player_prefab = ExtResource("2_5qw78")
 
 [node name="sprite" type="Sprite2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -16)
 scale = Vector2(0.5, 1.5)
 texture = ExtResource("1_8lhm6")
 
 [node name="save_area" type="Area2D" parent="."]
+position = Vector2(0, 48)
 collision_layer = 4
 
 [node name="collision" type="CollisionShape2D" parent="save_area"]

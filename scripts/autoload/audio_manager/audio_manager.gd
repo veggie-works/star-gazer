@@ -1,12 +1,18 @@
 extends Node
 
+const AUDIO_OFF_DB: float = -60
+
 ## The prefab to instantiate when playing a one shot clip
 @export var audio_player_prefab: PackedScene
 
-## The audio stream player of the current music track, fades out to upcoming track
-@onready var current_music_player: AudioStreamPlayer2D = $current_music_player
-## The audio stream player of the upcoming music track, fades in from current track
-@onready var upcoming_music_player: AudioStreamPlayer2D = $upcoming_music_player
+## Parent of all spawned generic audio players
+@onready var audio_players: Node = $audio_players
+## Parent of all spawned music players
+@onready var music_players: Node = $music_players
+## The audio stream player of the current music track, fades out to upcoming music player
+@onready var current_music_player: AudioStreamPlayer2D = music_players.get_node("current_music_player")
+## The audio stream player of the current music track, fades in from current music player
+@onready var upcoming_music_player: AudioStreamPlayer2D = music_players.get_node("upcoming_music_player")
 
 ## Emitted when the music reaches a downbeat
 signal downbeat
@@ -70,7 +76,7 @@ func play_clip(clip: AudioStream, pitch_min: float = 1, pitch_max: float = 1) ->
 	audio_player.pitch_scale = randf_range(pitch_min, pitch_max)
 	audio_player.finished.connect(func(): audio_player.queue_free())
 	audio_player.stream = clip
-	add_child(audio_player)
+	audio_players.add_child(audio_player)
 	audio_player.play()
 
 ## Play a music track, fading out from the current track into the new track
@@ -82,20 +88,16 @@ func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false
 		current_music_player.play()
 		return
 	# Don't fade in and out of the same music track
-	elif (current_music_player.stream != null and track.music_clip.resource_path == current_music_player.stream.resource_path):
+	elif current_music_player.stream != null and track.music_clip.resource_path == current_music_player.stream.resource_path:
 		return
 	upcoming_music_player.set_stream(track.music_clip)
-	if volume_tween != null:
+	if volume_tween and volume_tween.is_running():
 		volume_tween.kill()
 	volume_tween = create_tween()
-	volume_tween.finished.connect(func():
-		current_music_player.set_stream(track.music_clip)
-		current_music_player.play(upcoming_music_player.get_playback_position())
-		upcoming_music_player.stop()
-		volume_tween.kill())
+	volume_tween.finished.connect(on_volume_tween_finished)
 	upcoming_music_player.play(current_music_player.get_playback_position())
-	volume_tween.tween_property(current_music_player, "volume_db", -32, fade_time).from(music_volume).set_trans(Tween.TRANS_CUBIC)
-	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time).from(-32).set_trans(Tween.TRANS_CUBIC)
+	volume_tween.tween_property(current_music_player, "volume_db", AUDIO_OFF_DB, fade_time).from(music_volume).set_trans(Tween.TRANS_LINEAR)
+	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time).from(AUDIO_OFF_DB).set_trans(Tween.TRANS_LINEAR)
 
 ## Stop the currently playing music
 func stop_music() -> void:
@@ -114,3 +116,10 @@ func _on_current_music_player_finished() -> void:
 
 func _on_upcoming_music_player_finished() -> void:
 	upcoming_music_player.play()
+
+## Callback for when the volume tween finishes
+func on_volume_tween_finished() -> void:
+	current_music_player.set_stream(current_track.music_clip)
+	current_music_player.play(upcoming_music_player.get_playback_position())
+	current_music_player.set_volume_db(music_volume)
+	upcoming_music_player.stop()

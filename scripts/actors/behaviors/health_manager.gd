@@ -13,13 +13,13 @@ class_name HealthManager extends Area2D
 ## The collision shape that triggers a damage event
 @onready var hurt_box: CollisionShape2D = $hurt_box
 ## Controls flashiing after taking damage
-@onready var flasher: Flasher = $"../flasher"
+@onready var flasher: Flasher = get_node_or_null("../flasher")
 ## Controls pulsing while invincible after taking damage
-@onready var pulser: Pulser = $"../pulser"
+@onready var pulser: Pulser = get_node_or_null("../pulser")
 ## Used to recoil the actor when taking damage
-@onready var recoil_manager: RecoilManager = $"../recoil_manager"
+@onready var recoil_manager: RecoilManager = get_node_or_null("../recoil_manager")
 ## Used to shake the actor on damage
-@onready var shaker: Shaker = $"../shaker"
+@onready var shaker: Shaker = get_node_or_null("../shaker")
 
 ## Emitted when the actor heals
 signal healed(heal_amount: float)
@@ -72,9 +72,9 @@ func take_damage(attack: Attack) -> void:
 	if is_dead:
 		die()
 		return
-	if recoil_manager != null:
+	if recoil_manager:
 		recoil_manager.recoil(attack.attack_angle, attack.attack_force)
-	if shaker != null:
+	if shaker:
 		shaker.shake(15, 0.25)
 
 ## Actor death
@@ -87,13 +87,13 @@ func set_invincible(value: bool = true) -> void:
 	hurt_box.set_deferred("disabled", value)
 	if value:
 		invincible_time = 0.0
-		if pulser != null:
+		if pulser:
 			pulser.start_pulse()
-		elif flasher != null:
+		elif flasher:
 			flasher.flash()
 	else:
 		invincible_time = INF
-		if pulser != null and pulser.is_pulsing:
+		if pulser and pulser.is_pulsing:
 			pulser.stop_pulse()
 
 func _on_area_entered(area: DamageArea) -> void:

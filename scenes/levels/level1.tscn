@@ -10,7 +10,7 @@
 music_track = ExtResource("2_y012l")
 
 [node name="save_point" parent="." index="0" instance=ExtResource("4_e4t6x")]
-position = Vector2(208, 74)
+position = Vector2(208, 61)
 
 [node name="door_left" parent="." index="1" instance=ExtResource("5_blkad")]
 position = Vector2(14, 106)

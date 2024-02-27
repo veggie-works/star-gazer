@@ -12,5 +12,5 @@ func recoil(angle: float, amount: float) -> void:
 	var angle_rad: float = deg_to_rad(angle)
 	var recoil_vector := Vector2(cos(angle_rad), -sin(angle_rad)) * amount
 	actor.velocity = recoil_vector
-	if recoil_state != null:
+	if recoil_state:
 		recoil_state.fsm.set_state(recoil_state)

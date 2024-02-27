@@ -19,7 +19,7 @@ func _process(delta: float) -> void:
 	if len(target_group) > 0:
 		all_targets = get_tree().get_nodes_in_group(target_group)
 	var closest: Node = Globals.get_closest(self, all_targets)
-	if closest != null:
+	if closest:
 		raycast.target_position = (closest.global_position - global_position).normalized() * sight_length
 		## Keep scale positive
 		raycast.global_transform.x.x = 1

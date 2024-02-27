@@ -1,10 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://byf21g036g36h"]
+[gd_scene load_steps=7 format=3 uid="uid://byf21g036g36h"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_tftho"]
 [ext_resource type="Resource" uid="uid://b7xpyw37rvn2" path="res://resources/music_tracks/level0.tres" id="2_4r7nn"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="3_c4d54"]
 [ext_resource type="PackedScene" uid="uid://cnri2gdmg878w" path="res://scenes/gameplay/saves/save_point.tscn" id="4_ky82b"]
-[ext_resource type="PackedScene" uid="uid://r28wdqjlisvt" path="res://scenes/actors/enemies/test_enemy.tscn" id="6_r6t0q"]
 [ext_resource type="PackedScene" uid="uid://ca4hofmt5120j" path="res://scenes/actors/npcs/npc.tscn" id="7_qy8ep"]
 [ext_resource type="TileSet" uid="uid://dm4qttwlwkcjx" path="res://resources/tilesets/test_tile_set.tres" id="8_tx37h"]
 
@@ -18,10 +17,7 @@ target_scene = "res://scenes/levels/level1.tscn"
 target_name = "door_left"
 
 [node name="save_point" parent="." index="1" instance=ExtResource("4_ky82b")]
-position = Vector2(59, 121)
-
-[node name="test_enemy" parent="enemies" index="0" instance=ExtResource("6_r6t0q")]
-position = Vector2(173, 113)
+position = Vector2(59, 109)
 
 [node name="npc" parent="." index="4" instance=ExtResource("7_qy8ep")]
 position = Vector2(16, 113)

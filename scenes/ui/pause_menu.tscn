@@ -1,10 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://b5csifcrytegw"]
+[gd_scene load_steps=10 format=3 uid="uid://b5csifcrytegw"]
 
 [ext_resource type="Script" path="res://scripts/ui/pause_menu.gd" id="1_78msb"]
 [ext_resource type="Shader" path="res://resources/shaders/blur.gdshader" id="2_bgr1x"]
 [ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_ig7np"]
+[ext_resource type="PackedScene" uid="uid://8agf2mc41tgx" path="res://scenes/ui/quit_warning.tscn" id="4_klkif"]
 [ext_resource type="PackedScene" uid="uid://d5l2m2e8q2x4" path="res://scenes/ui/settings/settings_ui.tscn" id="4_mtpwx"]
-
 
 [sub_resource type="Animation" id="Animation_bcgww"]
 resource_name = "close"
@@ -127,32 +127,9 @@ text = "Settings"
 layout_mode = 2
 text = "Quit"
 
-[node name="quit_warning" type="VBoxContainer" parent="margin_container"]
+[node name="quit_warning" parent="margin_container" instance=ExtResource("4_klkif")]
 visible = false
 layout_mode = 2
-theme_override_constants/separation = 64
-
-[node name="quit_warning" type="RichTextLabel" parent="margin_container/quit_warning"]
-layout_mode = 2
-size_flags_vertical = 3
-bbcode_enabled = true
-text = "[center]Are you sure you want to quit?[/center]"
-
-[node name="center_container" type="CenterContainer" parent="margin_container/quit_warning"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="quit_buttons" type="HBoxContainer" parent="margin_container/quit_warning/center_container"]
-layout_mode = 2
-theme_override_constants/separation = 64
-
-[node name="quit_confirm" parent="margin_container/quit_warning/center_container/quit_buttons" instance=ExtResource("2_ig7np")]
-layout_mode = 2
-text = "Yes"
-
-[node name="quit_cancel" parent="margin_container/quit_warning/center_container/quit_buttons" instance=ExtResource("2_ig7np")]
-layout_mode = 2
-text = "No"
 
 [node name="settings_ui" parent="." instance=ExtResource("4_mtpwx")]
 visible = false
@@ -162,6 +139,6 @@ layout_mode = 1
 [connection signal="pressed" from="margin_container/menu_buttons/resume_button" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/settings_button" to="." method="_on_settings_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="margin_container/quit_warning/center_container/quit_buttons/quit_confirm" to="." method="_on_quit_confirm_pressed"]
-[connection signal="pressed" from="margin_container/quit_warning/center_container/quit_buttons/quit_cancel" to="." method="_on_quit_cancel_pressed"]
+[connection signal="quit_canceled" from="margin_container/quit_warning" to="." method="_on_quit_warning_quit_canceled"]
+[connection signal="quit_confirmed" from="margin_container/quit_warning" to="." method="_on_quit_warning_quit_confirmed"]
 [connection signal="hidden" from="settings_ui" to="." method="_on_settings_ui_hidden"]

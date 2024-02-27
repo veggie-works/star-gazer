@@ -12,16 +12,16 @@ class_name PlayerRunState extends PlayerState
 @onready var footstep_timer: Timer = $footstep_timer
 
 func _ready() -> void:
-	if footstep_timer != null:
+	if footstep_timer:
 		footstep_timer.timeout.connect(on_footstep_timer_timeout)
 
 func enter() -> void:
 	animator.play("run")
-	if footstep_timer != null:
+	if footstep_timer:
 		footstep_timer.start(footstep_interval)
 
 func exit() -> void:
-	if footstep_timer != null:
+	if footstep_timer:
 		footstep_timer.stop()
 
 func update(delta: float) -> void:
