@@ -37,3 +37,7 @@ func get_closest(object: Node2D, targets: Array):
 ## Map a range of inputs to another
 func map(value: float, in_min: float, in_max: float, out_min: float, out_max: float) -> float:
 	return (value + in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+
+## Get a random object from an array
+func get_random(array: Array[Variant]) -> Variant:
+	return array[randi_range(0, len(array) - 1)]

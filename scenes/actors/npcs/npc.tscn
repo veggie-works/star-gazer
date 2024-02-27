@@ -10,6 +10,7 @@
 size = Vector2(128, 8)
 
 [node name="npc" instance=ExtResource("1_ictci")]
+scale = Vector2(0.25, 0.25)
 collision_layer = 4
 script = ExtResource("2_w1uxi")
 dialog = ExtResource("3_3xbx2")

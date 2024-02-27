@@ -58,10 +58,12 @@ func _on_hidden() -> void:
 
 func _on_master_volume_slider_value_changed(value: float) -> void:
 	SaveManager.settings.master_volume = value
+	AudioManager.update_music_volume()
 	master_volume_value_label.text = " %d%%" % round(SaveManager.settings.master_volume * 100)
 
 func _on_music_volume_slider_value_changed(value: float) -> void:
 	SaveManager.settings.music_volume = value
+	AudioManager.update_music_volume()
 	music_volume_value_label.text = " %d%%" % round(SaveManager.settings.music_volume * 100)
 
 func _on_sfx_volume_slider_value_changed(value: float) -> void:

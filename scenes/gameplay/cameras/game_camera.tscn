@@ -5,7 +5,7 @@
 
 [node name="game_camera" type="Camera2D"]
 enabled = false
-zoom = Vector2(2, 2)
+zoom = Vector2(4, 4)
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("1_4qe6i")

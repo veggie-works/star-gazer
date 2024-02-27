@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://cv1s172jl6jpm" path="res://scenes/audio/audio_player.tscn" id="2_yi06v"]
 
 [node name="audio_manager" type="Node"]
+process_mode = 3
 script = ExtResource("1_us30y")
 audio_player_prefab = ExtResource("2_yi06v")
 

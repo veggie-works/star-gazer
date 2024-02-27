@@ -35,6 +35,19 @@ var time_to_next_beat: float:
 			return INF
 		var sec: float = current_music_player.get_playback_position()
 		return beat_length - fposmod(sec, beat_length)
+	
+## Music volume combined with master volume
+var music_volume: float:
+	get:
+		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.music_volume, 0.0, 1.0, -32, 0)
+	
+## SFX volume combined with master volume
+var sfx_volume: float:
+	get:
+		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.sfx_volume, 0.0, 1.0, -32, 0)
+
+func _ready() -> void:
+	update_music_volume()
 
 func _process(delta: float) -> void:
 	check_downbeat()
@@ -51,8 +64,10 @@ func check_downbeat() -> void:
 		downbeat.emit()
 	
 ## Play a one shot audio clip
-func play_clip(clip: AudioStream) -> void:
+func play_clip(clip: AudioStream, pitch_min: float = 1, pitch_max: float = 1) -> void:
 	var audio_player: AudioStreamPlayer2D = audio_player_prefab.instantiate()
+	audio_player.volume_db = sfx_volume
+	audio_player.pitch_scale = randf_range(pitch_min, pitch_max)
 	audio_player.finished.connect(func(): audio_player.queue_free())
 	audio_player.stream = clip
 	add_child(audio_player)
@@ -79,8 +94,8 @@ func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false
 		upcoming_music_player.stop()
 		volume_tween.kill())
 	upcoming_music_player.play(current_music_player.get_playback_position())
-	volume_tween.tween_property(current_music_player, "volume_db", -32, fade_time).from(0).set_trans(Tween.TRANS_CUBIC)
-	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", 0, fade_time).from(-32).set_trans(Tween.TRANS_CUBIC)
+	volume_tween.tween_property(current_music_player, "volume_db", -32, fade_time).from(music_volume).set_trans(Tween.TRANS_CUBIC)
+	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time).from(-32).set_trans(Tween.TRANS_CUBIC)
 
 ## Stop the currently playing music
 func stop_music() -> void:
@@ -89,6 +104,10 @@ func stop_music() -> void:
 	upcoming_music_player.stop()
 	upcoming_music_player.stream = null
 	current_track = null
+
+## Update the current music volume
+func update_music_volume() -> void:
+	current_music_player.volume_db = music_volume
 
 func _on_current_music_player_finished() -> void:
 	current_music_player.play()

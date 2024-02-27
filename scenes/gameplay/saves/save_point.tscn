@@ -8,6 +8,7 @@
 size = Vector2(64, 10)
 
 [node name="save_point" type="Node2D" groups=["save_points"]]
+scale = Vector2(0.25, 0.25)
 script = ExtResource("1_gv0sa")
 player_prefab = ExtResource("2_5qw78")
 

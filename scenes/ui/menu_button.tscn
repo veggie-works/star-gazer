@@ -1,4 +1,7 @@
-[gd_scene format=3 uid="uid://xmhpn38awq6d"]
+[gd_scene load_steps=3 format=3 uid="uid://xmhpn38awq6d"]
+
+[ext_resource type="Script" path="res://scripts/ui/menu_button.gd" id="1_x6e5d"]
+[ext_resource type="AudioStream" uid="uid://c8s5kekxs8aay" path="res://assets/sfx/ui/switch28.ogg" id="2_xtirn"]
 
 [node name="menu_button" type="Button"]
 anchors_preset = 10
@@ -6,3 +9,7 @@ anchor_right = 1.0
 offset_bottom = 8.0
 grow_horizontal = 2
 size_flags_horizontal = 3
+script = ExtResource("1_x6e5d")
+click_sound = ExtResource("2_xtirn")
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

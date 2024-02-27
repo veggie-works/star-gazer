@@ -12,23 +12,21 @@
 music_track = ExtResource("2_4r7nn")
 
 [node name="door_right" parent="." index="0" instance=ExtResource("3_c4d54")]
-position = Vector2(953, 424)
+position = Vector2(266, 98)
 scale = Vector2(1, 2.8)
 target_scene = "res://scenes/levels/level1.tscn"
 target_name = "door_left"
 
 [node name="save_point" parent="." index="1" instance=ExtResource("4_ky82b")]
-position = Vector2(306, 483)
+position = Vector2(59, 121)
 
 [node name="test_enemy" parent="enemies" index="0" instance=ExtResource("6_r6t0q")]
-position = Vector2(679, 483)
-scale = Vector2(0.5, 0.5)
+position = Vector2(173, 113)
 
 [node name="npc" parent="." index="4" instance=ExtResource("7_qy8ep")]
-position = Vector2(127, 452)
+position = Vector2(16, 113)
 
 [node name="tile_map" type="TileMap" parent="." index="5"]
-scale = Vector2(4, 4)
 tile_set = ExtResource("8_tx37h")
 format = 2
 layer_0/name = "Terrain"

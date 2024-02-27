@@ -5,8 +5,7 @@ func _ready() -> void:
 	body.landed.connect(on_land)
 
 func enter() -> void:
-	pass
-	# animator.play("hurt")
+	animator.play("hurt")
 
 func update(delta: float) -> void:
 	if Input.is_action_just_pressed("block"):
