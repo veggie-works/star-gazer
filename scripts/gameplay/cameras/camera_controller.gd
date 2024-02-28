@@ -1,26 +1,42 @@
 ## A custom camera controller
 extends Camera2D
 
-## The speed at which the camera should track its targets
-@export_range(1, 15) var track_speed: float = 5
+## The speed at which the camera tracks its targets, in pixels per second
+@export var tracking_speed: float = 150
 ## A list of targets to track
 @export var targets: Array[Node2D] = []
 ## Whether to track targets along the horizontal axis
 @export var track_x: bool = true
 ## Whether to track targets along the vertical axis
 @export var track_y: bool = true
+## The maximum distance that the camera has to be from its target position before it stops tracking
+@export var end_tracking_threshold: float = 10
 
 ## Controls camera shake
 @onready var shaker: Shaker = $shaker
+## The area outside of which the camera will start tracking its targets
+@onready var deadzone: Area2D = $deadzone
+## The collider bounds for the deadzone
+@onready var deadzone_collision: CollisionShape2D = deadzone.get_node("collision")
+
+## Whether the camera is tracking
+var tracking: bool
 
 func _process(delta: float) -> void:
 	if targets.all(func(target): return target != null):
-		track(delta)
+		var target_position: Vector2 = get_target_pos()
+		var deadzone_size: Vector2 = deadzone_collision.get_shape().get_rect().size
+		var rect := Rect2(global_position - deadzone_size / 2, deadzone_size)
+		if not rect.has_point(target_position):
+			tracking = true
+		if tracking:
+			track(delta)
 
 ## Add a target for this camera to track
 func add_target(target: Node2D) -> void:
 	targets.append(target)
 	global_position = get_target_pos()
+	tracking = false
 	
 ## Shake the camera
 func shake(amount: float, duration: float) -> void:
@@ -29,7 +45,10 @@ func shake(amount: float, duration: float) -> void:
 
 ## Track targets
 func track(delta: float) -> void:
-	global_position = global_position.lerp(get_target_pos(), track_speed * delta)
+	if (global_position - get_target_pos()).length() <= end_tracking_threshold:
+		tracking = false
+	var diff: Vector2 = get_target_pos() - global_position
+	global_position += diff.normalized() * tracking_speed * delta
 
 ## Fetch the position that the camera should track to
 func get_target_pos() -> Vector2:

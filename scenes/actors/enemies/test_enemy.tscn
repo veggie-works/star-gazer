@@ -17,7 +17,7 @@
 size = Vector2(128, 128)
 
 [node name="test_enemy" instance=ExtResource("1_w2i0m")]
-scale = Vector2(0.125, 0.125)
+scale = Vector2(0.25, 0.25)
 gravity_scale = 1.0
 falling_gravity_scale = 2.0
 run_speed = 50.0
@@ -44,6 +44,8 @@ start_state = NodePath("idle_state")
 
 [node name="idle_state" type="Node" parent="fsm" index="0"]
 script = ExtResource("6_gp1yr")
+idle_beats_min = 8
+idle_beats_max = 10
 next_state = ExtResource("7_4atx6")
 
 [node name="wander_state" type="Node" parent="fsm" index="1"]
@@ -56,7 +58,7 @@ chase_state = NodePath("../chase_state")
 
 [node name="chase_state" type="Node" parent="fsm" index="3"]
 script = ExtResource("9_346ga")
-chase_speed = 65.0
+chase_speed = 75.0
 
 [node name="damage_area" parent="." index="7" instance=ExtResource("10_riphe")]
 weapon = ExtResource("11_x27lj")
@@ -66,5 +68,12 @@ attack_angle = 110.0
 [node name="line_of_sight" parent="." index="8" instance=ExtResource("12_0ldor")]
 unique_name_in_owner = true
 sight_length = 1000.0
+
+[node name="state_debug_label" parent="." index="9"]
+offset_left = -132.0
+offset_top = -132.0
+offset_right = 0.0
+offset_bottom = -106.0
+scale = Vector2(2, 2)
 
 [editable path="behaviors/health_manager"]

@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dwibdkrqgbotj"]
+[gd_scene load_steps=10 format=3 uid="uid://dwibdkrqgbotj"]
 
 [ext_resource type="Script" path="res://scripts/actors/actor.gd" id="1_qymhu"]
 [ext_resource type="Shader" path="res://resources/shaders/color_key_flash.gdshader" id="1_vlh6d"]
 [ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="3_1bv52"]
 [ext_resource type="Script" path="res://scripts/fsm/state_machine.gd" id="3_cgdik"]
+[ext_resource type="PackedScene" uid="uid://cjp2np3c242rp" path="res://scenes/actors/state_debug_label.tscn" id="5_iat4a"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tf50f"]
 shader = ExtResource("1_vlh6d")
@@ -16,6 +17,8 @@ shader_parameter/flash_amount = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6k56w"]
 size = Vector2(128, 128)
+
+[sub_resource type="LabelSettings" id="LabelSettings_ydra3"]
 
 [node name="actor" type="CharacterBody2D"]
 editor_description = "Base controller for all actors, e.g. players, enemies, NPCs."
@@ -42,3 +45,8 @@ shape = SubResource("RectangleShape2D_6k56w")
 
 [node name="fsm" type="Node" parent="."]
 script = ExtResource("3_cgdik")
+
+[node name="state_debug_label" parent="." instance=ExtResource("5_iat4a")]
+offset_top = -64.0
+offset_bottom = -38.0
+label_settings = SubResource("LabelSettings_ydra3")

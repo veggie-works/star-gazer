@@ -46,11 +46,10 @@ func _process(delta: float) -> void:
 
 ## Set the FSM's current state to a new state
 func set_state(new_state: State) -> void:
-	state_history.append(new_state)
-	var old_state: State = null
-	if len(state_history) > 1:
-		old_state = current_state
+	var old_state: State = current_state
+	if old_state:
 		old_state.exit()
+	state_history.append(new_state)
 	if len(state_history) > state_history_capacity:
 		state_history.pop_front()
 	new_state.enter()

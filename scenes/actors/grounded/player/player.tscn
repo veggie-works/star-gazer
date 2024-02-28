@@ -208,7 +208,7 @@ libraries = {
 [node name="sprite" parent="." index="1"]
 use_parent_material = true
 position = Vector2(0, -7)
-texture = ExtResource("21_l5mf2")
+texture = ExtResource("28_0halg")
 
 [node name="collision" parent="." index="2"]
 position = Vector2(-1, 0)
@@ -276,11 +276,11 @@ run_speed = 150.0
 [node name="player_jump_state" type="Node" parent="fsm" index="2"]
 script = ExtResource("14_ygy2g")
 jump_height = 75.0
-midair_move_speed = 75.0
+midair_move_speed = 100.0
 
 [node name="player_fall_state" type="Node" parent="fsm" index="3"]
 script = ExtResource("15_7k3jt")
-midair_move_speed = 75.0
+midair_move_speed = 100.0
 
 [node name="player_hurt_state" type="Node" parent="fsm" index="4"]
 script = ExtResource("18_2rtci")
@@ -313,5 +313,11 @@ collision_mask = 4
 [node name="collision" type="CollisionShape2D" parent="triggers/interact_trigger" index="0"]
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_cl6t6")
+
+[node name="state_debug_label" parent="." index="9"]
+offset_left = -32.0
+offset_top = -44.0
+offset_right = 34.0
+offset_bottom = -31.0
 
 [editable path="behaviors/health_manager"]

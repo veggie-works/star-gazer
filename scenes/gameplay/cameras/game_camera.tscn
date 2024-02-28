@@ -1,7 +1,10 @@
-[gd_scene load_steps=3 format=3 uid="uid://bt4hp2ye7flah"]
+[gd_scene load_steps=4 format=3 uid="uid://bt4hp2ye7flah"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/cameras/camera_controller.gd" id="1_4qe6i"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/shaker.gd" id="2_5o5m5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vn6m3"]
+size = Vector2(96, 192)
 
 [node name="game_camera" type="Camera2D"]
 enabled = false
@@ -12,3 +15,10 @@ script = ExtResource("1_4qe6i")
 
 [node name="shaker" type="Node2D" parent="."]
 script = ExtResource("2_5o5m5")
+
+[node name="deadzone" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2147483648
+
+[node name="collision" type="CollisionShape2D" parent="deadzone"]
+shape = SubResource("RectangleShape2D_vn6m3")

@@ -7,7 +7,7 @@ editor_description = "Base level for all levels."
 script = ExtResource("1_4jkmw")
 
 [node name="enemies" type="Node2D" parent="."]
-editor_description = "Container for all enemy scenes."
+editor_description = "Container for all enemy instances."
 
 [node name="camera_focus_zones" type="Node2D" parent="."]
 editor_description = "Container for all areas that the camera should lock into."
