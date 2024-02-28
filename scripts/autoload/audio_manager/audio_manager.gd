@@ -96,8 +96,8 @@ func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false
 	volume_tween = create_tween()
 	volume_tween.finished.connect(on_volume_tween_finished)
 	upcoming_music_player.play(current_music_player.get_playback_position())
-	volume_tween.tween_property(current_music_player, "volume_db", AUDIO_OFF_DB, fade_time).from(music_volume).set_trans(Tween.TRANS_LINEAR)
-	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time).from(AUDIO_OFF_DB).set_trans(Tween.TRANS_LINEAR)
+	volume_tween.tween_property(current_music_player, "volume_db", AUDIO_OFF_DB, fade_time).from(music_volume).set_trans(Tween.TRANS_CIRC)
+	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time / 2).from(AUDIO_OFF_DB).set_trans(Tween.TRANS_CIRC)
 
 ## Stop the currently playing music
 func stop_music() -> void:

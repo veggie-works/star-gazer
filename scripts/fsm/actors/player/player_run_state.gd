@@ -12,8 +12,7 @@ class_name PlayerRunState extends PlayerState
 @onready var footstep_timer: Timer = $footstep_timer
 
 func _ready() -> void:
-	if footstep_timer:
-		footstep_timer.timeout.connect(on_footstep_timer_timeout)
+	footstep_timer.timeout.connect(on_footstep_timer_timeout)
 
 func enter() -> void:
 	animator.play("run")
@@ -27,6 +26,7 @@ func exit() -> void:
 func update(delta: float) -> void:
 	if body.velocity.y > 0:
 		fsm.transition_to(PlayerFallState)
+		return
 		
 	if body.disable_input:
 		return

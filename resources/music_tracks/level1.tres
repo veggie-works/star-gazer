@@ -1,11 +1,10 @@
 [gd_resource type="Resource" script_class="MusicTrack" load_steps=3 format=3 uid="uid://b26fpa887igk5"]
 
-[ext_resource type="AudioStream" uid="uid://cr7jocqk53an1" path="res://assets/music/bpm90.wav" id="1_t272k"]
+[ext_resource type="AudioStream" uid="uid://dcur2yjviase3" path="res://assets/music/Vertical_dynam_loop_2.wav" id="1_hfuyw"]
 [ext_resource type="Script" path="res://scripts/autoload/audio_manager/music_track.gd" id="1_yy4au"]
-
 
 [resource]
 resource_local_to_scene = true
 script = ExtResource("1_yy4au")
-bpm = 90
-music_clip = ExtResource("1_t272k")
+bpm = 114
+music_clip = ExtResource("1_hfuyw")

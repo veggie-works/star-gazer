@@ -60,7 +60,7 @@ chase_speed = 65.0
 
 [node name="damage_area" parent="." index="7" instance=ExtResource("10_riphe")]
 weapon = ExtResource("11_x27lj")
-attack_force = 1000.0
+attack_force = 200.0
 attack_angle = 110.0
 
 [node name="line_of_sight" parent="." index="8" instance=ExtResource("12_0ldor")]

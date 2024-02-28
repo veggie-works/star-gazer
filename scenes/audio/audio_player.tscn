@@ -1,3 +1,5 @@
 [gd_scene format=3 uid="uid://cv1s172jl6jpm"]
 
 [node name="audio_player" type="AudioStreamPlayer2D"]
+
+[connection signal="finished" from="." to="." method="_on_finished"]

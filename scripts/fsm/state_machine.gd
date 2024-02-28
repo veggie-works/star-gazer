@@ -16,7 +16,11 @@ var states: Array[State] = []
 var state_history: Array[State] = []
 
 ## The FSM's current state
-var current_state: State
+var current_state: State:
+	get:
+		if len(state_history) < 1:
+			return null
+		return state_history[len(state_history) - 1]
 
 ## For debugging purposes
 var current_state_name: String:
@@ -42,14 +46,14 @@ func _process(delta: float) -> void:
 
 ## Set the FSM's current state to a new state
 func set_state(new_state: State) -> void:
-	var old_state: State = current_state
-	current_state = new_state
-	if old_state:
-		old_state.exit()
-	new_state.enter()
 	state_history.append(new_state)
+	var old_state: State = null
+	if len(state_history) > 1:
+		old_state = current_state
+		old_state.exit()
 	if len(state_history) > state_history_capacity:
 		state_history.pop_front()
+	new_state.enter()
 	state_changed.emit(old_state, new_state)
 
 ## Transition to a new state

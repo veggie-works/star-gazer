@@ -21,6 +21,7 @@ class_name Door extends Node2D
 
 ## Walk the player from this door into the scene
 func enter_from() -> void:
+	print("ENTER FROM: ", name)
 	var player: Player = player_prefab.instantiate()
 	player.in_cutscene = true
 	collision.disabled = true
@@ -44,11 +45,12 @@ func enter_from() -> void:
 	player.in_cutscene = false
 
 func _on_area_entered(area: Area2D) -> void:
-	var body: Node = area.get_owner()
-	if body is Player:
-		body.in_cutscene = true
-		if enter_direction == "left" or enter_direction == "right":
-			var target_sign: float = sign(global_position.x - body.global_position.x)
-			var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
-			body.move_to(target_x)
-		SceneManager.change_scene(target_scene, target_name)
+	if area.get_collision_mask_value(3):
+		var body: Node = area.get_owner()
+		if body is Player:
+			body.in_cutscene = true
+			if enter_direction == "left" or enter_direction == "right":
+				var target_sign: float = sign(global_position.x - body.global_position.x)
+				var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
+				body.move_to(target_x)
+			SceneManager.change_scene(target_scene, target_name)
