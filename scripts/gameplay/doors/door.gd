@@ -21,7 +21,6 @@ class_name Door extends Node2D
 
 ## Walk the player from this door into the scene
 func enter_from() -> void:
-	print("ENTER FROM: ", name)
 	var player: Player = player_prefab.instantiate()
 	player.in_cutscene = true
 	collision.disabled = true
