@@ -53,8 +53,6 @@ func save_game() -> void:
 
 ## Save game data to disk
 func save_game_data() -> void:
-	if len(save_data.save_scene) <= 0:
-		return
 	ResourceSaver.save(save_data, save_path)
 	
 ## Save settings to disk

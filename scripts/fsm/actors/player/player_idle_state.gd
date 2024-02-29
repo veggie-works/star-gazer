@@ -2,7 +2,7 @@
 class_name PlayerIdleState extends PlayerState
 
 func enter() -> void:
-	if body.disable_input:
+	if abs(body.velocity.x) > 0 and body.disable_input:
 		await body.arrived
 		
 	animator.play("idle")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://c3t7i680dmac2"]
+[gd_scene load_steps=8 format=3 uid="uid://c3t7i680dmac2"]
 
 [ext_resource type="Script" path="res://scripts/ui/ui_manager.gd" id="1_0dkf0"]
 [ext_resource type="PackedScene" uid="uid://b5csifcrytegw" path="res://scenes/ui/pause_menu.tscn" id="3_wg14w"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b7efyr5igynpq" path="res://scenes/ui/fader.tscn" id="4_t5kd5"]
 [ext_resource type="PackedScene" uid="uid://d0kwotaty7nke" path="res://scenes/ui/hud.tscn" id="5_ans1r"]
 [ext_resource type="PackedScene" uid="uid://d255w6bca6ikd" path="res://scenes/ui/dialog_ui.tscn" id="6_hhuok"]
+[ext_resource type="PackedScene" uid="uid://df8vtivmt0f63" path="res://scenes/ui/fast_travel_ui.tscn" id="7_13jar"]
 
 [node name="ui_manager" type="Control"]
 editor_description = "UI manager singleton that manages all user interfaces."
@@ -20,7 +21,7 @@ offset_bottom = -2.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0dkf0")
-ui_scenes = Array[PackedScene]([ExtResource("3_wg14w"), ExtResource("4_t5kd5"), ExtResource("4_maj2i"), ExtResource("5_ans1r"), ExtResource("6_hhuok")])
+ui_scenes = Array[PackedScene]([ExtResource("3_wg14w"), ExtResource("4_t5kd5"), ExtResource("4_maj2i"), ExtResource("5_ans1r"), ExtResource("6_hhuok"), ExtResource("7_13jar")])
 
 [node name="ui_layer" type="CanvasLayer" parent="."]
 editor_description = "The canvas in which all user interfaces will be contained in."

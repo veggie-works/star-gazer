@@ -52,4 +52,4 @@ func _on_area_entered(area: Area2D) -> void:
 				var target_sign: float = sign(global_position.x - body.global_position.x)
 				var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
 				body.move_to(target_x)
-			SceneManager.change_scene(target_scene, target_name)
+			SceneManager.change_scene_between_doors(target_scene, target_name)

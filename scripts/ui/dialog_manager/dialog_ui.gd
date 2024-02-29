@@ -33,14 +33,10 @@ func _input(event: InputEvent) -> void:
 func open() -> void:
 	current_page_index = 0
 	super.open()
-	var players: Array[Node] = get_tree().get_nodes_in_group("players")
-	for player in players:
-		if player is Player:
-			player.in_cutscene = true
-			player.run(0)
 
 func close() -> void:
 	super.close()
+	await get_tree().create_timer(0.25).timeout
 	var players: Array[Node] = get_tree().get_nodes_in_group("players")
 	for player in players:
 		if player is Player:
@@ -64,7 +60,7 @@ func skip_printing() -> void:
 	dialog_label.text = current_page
 	print_timer.stop()
 
-## Proceed to the next page of dialog
+## Proceed to the next page of dialog, or close if the last page was already reached
 func next_page() -> void:
 	current_page_index += 1
 	if current_page_index >= len(current_dialog.pages):

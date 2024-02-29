@@ -18,6 +18,7 @@ enter_direction = "right"
 
 [node name="save_point" parent="save_points" index="0" instance=ExtResource("4_e4t6x")]
 position = Vector2(208, 61)
+save_point_name = "Empty Test Room"
 
 [node name="tile_map" parent="." index="5"]
 tile_set = ExtResource("5_26qwn")

@@ -23,7 +23,7 @@ func update(delta: float) -> void:
 		fsm.transition_to(PlayerIdleState)
 		return
 	body.velocity.x += direction * run_speed
-	if body.is_grounded() and Input.is_action_just_pressed("jump"):
+	if InputManager.is_buffered("jump") or ((body.is_grounded() or body.in_coyote_time) and Input.is_action_just_pressed("jump")):
 		fsm.transition_to(PlayerJumpState)
 
 ## Play footstep SFX

@@ -19,9 +19,12 @@ func _input(event: InputEvent) -> void:
 ## Interact with a player
 func interact_with(body: Player) -> void:
 	interact.emit()
+	body.run(0)
+	body.get_node("fsm").transition_to(PlayerIdleState)
+	body.in_cutscene = true
 
-func _on_body_entered(body: Actor) -> void:
+func _on_body_entered(body: Player) -> void:
 	player = body
 
-func _on_body_exited(body: Actor) -> void:
+func _on_body_exited(body: Player) -> void:
 	player = null

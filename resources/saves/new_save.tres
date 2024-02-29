@@ -1,8 +1,15 @@
-[gd_resource type="Resource" script_class="SaveData" load_steps=2 format=3 uid="uid://bpq25ufu805u1"]
+[gd_resource type="Resource" script_class="SaveData" load_steps=4 format=3 uid="uid://bpq25ufu805u1"]
 
+[ext_resource type="Script" path="res://scripts/autoload/save_manager/save_point_data.gd" id="1_6vwvp"]
 [ext_resource type="Script" path="res://scripts/autoload/save_manager/save_data.gd" id="1_plc0g"]
+
+[sub_resource type="Resource" id="Resource_p3gq5"]
+script = ExtResource("1_6vwvp")
+save_point_name = "Room with Enemy/NPC"
+save_scene = "res://scenes/levels/level0.tscn"
+save_position = Vector2(59, 109)
 
 [resource]
 script = ExtResource("1_plc0g")
-save_scene = "res://scenes/levels/level0.tscn"
-save_position = Vector2(59, 109)
+last_save_point = SubResource("Resource_p3gq5")
+visited_save_points = Array[ExtResource("1_6vwvp")]([SubResource("Resource_p3gq5")])

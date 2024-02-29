@@ -22,4 +22,5 @@ editor_description = "Container for all locations where the game may save."
 editor_description = "Container of all non-player characters that can be interacted with."
 
 [node name="tile_map" type="TileMap" parent="."]
+editor_description = "The tile map of the world."
 format = 2
