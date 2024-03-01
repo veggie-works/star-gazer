@@ -101,6 +101,7 @@ dodge={
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="player attack"
 2d_physics/layer_7="enemy attack"
+2d_physics/layer_8="platform"
 2d_physics/layer_32="camera target body"
 
 [rendering]

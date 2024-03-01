@@ -9,6 +9,10 @@ class_name PlayerJumpState extends PlayerState
 func enter() -> void:
 	body.jump(jump_height)
 	animator.play("jump")
+	body.set_collision_mask_value(8, false)
+
+func exit() -> void:
+	body.set_collision_mask_value(8, true)
 
 func update(delta: float) -> void:
 	body.velocity.x = 0

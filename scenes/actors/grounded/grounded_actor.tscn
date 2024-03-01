@@ -17,19 +17,19 @@ editor_description = "Container for all ground ray casts."
 editor_description = "The first ground ray cast, or the leftmost one if the player's scale is positive."
 position = Vector2(-64, 64)
 target_position = Vector2(0, 1)
-collision_mask = 2
+collision_mask = 130
 
 [node name="raycast1" type="RayCast2D" parent="ground_raycasts" index="1"]
 editor_description = "The second ground ray cast, or the middle one if the player's scale is positive."
 position = Vector2(0, 64)
 target_position = Vector2(0, 1)
-collision_mask = 2
+collision_mask = 130
 
 [node name="raycast2" type="RayCast2D" parent="ground_raycasts" index="2"]
 editor_description = "The third ground ray cast, or the rightmost one if the player's scale is positive."
 position = Vector2(64, 64)
 target_position = Vector2(0, 1)
-collision_mask = 2
+collision_mask = 130
 
 [node name="wall_raycasts" type="Node2D" parent="." index="6"]
 

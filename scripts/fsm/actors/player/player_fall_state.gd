@@ -6,6 +6,11 @@ class_name PlayerFallState extends PlayerState
 
 func enter() -> void:
 	animator.play("fall")
+	if Input.is_action_pressed("down"):
+		body.set_collision_mask_value(8, false)
+
+func exit() -> void:
+	body.set_collision_mask_value(8, true)
 
 func update(delta: float) -> void:
 	if body.is_grounded():

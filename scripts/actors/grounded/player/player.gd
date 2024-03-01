@@ -6,7 +6,7 @@ class_name Player extends GroundedActor
 ## Timer that counts down the time the player may still jump while in the air after walking off a ledge
 @onready var coyote_timer: Timer = $timers/coyote_timer
 ## Parent of areas that trigger certain objects
-@onready var triggers: Node2D = $triggers
+@onready var colliders: Array[CollisionShape2D] = []
 
 ## Whether input should be disabled
 var disable_input: bool
@@ -15,11 +15,8 @@ var disable_input: bool
 var in_cutscene: bool:
 	set(value):
 		disable_input = value
-		if triggers:
-			for child in triggers.get_children():
-				var grandchild: Node2D = child.get_child(0)
-				if grandchild is CollisionShape2D:
-					grandchild.set_deferred("disabled", value)
+		for collider: CollisionShape2D in colliders:
+			collider.set_deferred("disabled", value)
 
 ## Whether the player is still in coyote time
 var in_coyote_time: bool:
@@ -28,6 +25,11 @@ var in_coyote_time: bool:
 
 func _ready() -> void:
 	UIManager.get_ui(HUD).update_health()
+	for collider: CollisionShape2D in find_children("*", "CollisionShape2D"):
+		if collider.shape is RectangleShape2D:
+			collider.global_position = collision.global_position
+			collider.shape.set_size(collision.shape.size)
+		colliders.append(collider)
 
 func _process(delta: float) -> void:
 	update_coyote_time()

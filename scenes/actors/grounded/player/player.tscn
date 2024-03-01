@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=59 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -185,16 +185,18 @@ _data = {
 size = Vector2(16, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvff"]
-size = Vector2(12, 37)
+size = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
-size = Vector2(20, 37)
+size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttbdg"]
+size = Vector2(0, 0)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
 z_index = 1
 material = SubResource("ShaderMaterial_weryg")
 collision_layer = 1
-collision_mask = 66
 script = ExtResource("2_d5awl")
 gravity_scale = 1.0
 falling_gravity_scale = 2.0
@@ -208,7 +210,7 @@ libraries = {
 [node name="sprite" parent="." index="1"]
 use_parent_material = true
 position = Vector2(0, -7)
-texture = ExtResource("28_0halg")
+texture = ExtResource("25_lgruc")
 
 [node name="collision" parent="." index="2"]
 position = Vector2(-1, 0)
@@ -312,7 +314,7 @@ collision_mask = 4
 
 [node name="collision" type="CollisionShape2D" parent="triggers/interact_trigger" index="0"]
 position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_cl6t6")
+shape = SubResource("RectangleShape2D_ttbdg")
 
 [node name="state_debug_label" parent="." index="9"]
 offset_left = -32.0
