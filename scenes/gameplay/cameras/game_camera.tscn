@@ -7,11 +7,10 @@
 size = Vector2(96, 192)
 
 [node name="game_camera" type="Camera2D"]
-enabled = false
-zoom = Vector2(4, 4)
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("1_4qe6i")
+end_tracking_threshold = 1.0
 
 [node name="shaker" type="Node2D" parent="."]
 script = ExtResource("2_5o5m5")

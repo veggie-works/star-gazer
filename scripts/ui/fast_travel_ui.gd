@@ -28,10 +28,6 @@ func refresh_fast_travel_locations() -> void:
 			button.disabled = true
 		container.add_child(button)
 
-## Fast travel to a save point
-func fast_travel_to(save_point: SavePointData) -> void:
-	SceneManager.change_scene_load_save_point(save_point)
-
 ## Callback for when a fast travel location button is pressed
 func on_fast_travel_location_button_pressed(save_point_data: SavePointData) -> void:
 	close()

@@ -1,5 +1,5 @@
 ## A transition from or into another scene
-class_name Door extends Node2D
+class_name Door extends Area2D
 
 ## The player prefab to spawn at the door when entering from a different scene
 @export var player_prefab: PackedScene
@@ -18,6 +18,16 @@ class_name Door extends Node2D
 
 ## The root of the level scene that contains this door
 @onready var level_root: Node = get_owner()
+
+## Data associated with this door
+var data := DoorData.new()
+
+func _ready() -> void:
+	data.door_name = name
+	data.door_scene = level_root.scene_file_path
+	data.door_position = global_position
+	data.target_door_name = target_name
+	data.target_door_scene = target_scene
 
 ## Walk the player from this door into the scene
 func enter_from() -> void:

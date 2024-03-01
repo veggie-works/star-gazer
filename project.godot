@@ -35,6 +35,7 @@ BeatManager="*res://scripts/autoload/beat_manager.gd"
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/stretch/mode="canvas_items"
 window/stretch/scale_mode="integer"
 
 [dotnet]
@@ -94,6 +95,8 @@ dodge={
 
 [layer_names]
 
+2d_render/layer_1="world"
+2d_render/layer_2="ui"
 2d_physics/layer_1="player"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="interactive"

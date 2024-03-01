@@ -13,6 +13,6 @@ func _ready() -> void:
 func load_save_point(save_point_data: SavePointData) -> void:
 	var save_points: Array[Node] = get_tree().get_nodes_in_group("save_points")
 	for save_point in save_points:
-		if save_point is SavePoint and (save_point.global_position - save_point_data.save_position).length() <= 0.1:
+		if save_point is SavePoint and save_point.equals(save_point_data.save_position):
 			save_point.load_save(save_point_data)
 			return

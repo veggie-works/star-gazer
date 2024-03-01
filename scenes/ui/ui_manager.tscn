@@ -10,6 +10,7 @@
 
 [node name="ui_manager" type="Control"]
 editor_description = "UI manager singleton that manages all user interfaces."
+visibility_layer = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

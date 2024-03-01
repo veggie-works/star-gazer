@@ -1,14 +1,24 @@
 ## A custom camera controller
 extends Camera2D
 
+## Data structure used for storing the min and max values for each axis
+class TargetRanges:
+	## The minimum position value for all targets along the x-axis
+	var min_x: float
+	## The maximum position value for all targets along the x-axis
+	var max_x: float
+	## The minimum position value for all targets along the y-axis
+	var min_y: float
+	## The maximum position value for all targets along the y-axis
+	var max_y: float
+
+## The base zoom factor
+const BASE_ZOOM: float = 4
+
 ## The speed at which the camera tracks its targets, in pixels per second
 @export var tracking_speed: float = 150
 ## A list of targets to track
 @export var targets: Array[Node2D] = []
-## Whether to track targets along the horizontal axis
-@export var track_x: bool = true
-## Whether to track targets along the vertical axis
-@export var track_y: bool = true
 ## The maximum distance that the camera has to be from its target position before it stops tracking
 @export var end_tracking_threshold: float = 10
 
@@ -18,9 +28,14 @@ extends Camera2D
 @onready var deadzone: Area2D = $deadzone
 ## The collider bounds for the deadzone
 @onready var deadzone_collision: CollisionShape2D = deadzone.get_node("collision")
+## The root window containing this camera
+@onready var root_window: Window = get_tree().get_root()
 
 ## Whether the camera is tracking
 var tracking: bool
+
+func _ready() -> void:
+	zoom = Vector2.ONE * BASE_ZOOM
 
 func _process(delta: float) -> void:
 	if targets.all(func(target): return target != null):
@@ -33,10 +48,16 @@ func _process(delta: float) -> void:
 			track(delta)
 
 ## Add a target for this camera to track
-func add_target(target: Node2D) -> void:
+func add_target(target: Node2D, immediate: bool = true, recursive: bool = false) -> void:
 	targets.append(target)
-	global_position = get_target_pos()
-	tracking = false
+	if recursive:
+		for child in target.get_children():
+			if child is Node2D:
+				add_target(child, immediate, recursive)
+	if immediate:
+		global_position = get_target_pos()
+		zoom = Vector2.ONE * get_target_zoom()
+		tracking = false
 	
 ## Shake the camera
 func shake(amount: float, duration: float) -> void:
@@ -49,25 +70,38 @@ func track(delta: float) -> void:
 		tracking = false
 	var diff: Vector2 = get_target_pos() - global_position
 	global_position += diff.normalized() * tracking_speed * delta
+	zoom = Vector2.ONE * get_target_zoom()
 
 ## Fetch the position that the camera should track to
 func get_target_pos() -> Vector2:
-	var center_x: float = global_position.x
-	var center_y: float = global_position.y
-	if track_x:
-		var min_x: float = targets.reduce(func(x, target):
-			return target.global_position.x if target.global_position.x < x else x,
-		INF)
-		var max_x: float = targets.reduce(func(x, target):
-			return target.global_position.x if target.global_position.x > x else x,
-		-INF)
-		center_x = min_x + (max_x - min_x) / 2
-	if track_y:
-		var min_y: float = targets.reduce(func(y, target): 
-			return target.global_position.y if target.global_position.y < y else y,
-		INF)
-		var max_y: float = targets.reduce(func(y, target):
-			return target.global_position.y if target.global_position.y > y else y,
-		-INF)
-		center_y = min_y + (max_y - min_y) / 2
+	var target_ranges: TargetRanges = get_target_ranges()
+	var center_x: float = target_ranges.min_x + (target_ranges.max_x - target_ranges.min_x) / 2
+	var center_y: float = target_ranges.min_y + (target_ranges.max_y - target_ranges.min_y) / 2
 	return Vector2(center_x, center_y)
+	
+## Calculate the zoom factor that the camera should have in order to fit all targets in frame
+func get_target_zoom() -> float:
+	if len(targets) <= 1:
+		return BASE_ZOOM
+	var target_ranges: TargetRanges = get_target_ranges()
+	var x_range: float = target_ranges.max_x - target_ranges.min_x
+	var y_range: float = target_ranges.max_y - target_ranges.min_y
+	var zoom_factor: float = min((root_window.size.x / x_range) * 0.9, (root_window.size.x / y_range) * 0.9, BASE_ZOOM)
+	return zoom_factor
+
+## Calculate the minimum and maximum values of the x- and y-axes and return them as an object
+func get_target_ranges() -> TargetRanges:
+	var target_ranges := TargetRanges.new()
+	target_ranges.min_x = targets.reduce(func(x, target):
+		return target.global_position.x if target.global_position.x < x else x,
+	INF)
+	target_ranges.max_x = targets.reduce(func(x, target):
+		return target.global_position.x if target.global_position.x > x else x,
+	-INF)
+	target_ranges.min_y = targets.reduce(func(y, target): 
+		return target.global_position.y if target.global_position.y < y else y,
+	INF)
+	target_ranges.max_y = targets.reduce(func(y, target):
+		return target.global_position.y if target.global_position.y > y else y,
+	-INF)
+	return target_ranges
