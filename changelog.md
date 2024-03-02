@@ -1,5 +1,17 @@
 # Star Gazer Change log
 
+## [0.0.4] - 2024-03-01
+
+### Added
+
+- Fast travel
+- Additional actor behaviors
+- World map generator
+
+### Changed
+
+- Expanded tilemap in first room
+
 ## [0.0.3] - 2024-27-02
 
 ### Added
