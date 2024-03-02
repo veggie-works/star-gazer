@@ -8,6 +8,14 @@ func _ready() -> void:
 	AudioManager.play_music(music_track)
 	UIManager.open_ui(HUD)
 	GameCamera.enabled = true
+	
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("inventory"):
+		var map_ui: MapUI = UIManager.get_ui(MapUI)
+		if map_ui == null or not map_ui.visible:
+			UIManager.open_ui(MapUI)
+		else:
+			UIManager.close_ui(MapUI)
 
 ## Load the save point in this scene
 func load_save_point(save_point_data: SavePointData) -> void:

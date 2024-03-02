@@ -47,6 +47,7 @@ shape = SubResource("RectangleShape2D_6k56w")
 script = ExtResource("3_cgdik")
 
 [node name="state_debug_label" parent="." instance=ExtResource("5_iat4a")]
+visible = false
 offset_top = -64.0
 offset_bottom = -38.0
 label_settings = SubResource("LabelSettings_ydra3")

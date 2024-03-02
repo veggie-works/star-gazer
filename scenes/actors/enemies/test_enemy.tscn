@@ -70,6 +70,7 @@ unique_name_in_owner = true
 sight_length = 1000.0
 
 [node name="state_debug_label" parent="." index="9"]
+visible = true
 offset_left = -132.0
 offset_top = -132.0
 offset_right = 0.0
