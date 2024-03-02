@@ -1,0 +1,59 @@
+[gd_scene load_steps=3 format=3 uid="uid://df8vtivmt0f63"]
+
+[ext_resource type="Script" path="res://scripts/ui/fast_travel_ui.gd" id="1_5sdva"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ge50m"]
+font_size = 48
+
+[node name="fast_travel_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_5sdva")
+
+[node name="panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="panel"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 38.0
+grow_horizontal = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="fast_travel_locations" type="VBoxContainer" parent="panel/margin_container"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="header_container" type="HBoxContainer" parent="panel/margin_container/fast_travel_locations"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="label" type="Label" parent="panel/margin_container/fast_travel_locations/header_container"]
+layout_mode = 2
+text = "Fast Travel Locations"
+label_settings = SubResource("LabelSettings_ge50m")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="spacer" type="Control" parent="panel/margin_container/fast_travel_locations/header_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="close_button" type="Button" parent="panel/margin_container/fast_travel_locations/header_container"]
+layout_mode = 2
+text = "X"
+
+[connection signal="pressed" from="panel/margin_container/fast_travel_locations/header_container/close_button" to="." method="_on_close_button_pressed"]

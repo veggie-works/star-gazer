@@ -11,10 +11,14 @@ config_version=5
 [application]
 
 config/name="Star Gazer"
-run/main_scene="res://scenes/main.tscn"
+run/main_scene="res://scenes/levels/main_menu/main_menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 boot_splash/bg_color=Color(0.141176, 0.141176, 0.141176, 1)
 config/icon="res://icon.svg"
+
+[audio]
+
+buses/default_bus_layout="res://resources/bus_layouts/default_bus_layout.tres"
 
 [autoload]
 
@@ -41,6 +45,10 @@ project/assembly_name="Star Gazer"
 [editor_plugins]
 
 enabled=PackedStringArray()
+
+[gui]
+
+theme/custom="res://resources/themes/default_theme.tres"
 
 [input]
 
@@ -87,6 +95,8 @@ dodge={
 
 [layer_names]
 
+2d_render/layer_1="world"
+2d_render/layer_2="ui"
 2d_physics/layer_1="player"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="interactive"
@@ -94,7 +104,10 @@ dodge={
 2d_physics/layer_5="enemy"
 2d_physics/layer_6="player attack"
 2d_physics/layer_7="enemy attack"
+2d_physics/layer_8="platform"
+2d_physics/layer_32="camera target body"
 
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+renderer/rendering_method="gl_compatibility"

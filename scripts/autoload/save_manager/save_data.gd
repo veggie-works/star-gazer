@@ -1,8 +1,8 @@
 ## Contains data about a particular save slot
 class_name SaveData extends Resource
 
-## The name of the scene that the player last saved at
-@export_file("*.tscn") var save_scene: String
+## The save point that the player last saved at
+@export var last_save_point: SavePointData
 
-## The player's position during the last save
-@export var save_position: Vector2
+## A list of all save points that have been visited
+@export var visited_save_points: Array[SavePointData]

@@ -83,12 +83,12 @@ func play_clip(clip: AudioStream, pitch_min: float = 1, pitch_max: float = 1) ->
 func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false) -> void:
 	# Immediately play music if nothing is currently playing (or if immediate specified)
 	current_track = track
-	if current_music_player.stream == null or immediate:
+	if not current_music_player.stream or immediate:
 		current_music_player.set_stream(track.music_clip)
 		current_music_player.play()
 		return
 	# Don't fade in and out of the same music track
-	elif current_music_player.stream != null and track.music_clip.resource_path == current_music_player.stream.resource_path:
+	elif current_music_player.stream and track.music_clip.resource_path == current_music_player.stream.resource_path:
 		return
 	upcoming_music_player.set_stream(track.music_clip)
 	if volume_tween and volume_tween.is_running():
@@ -96,8 +96,14 @@ func play_music(track: MusicTrack, fade_time: float = 2, immediate: bool = false
 	volume_tween = create_tween()
 	volume_tween.finished.connect(on_volume_tween_finished)
 	upcoming_music_player.play(current_music_player.get_playback_position())
-	volume_tween.tween_property(current_music_player, "volume_db", AUDIO_OFF_DB, fade_time).from(music_volume).set_trans(Tween.TRANS_LINEAR)
-	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time).from(AUDIO_OFF_DB).set_trans(Tween.TRANS_LINEAR)
+	volume_tween.tween_property(current_music_player, "volume_db", AUDIO_OFF_DB, fade_time) \
+		.from(music_volume) \
+		.set_trans(Tween.TRANS_EXPO) \
+		.set_ease(Tween.EASE_IN)
+	volume_tween.parallel().tween_property(upcoming_music_player, "volume_db", music_volume, fade_time) \
+		.from(AUDIO_OFF_DB) \
+		.set_trans(Tween.TRANS_EXPO) \
+		.set_ease(Tween.EASE_OUT)
 
 ## Stop the currently playing music
 func stop_music() -> void:

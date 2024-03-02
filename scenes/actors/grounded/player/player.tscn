@@ -1,4 +1,4 @@
-[gd_scene load_steps=58 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=59 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
@@ -55,70 +55,6 @@ shader_parameter/replace_color = Color(1, 1, 1, 1)
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
-[sub_resource type="Animation" id="Animation_fofbs"]
-resource_name = "idle"
-length = 0.9333
-loop_mode = 1
-step = 0.0001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8169),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("4_nxbpc"), ExtResource("5_xnqlw"), ExtResource("6_15f6q"), ExtResource("7_jksri"), ExtResource("8_mvaog"), ExtResource("9_vwxn8"), ExtResource("10_2atxa"), ExtResource("11_eujky")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:material:shader_parameter/replace_color")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8162, 0.9333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(0, 1, 0, 1), Color(0.976471, 1, 0, 1), Color(1, 0.419608, 0, 1), Color(1, 0, 0.105882, 1), Color(1, 0, 0.956863, 1), Color(0.494118, 0, 1, 1), Color(0.0117647, 0, 1, 1), Color(0, 1, 1, 1), Color(0, 1, 0, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_umav7"]
-resource_name = "run"
-length = 0.9333
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0933, 0.1866, 0.2799, 0.3732, 0.4665, 0.5598, 0.6531, 0.7464, 0.8397),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [ExtResource("12_lpugu"), ExtResource("13_huosg"), ExtResource("14_urf0e"), ExtResource("15_4a5ls"), ExtResource("16_wqw43"), ExtResource("17_s2qvw"), ExtResource("18_qwlp7"), ExtResource("19_355kb"), ExtResource("20_2d7nm"), ExtResource("21_l5mf2")]
-}
-
-[sub_resource type="Animation" id="Animation_0d5oq"]
-resource_name = "jump"
-length = 0.3111
-step = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("sprite:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1037, 0.2074),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [ExtResource("22_kqefx"), ExtResource("23_3c7h4"), ExtResource("23_mrsry")]
-}
-
 [sub_resource type="Animation" id="Animation_04ier"]
 resource_name = "fall"
 length = 0.4148
@@ -154,6 +90,88 @@ tracks/0/keys = {
 "values": [ExtResource("29_r11vq"), ExtResource("30_jp3mp")]
 }
 
+[sub_resource type="Animation" id="Animation_fofbs"]
+resource_name = "idle"
+length = 0.9333
+loop_mode = 1
+step = 0.0001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8169),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("4_nxbpc"), ExtResource("5_xnqlw"), ExtResource("6_15f6q"), ExtResource("7_jksri"), ExtResource("8_mvaog"), ExtResource("9_vwxn8"), ExtResource("10_2atxa"), ExtResource("11_eujky")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:material:shader_parameter/replace_color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1167, 0.2334, 0.3501, 0.4668, 0.5835, 0.7002, 0.8162, 0.9333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 1, 0, 1), Color(0.976471, 1, 0, 1), Color(1, 0.419608, 0, 1), Color(1, 0, 0.105882, 1), Color(1, 0, 0.956863, 1), Color(0.494118, 0, 1, 1), Color(0.0117647, 0, 1, 1), Color(0, 1, 1, 1), Color(0, 1, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0d5oq"]
+resource_name = "jump"
+length = 0.3111
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1037, 0.2074),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("22_kqefx"), ExtResource("23_3c7h4"), ExtResource("23_mrsry")]
+}
+
+[sub_resource type="Animation" id="Animation_umav7"]
+resource_name = "run"
+length = 0.9333
+loop_mode = 1
+step = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sprite:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0933, 0.1866, 0.2799, 0.3732, 0.4665, 0.5598, 0.6531, 0.7464, 0.8397),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("12_lpugu"), ExtResource("13_huosg"), ExtResource("14_urf0e"), ExtResource("15_4a5ls"), ExtResource("16_wqw43"), ExtResource("17_s2qvw"), ExtResource("18_qwlp7"), ExtResource("19_355kb"), ExtResource("20_2d7nm"), ExtResource("21_l5mf2")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("fsm/player_run_state")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3732, 0.8397),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"play_footstep"
+}, {
+"args": [],
+"method": &"play_footstep"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xmrs4"]
 _data = {
 "fall": SubResource("Animation_04ier"),
@@ -167,16 +185,18 @@ _data = {
 size = Vector2(16, 37)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bbvff"]
-size = Vector2(12, 37)
+size = Vector2(0, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cl6t6"]
-size = Vector2(20, 37)
+size = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ttbdg"]
+size = Vector2(0, 0)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
 z_index = 1
 material = SubResource("ShaderMaterial_weryg")
 collision_layer = 1
-collision_mask = 66
 script = ExtResource("2_d5awl")
 gravity_scale = 1.0
 falling_gravity_scale = 2.0
@@ -190,7 +210,7 @@ libraries = {
 [node name="sprite" parent="." index="1"]
 use_parent_material = true
 position = Vector2(0, -7)
-texture = ExtResource("4_nxbpc")
+texture = ExtResource("25_lgruc")
 
 [node name="collision" parent="." index="2"]
 position = Vector2(-1, 0)
@@ -253,19 +273,16 @@ script = ExtResource("12_2ynoo")
 [node name="player_run_state" type="Node" parent="fsm" index="1"]
 script = ExtResource("13_dg6tn")
 footstep_clip_table = ExtResource("42_cp2bi")
-footstep_interval = 0.467
-run_speed = 100.0
-
-[node name="footstep_timer" type="Timer" parent="fsm/player_run_state" index="0"]
+run_speed = 150.0
 
 [node name="player_jump_state" type="Node" parent="fsm" index="2"]
 script = ExtResource("14_ygy2g")
 jump_height = 75.0
-midair_move_speed = 50.0
+midair_move_speed = 100.0
 
 [node name="player_fall_state" type="Node" parent="fsm" index="3"]
 script = ExtResource("15_7k3jt")
-midair_move_speed = 50.0
+midair_move_speed = 100.0
 
 [node name="player_hurt_state" type="Node" parent="fsm" index="4"]
 script = ExtResource("18_2rtci")
@@ -286,7 +303,7 @@ one_shot = true
 [node name="triggers" type="Node2D" parent="." index="7"]
 
 [node name="door_trigger" type="Area2D" parent="triggers" index="0"]
-collision_mask = 0
+collision_mask = 8
 
 [node name="collision" type="CollisionShape2D" parent="triggers/door_trigger" index="0"]
 position = Vector2(-1, 0)
@@ -297,6 +314,12 @@ collision_mask = 4
 
 [node name="collision" type="CollisionShape2D" parent="triggers/interact_trigger" index="0"]
 position = Vector2(-1, 0)
-shape = SubResource("RectangleShape2D_cl6t6")
+shape = SubResource("RectangleShape2D_ttbdg")
+
+[node name="state_debug_label" parent="." index="9"]
+offset_left = -32.0
+offset_top = -44.0
+offset_right = 34.0
+offset_bottom = -31.0
 
 [editable path="behaviors/health_manager"]

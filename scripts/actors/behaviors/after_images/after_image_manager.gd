@@ -9,7 +9,7 @@ class_name AfterImageManager extends Timer
 @export var reference_sprite: Sprite2D
 
 ## The level that will contain the after images
-@onready var level: BaseLevel = SceneManager.screen.get_child(0)
+@onready var level: BaseLevel = get_tree().current_scene
 
 ## Create an after image of the actor
 func create_after_image() -> void:

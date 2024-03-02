@@ -1,5 +1,5 @@
 ## A transition from or into another scene
-class_name Door extends Node2D
+class_name Door extends Area2D
 
 ## The player prefab to spawn at the door when entering from a different scene
 @export var player_prefab: PackedScene
@@ -19,6 +19,16 @@ class_name Door extends Node2D
 ## The root of the level scene that contains this door
 @onready var level_root: Node = get_owner()
 
+## Data associated with this door
+var data := DoorData.new()
+
+func _ready() -> void:
+	data.door_name = name
+	data.door_scene = level_root.scene_file_path
+	data.door_position = global_position
+	data.target_door_name = target_name
+	data.target_door_scene = target_scene
+
 ## Walk the player from this door into the scene
 func enter_from() -> void:
 	var player: Player = player_prefab.instantiate()
@@ -27,7 +37,7 @@ func enter_from() -> void:
 	level_root.add_child(player)
 	player.global_position = global_position
 	GameCamera.targets.clear()
-	GameCamera.targets.append(player)
+	GameCamera.add_target(player)
 	if enter_direction == "left" or enter_direction == "right":
 		var target_sign: float
 		match enter_direction:
@@ -44,11 +54,12 @@ func enter_from() -> void:
 	player.in_cutscene = false
 
 func _on_area_entered(area: Area2D) -> void:
-	var body: Node = area.get_owner()
-	if body is Player:
-		body.in_cutscene = true
-		if enter_direction == "left" or enter_direction == "right":
-			var target_sign: float = sign(global_position.x - body.global_position.x)
-			var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
-			body.move_to(target_x)
-		SceneManager.change_scene(target_scene, target_name)
+	if area.get_collision_mask_value(3):
+		var body: Node = area.get_owner()
+		if body is Player:
+			body.in_cutscene = true
+			if enter_direction == "left" or enter_direction == "right":
+				var target_sign: float = sign(global_position.x - body.global_position.x)
+				var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
+				body.move_to(target_x)
+			SceneManager.change_scene_between_doors(target_scene, target_name)

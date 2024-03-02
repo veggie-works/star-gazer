@@ -7,5 +7,20 @@ editor_description = "Base level for all levels."
 script = ExtResource("1_4jkmw")
 
 [node name="enemies" type="Node2D" parent="."]
+editor_description = "Container for all enemy instances."
 
-[node name="focus_zones" type="Node2D" parent="."]
+[node name="camera_focus_zones" type="Node2D" parent="."]
+editor_description = "Container for all areas that the camera should lock into."
+
+[node name="doors" type="Node2D" parent="."]
+editor_description = "Container for all doorways to other level scenes."
+
+[node name="save_points" type="Node2D" parent="."]
+editor_description = "Container for all locations where the game may save."
+
+[node name="npcs" type="Node2D" parent="."]
+editor_description = "Container of all non-player characters that can be interacted with."
+
+[node name="tile_map" type="TileMap" parent="."]
+editor_description = "The tile map of the world."
+format = 2

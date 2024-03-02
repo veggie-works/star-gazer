@@ -2,15 +2,16 @@
 class_name PlayerIdleState extends PlayerState
 
 func enter() -> void:
-	if body.disable_input:
+	if abs(body.velocity.x) > 0 and body.disable_input:
 		await body.arrived
 		
 	animator.play("idle")
 	body.velocity.x = 0
 
 func update(delta: float) -> void:
-	if body.velocity.y > 0:
+	if not body.is_grounded():
 		fsm.transition_to(PlayerFallState)
+		return
 		
 	if body.disable_input:
 		return

@@ -3,9 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="1_8lhm6"]
 [ext_resource type="Script" path="res://scripts/gameplay/save/save_point.gd" id="1_gv0sa"]
 [ext_resource type="PackedScene" uid="uid://bmqoaf40cddce" path="res://scenes/actors/grounded/player/player.tscn" id="2_5qw78"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_cosb7"]
-size = Vector2(64, 10)
+[ext_resource type="PackedScene" uid="uid://tmwqa2gkqll6" path="res://scenes/gameplay/interactive/interact_area.tscn" id="4_28bx0"]
 
 [node name="save_point" type="Node2D" groups=["save_points"]]
 scale = Vector2(0.25, 0.25)
@@ -17,12 +15,7 @@ position = Vector2(0, -16)
 scale = Vector2(0.5, 1.5)
 texture = ExtResource("1_8lhm6")
 
-[node name="save_area" type="Area2D" parent="."]
-position = Vector2(0, 48)
-collision_layer = 4
+[node name="interact_area" parent="." instance=ExtResource("4_28bx0")]
+position = Vector2(0, 72)
 
-[node name="collision" type="CollisionShape2D" parent="save_area"]
-position = Vector2(0, 27)
-shape = SubResource("RectangleShape2D_cosb7")
-
-[connection signal="body_entered" from="save_area" to="." method="_on_save_area_body_entered"]
+[connection signal="interact" from="interact_area" to="." method="_on_interact_area_interact"]

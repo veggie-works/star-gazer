@@ -7,6 +7,7 @@ class_name GroundedActor extends Actor
 @export var falling_gravity_scale: float = 8
 ## The speed at which this actor runs, in pixels per second
 @export var run_speed: float = 600
+@export var terminal_velocity: float = 600
 
 ## Parent node of raycasts used to detect the ground
 @onready var ground_raycasts: Node2D = $ground_raycasts
@@ -37,6 +38,7 @@ func _process(delta: float) -> void:
 func apply_gravity(delta: float) -> void:
 	if not is_grounded():
 		velocity.y += Globals.gravity * (falling_gravity_scale if velocity.y >= 0 else gravity_scale) * delta
+		velocity.y = min(velocity.y, terminal_velocity)
 
 ## Check if the actor is grounded
 func is_grounded() -> bool:

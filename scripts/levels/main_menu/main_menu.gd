@@ -20,7 +20,7 @@ func _on_start_button_pressed() -> void:
 	if OS.is_debug_build():
 		UIManager.create_ui(DebugPanel)
 	SaveManager.load_game(0)
-	SceneManager.change_scene(SaveManager.save_data.save_scene)
+	SceneManager.change_scene_load_save_point(SaveManager.save_data.last_save_point)
 
 func _on_settings_button_pressed() -> void:
 	margin_container.hide()

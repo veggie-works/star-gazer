@@ -6,7 +6,6 @@ class_name PlayerFSM extends StateMachine
 ## The player's local weapon manager
 @onready var weapon_manager: WeaponManager = $"../behaviors/weapon_manager"
 
-
 func _ready() -> void:
 	combo_manager.combo_started.connect(on_combo_start)
 	combo_manager.maxed_combo.connect(on_maxed_combo)
