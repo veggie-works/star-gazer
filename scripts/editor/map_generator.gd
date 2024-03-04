@@ -4,6 +4,9 @@ extends Node
 ## The max length and width that a texture may be
 const MAX_TEXTURE_SIZE: int = 16384
 
+## A list of all level scenes
+@export var level_scenes: Array[PackedScene] = []
+
 ## The frame that will enclose a captured level
 @onready var frame: SubViewport = $frame
 ## The camera that will take a picture of the captured level
@@ -15,12 +18,12 @@ var map_resource: GameMap
 func _ready() -> void:
 	generate_map()
 
-## Generate the map image
+## Generate the level images and map resource
 func generate_map() -> void:
 	GameCamera.enabled = false
 	camera.make_current()
 	map_resource = GameMap.new()
-	for scene: PackedScene in SceneManager.level_scenes.filter(func(scene): return scene.get_state().get_node_name(0) != "main_menu"):
+	for scene: PackedScene in level_scenes:
 		var level_data := MapLevelData.new()
 		var level_root: BaseLevel = scene.instantiate()
 		level_data.level_name = level_root.name
@@ -29,20 +32,20 @@ func generate_map() -> void:
 		var tile_map_unit_rect: Rect2i = tile_map.get_used_rect()
 		var tile_size: int = tile_map.tile_set.tile_size.x
 		var tile_map_rect := Rect2(tile_map_unit_rect.position * tile_size, tile_map_unit_rect.size * tile_size)
-		print("Tile map rect: ", tile_map_rect)
 		frame.size = tile_map_rect.size
 		camera.global_position = tile_map_rect.get_center()
 		await RenderingServer.frame_post_draw
-		var image_file_path: String = "res://resources/map/%s.png" % level_root.name
+		var image_file_path: String = "res://assets/map/%s.png" % level_root.name
 		var frame_image: Image = frame.get_texture().get_image()
 		if frame_image.save_png(image_file_path) != OK:
 			printerr("Failed to save frame image to ", image_file_path)
 			continue
+		while not ResourceLoader.exists(image_file_path):
+			await get_tree().process_frame
 		level_data.image_file_path = image_file_path
 		for door: Door in get_tree().get_nodes_in_group("doors"):
 			var found_level_data: Array[MapLevelData] = map_resource.levels.filter(func(level_data: MapLevelData):
 				for door_data: DoorData in level_data.doors:
-					print("Door: %s, %s,\tData: %s, %s" % [door_data.target_door_name, door_data.target_door_scene, door.name, level_root.scene_file_path])
 					if door_data.target_door_name == door.name and door_data.target_door_scene == level_root.scene_file_path:
 						return true
 				return false)
@@ -60,20 +63,19 @@ func generate_map() -> void:
 			else:
 				# Scene will be at the center of the map
 				level_data.rect_in_map = tile_map_rect
-			print("Level rect: ", level_data.rect_in_map)
 			level_data.doors.append(door.data)
 		map_resource.levels.append(level_data)
 		level_root.queue_free()
 	var offset_x: int = map_resource.levels.reduce(func(current: int, level_data: MapLevelData):
 		if not ResourceLoader.exists(level_data.image_file_path):
-			print("File path doesn't exist: ", level_data.image_file_path)
+			printerr("File path doesn't exist: ", level_data.image_file_path)
 			return current
 		var level_texture: Texture2D = load(level_data.image_file_path)
 		return min(level_data.rect_in_map.position.x, current),
 	MAX_TEXTURE_SIZE)
 	var offset_y: int = map_resource.levels.reduce(func(current: int, level_data: MapLevelData):
 		if not ResourceLoader.exists(level_data.image_file_path):
-			print("File path doesn't exist: ", level_data.image_file_path)
+			printerr("File path doesn't exist: ", level_data.image_file_path)
 			return current
 		var level_texture: Texture2D = load(level_data.image_file_path)
 		return min(level_data.rect_in_map.position.y, current),
@@ -82,28 +84,26 @@ func generate_map() -> void:
 		level_data.rect_in_map.position -= Vector2(offset_x, offset_y)
 	ResourceSaver.save(map_resource, "res://resources/map/game_map.tres")
 	if OS.is_debug_build():
-		await get_tree().create_timer(0.25).timeout
 		generate_whole_map_image()
 
 ## Generate an image of the whole map with all levels placed
 func generate_whole_map_image() -> void:
 	var max_x: int = map_resource.levels.reduce(func(current: int, level_data: MapLevelData):
 		if not ResourceLoader.exists(level_data.image_file_path):
-			print("File path doesn't exist: ", level_data.image_file_path)
+			printerr("File path doesn't exist: ", level_data.image_file_path)
 			return current
 		var level_texture: Texture2D = load(level_data.image_file_path)
 		return max(level_data.rect_in_map.end.x, current),
 	-MAX_TEXTURE_SIZE)
 	var max_y: int = map_resource.levels.reduce(func(current: int, level_data: MapLevelData):
 		if not ResourceLoader.exists(level_data.image_file_path):
-			print("File path doesn't exist: ", level_data.image_file_path)
+			printerr("File path doesn't exist: ", level_data.image_file_path)
 			return current
 		var level_texture: Texture2D = load(level_data.image_file_path)
 		return max(level_data.rect_in_map.end.y, current),
 	-MAX_TEXTURE_SIZE)
 	var min_x: float = 0
 	var min_y: float = 0
-	print("Min: (%d, %d),\tMax: (%d, %d)" % [min_x, min_y, max_x, max_y])
 	var x_range: int = max_x - min_x
 	var y_range: int = max_y - min_y
 	var scale = min(16384 / x_range, 16384 / y_range, 1)

@@ -8,7 +8,7 @@ func enter() -> void:
 	animator.play("hurt")
 
 func update(delta: float) -> void:
-	if Input.is_action_just_pressed("block"):
+	if Input.is_action_just_pressed("dodge"):
 		fsm.transition_to(PlayerRecoverState)
 
 ## Callback for when the player lands during the hurt state

@@ -1,13 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://cchngcoruwpc4"]
+[gd_scene load_steps=5 format=3 uid="uid://cchngcoruwpc4"]
 
 [ext_resource type="Script" path="res://scripts/editor/map_generator.gd" id="1_1r1mo"]
+[ext_resource type="PackedScene" uid="uid://byf21g036g36h" path="res://scenes/levels/level0.tscn" id="2_w3xka"]
+[ext_resource type="PackedScene" uid="uid://bavwuvs5ypi0c" path="res://scenes/levels/level1.tscn" id="3_fx4s8"]
+[ext_resource type="PackedScene" uid="uid://co2q0qvqhoxrv" path="res://scenes/levels/level2.tscn" id="4_xsj72"]
 
 [node name="map_generator" type="Node"]
 script = ExtResource("1_1r1mo")
+level_scenes = Array[PackedScene]([ExtResource("2_w3xka"), ExtResource("3_fx4s8"), ExtResource("4_xsj72")])
 
 [node name="frame" type="SubViewport" parent="."]
 disable_3d = true
-canvas_cull_mask = 4294967293
+canvas_cull_mask = 4294967289
 render_target_update_mode = 4
 
 [node name="camera" type="Camera2D" parent="frame"]

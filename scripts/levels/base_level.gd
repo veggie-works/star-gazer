@@ -5,7 +5,8 @@ class_name BaseLevel extends Node
 @export var music_track: MusicTrack
 
 func _ready() -> void:
-	AudioManager.play_music(music_track)
+	if music_track:
+		AudioManager.play_music(music_track)
 	UIManager.open_ui(HUD)
 	GameCamera.enabled = true
 	

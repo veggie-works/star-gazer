@@ -11,13 +11,14 @@ class_name Door extends Area2D
 @export var target_name: String
 
 ## The direction the player should enter from this door
-@export_enum("left", "right", "top", "down") var enter_direction = "left"
+@export_enum("left", "right", "up", "down") var enter_direction = "left"
 
 ## The door's collision shape
 @onready var collision: CollisionShape2D = $collision
-
 ## The root of the level scene that contains this door
 @onready var level_root: Node = get_owner()
+## The target for the player to reach upon entering from this door
+@onready var target: Marker2D = $target
 
 ## Data associated with this door
 var data := DoorData.new()
@@ -45,10 +46,13 @@ func enter_from() -> void:
 				target_sign = -1
 			"right":
 				target_sign = 1
-		var target_x = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + player.get_node("collision").shape.get_rect().size.x / 2 + 4)
+		var target_x = target.global_position.x
 		player.move_to(target_x)
 		await player.arrived
-	else:
+	elif enter_direction == "up" or enter_direction == "down":
+		if enter_direction == "up":
+			var target_pos: Vector2 = target.global_position
+			player.jump_to(target_pos, 200, 1)
 		await player.landed
 	collision.disabled = false
 	player.in_cutscene = false

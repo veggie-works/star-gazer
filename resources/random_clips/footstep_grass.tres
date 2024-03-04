@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="RandomClip" load_steps=5 format=3 uid="uid://wik7l4lbr1dv"]
+[gd_resource type="Resource" script_class="RandomAudioClipTable" load_steps=5 format=3 uid="uid://wik7l4lbr1dv"]
 
 [ext_resource type="AudioStream" uid="uid://btlohagkvamyl" path="res://assets/sfx/actors/player/footstep_grass_000.ogg" id="1_7lxfi"]
 [ext_resource type="Script" path="res://scripts/autoload/audio_manager/random_audio_clip_table.gd" id="1_tofe8"]

@@ -1,9 +1,6 @@
 ## Manages loading and unloading of scenes
 extends Node
 
-## A list of all level scenes
-@export var level_scenes: Array[PackedScene] = []
-
 ## Emitted whenever a scene changes	
 signal scene_changed(old_scene: String, new_scene: String)
 

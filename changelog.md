@@ -1,5 +1,11 @@
 # Star Gazer Change log
 
+## [0.0.5] - 2024-03-
+
+### Added
+
+- Vertical scene transitions
+
 ## [0.0.4] - 2024-03-01
 
 ### Added

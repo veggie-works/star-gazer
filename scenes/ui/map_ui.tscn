@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://scripts/ui/map_ui/map_ui.gd" id="1_rxoil"]
 [ext_resource type="PackedScene" uid="uid://ctfvbdbss0ly" path="res://scripts/ui/map_ui/map_level.tscn" id="2_0280h"]
 [ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="2_doumn"]
-[ext_resource type="Resource" uid="uid://drkc4mjabud0f" path="res://resources/map/game_map.tres" id="2_iyxbn"]
+[ext_resource type="Resource" uid="uid://cp580gs68vs02" path="res://resources/map/game_map.tres" id="2_iyxbn"]
 
 [node name="map_ui" type="Control"]
 layout_mode = 3

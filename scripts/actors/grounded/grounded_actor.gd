@@ -63,14 +63,8 @@ func jump(height: float) -> void:
 func jump_to(target_position: Vector2, apex_height: float, jump_time: float) -> void:
 	var diff = target_position - global_position
 	velocity.x = diff.x / jump_time
-	var rising_gravity: float = Globals.gravity * gravity_scale
-	var falling_gravity: float = Globals.gravity * falling_gravity_scale
-	var final_velocity_y: float = sqrt(abs(2 * falling_gravity * (diff.y - apex_height)))
-	print("Final Y: ", final_velocity_y)
-	var denom_term1: float = final_velocity_y / rising_gravity
-	var denom_term2: float = (2 * (diff.y - apex_height)) / final_velocity_y
-	velocity.y = sqrt(2 * rising_gravity * apex_height)
-	print("Velocity: ", velocity)
+	velocity.y = -Globals.gravity * gravity_scale * jump_time
+	print("Vel: ", velocity)
 	await landed
 	velocity.x = 0
 

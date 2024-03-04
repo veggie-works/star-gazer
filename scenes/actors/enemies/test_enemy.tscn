@@ -71,6 +71,7 @@ sight_length = 1000.0
 
 [node name="state_debug_label" parent="." index="9"]
 visible = true
+visibility_layer = 2
 offset_left = -132.0
 offset_top = -132.0
 offset_right = 0.0
