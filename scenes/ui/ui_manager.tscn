@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bacb1bjpvjj2r" path="res://scenes/ui/map_ui.tscn" id="8_insq2"]
 
 [node name="ui_manager" type="Control"]
+process_mode = 3
 editor_description = "UI manager singleton that manages all user interfaces."
 visibility_layer = 2
 layout_mode = 3

@@ -24,6 +24,6 @@ func update(delta: float) -> void:
 		return
 		
 	body.velocity.x = 0
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction = Input.get_axis("left", "right")
 	body.velocity.x += direction * midair_move_speed
 

@@ -37,7 +37,7 @@ func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> Packed
 	return null
 
 ## Get the closest object
-func get_closest(target: Node2D, objects: Array[Node2D]) -> Node2D:
+func get_closest(target: Node2D, objects: Array):
 	var min_distance: float = INF
 	var closest: Node2D = null
 	for object in objects:

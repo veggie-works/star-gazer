@@ -22,7 +22,7 @@ func update(delta: float) -> void:
 	if body.in_cutscene:
 		return
 		
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction = Input.get_axis("left", "right")
 	body.velocity.x += direction * midair_move_speed
 	if not Input.is_action_pressed("jump"):
 		body.velocity.y = max(body.velocity.y / 2, body.velocity.y)
