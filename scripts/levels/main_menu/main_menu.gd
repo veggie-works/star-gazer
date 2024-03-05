@@ -3,6 +3,8 @@ class_name MainMenu extends BaseLevel
 
 ## Parent container of menu buttons list
 @onready var margin_container: MarginContainer = $margin_container
+## The button to exit the game
+@onready var exit_button: Button = margin_container.get_node("menu_buttons/exit_button")
 ## Warning for whether the player really wants to exit the game
 @onready var exit_warning: VBoxContainer = $exit_warning
 ## UI for changing game settings
@@ -13,6 +15,8 @@ func _ready() -> void:
 	GameCamera.enabled = false
 	if OS.is_debug_build():
 		UIManager.delete_ui(DebugPanel)
+	if OS.get_name() == "Web":
+		exit_button.hide()
 
 func _on_start_button_pressed() -> void:
 	
