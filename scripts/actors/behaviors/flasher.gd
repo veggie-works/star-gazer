@@ -24,6 +24,9 @@ var current_ramp_down_time: float
 ## Whether the object is flashing
 var is_flashing: bool
 
+func _ready() -> void:
+	owner_material.set_shader_parameter("flash_amount", 0)
+
 func _process(delta: float) -> void:
 	if current_ramp_up_time < ramp_up_time:
 		var flash_amount: float = Globals.map(current_ramp_up_time / ramp_up_time, 0.0, 1.0, 0.0, peak_flash_amount)

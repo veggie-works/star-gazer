@@ -18,7 +18,7 @@ func change_scene(scene_path: String) -> void:
 	await fader.faded_out
 
 ## Change to a new scene from one door to another
-func change_scene_between_doors(scene_path: String, door_name: String) -> void:
+func change_scene_between_doors(scene_path: String, door_name: String, enter_scale: float) -> void:
 	var fader: BaseUI = UIManager.open_ui(Fader)
 	var old_scene_path = get_tree().current_scene.scene_file_path
 	await fader.faded_in
@@ -29,7 +29,7 @@ func change_scene_between_doors(scene_path: String, door_name: String) -> void:
 	scene_changed.emit(old_scene_path, scene_path)
 	var doors = get_tree().get_nodes_in_group("doors").filter(func(door): return door.name == door_name)
 	if len(doors) > 0 and doors[0] is Door:
-		doors[0].enter_from()
+		doors[0].enter_from(enter_scale)
 	fader.close()
 	await fader.faded_out
 

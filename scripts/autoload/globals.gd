@@ -14,6 +14,7 @@ enum PhysicsLayers {
 	PLAYER_ATTACK,
 	ENEMY_ATTACK,
 	PLATFORM,
+	CAMERA_TARGET_BODY = 32,
 }
 
 ## Recursively load scenes and fetch the one whose script that matches the script parameter
@@ -36,14 +37,14 @@ func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> Packed
 	return null
 
 ## Get the closest object
-func get_closest(object: Node2D, targets: Array):
+func get_closest(target: Node2D, objects: Array[Node2D]) -> Node2D:
 	var min_distance: float = INF
 	var closest: Node2D = null
-	for target in targets:
-		var distance: float = (target.global_position - object.global_position).length()
+	for object in objects:
+		var distance: float = (object.global_position - target.global_position).length()
 		if distance <= min_distance:
 			min_distance = distance
-			closest = target
+			closest = object
 	return closest
 
 ## Map a range of inputs to another

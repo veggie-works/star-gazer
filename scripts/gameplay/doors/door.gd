@@ -31,7 +31,7 @@ func _ready() -> void:
 	data.target_door_scene = target_scene
 
 ## Walk the player from this door into the scene
-func enter_from() -> void:
+func enter_from(enter_scale: float) -> void:
 	var player: Player = player_prefab.instantiate()
 	player.global_position = global_position
 	collision.disabled = true
@@ -41,16 +41,17 @@ func enter_from() -> void:
 	match enter_direction:
 		"left", "right":
 			var target_x = target.global_position.x
-			print("RUN OUT DOOR")
 			player.run_to(target_x)
 			await player.arrived
 		"up":
+			player.transform.x.x *= enter_scale
 			while not player.is_grounded(): 
 				await get_tree().process_frame
 		# The enter direction for a door is the target door's direction, not its own, so a target 
 		# direction of "down" would mean the player enters from the bottom and must jump out
 		"down":
-			var target_pos: Vector2 = target.global_position
+			var target_diff_x: float = abs(target.global_position.x - global_position.x)
+			var target_pos := Vector2(global_position.x + target_diff_x * enter_scale, target.global_position.y)
 			player.jump_to(target_pos)
 			while not player.is_grounded(): 
 				await get_tree().process_frame
@@ -66,4 +67,4 @@ func _on_area_entered(area: Area2D) -> void:
 				var target_sign: float = sign(global_position.x - body.global_position.x)
 				var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
 				body.run_to(target_x)
-			SceneManager.change_scene_between_doors(target_scene, target_name)
+			SceneManager.change_scene_between_doors(target_scene, target_name, body.transform.x.x)
