@@ -9,7 +9,10 @@ func _ready() -> void:
 		AudioManager.play_music(music_track)
 	UIManager.open_ui(HUD)
 	GameCamera.enabled = true
-	
+
+func _exit_tree() -> void:
+	UIManager.close_ui(HUD)
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("inventory"):
 		var map_ui: MapUI = UIManager.get_ui(MapUI)

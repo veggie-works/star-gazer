@@ -47,6 +47,13 @@ func is_grounded() -> bool:
 			return true
 	return false
 
+## Whether the actor is fully grounded (all ground raycasts are colliding)
+func is_fully_grounded() -> bool:
+	for child in ground_raycasts.get_children():
+		if child is RayCast2D and not child.is_colliding():
+			return false
+	return true
+
 ## Check if the actor is colliding with a wall
 func is_colliding_with_wall() -> bool:
 	for child in wall_raycasts.get_children():

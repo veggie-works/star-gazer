@@ -44,6 +44,9 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	current_state.update(delta)
 
+func _physics_process(delta: float) -> void:
+	current_state.fixed_update(delta)
+
 ## Set the FSM's current state to a new state
 func set_state(new_state: State) -> void:
 	var old_state: State = current_state

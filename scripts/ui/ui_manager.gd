@@ -10,6 +10,7 @@ extends Control
 ## UIs that cannot be closed by pressing "ui_cancel"
 var non_closeable_uis: Array[GDScript] = [
 	DebugPanel,
+	Fader,
 	HUD,
 ]
 
@@ -43,6 +44,8 @@ func _input(event: InputEvent) -> void:
 					pause_menu.close()
 				else:
 					pause_menu.open()
+			else:
+				open_ui(PauseMenu)
 
 ## Close a UI
 func close_ui(ui: GDScript) -> void:

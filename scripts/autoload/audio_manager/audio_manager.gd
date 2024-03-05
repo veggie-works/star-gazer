@@ -1,3 +1,4 @@
+## Manages game audio and music
 extends Node
 
 const AUDIO_OFF_DB: float = -60
