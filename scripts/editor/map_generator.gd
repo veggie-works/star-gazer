@@ -16,6 +16,8 @@ const MAX_TEXTURE_SIZE: int = 16384
 var map_resource: GameMap
 
 func _ready() -> void:
+	# Load default game so an empty save isn't saved when exiting the gamez
+	SaveManager.load_game()
 	generate_map()
 
 ## Generate the level images and map resource

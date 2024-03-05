@@ -12,6 +12,7 @@ script = ExtResource("1_f28cp")
 player_prefab = ExtResource("2_3k2lv")
 
 [node name="collision" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_jk1gj")
 
 [node name="target" type="Marker2D" parent="."]

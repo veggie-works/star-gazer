@@ -4,6 +4,18 @@ extends Node
 ## The default gravity value, in pixels per second squared
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+## Enumeration of named 2D physics layers
+enum PhysicsLayers {
+	PLAYER = 1,
+	TERRAIN,
+	INTERACTIVE,
+	DOOR,
+	ENEMY,
+	PLAYER_ATTACK,
+	ENEMY_ATTACK,
+	PLATFORM,
+}
+
 ## Recursively load scenes and fetch the one whose script that matches the script parameter
 func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> PackedScene:
 	var dir := DirAccess.open(search_dir)

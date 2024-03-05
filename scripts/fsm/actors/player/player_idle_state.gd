@@ -3,8 +3,8 @@ class_name PlayerIdleState extends PlayerState
 
 func enter() -> void:
 	if abs(body.velocity.x) > 0 and body.disable_input:
-		await body.arrived
-		
+		while abs(body.velocity.x) > 0:
+			await get_tree().process_frame
 	animator.play("idle")
 	body.velocity.x = 0
 
@@ -14,6 +14,8 @@ func update(delta: float) -> void:
 		return
 		
 	if body.disable_input:
+		if abs(body.velocity.x) > 0:
+			fsm.transition_to(PlayerRunState)
 		return
 		
 	if abs(Input.get_axis("move_left", "move_right")) > 0:

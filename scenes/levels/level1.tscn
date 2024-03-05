@@ -10,7 +10,7 @@
 music_track = ExtResource("2_y012l")
 
 [node name="door_left" parent="doors" index="0" instance=ExtResource("5_blkad")]
-position = Vector2(16, 96)
+position = Vector2(16, 102)
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level0.tscn"
 target_name = "door_right"

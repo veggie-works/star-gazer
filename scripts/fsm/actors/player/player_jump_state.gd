@@ -9,17 +9,17 @@ class_name PlayerJumpState extends PlayerState
 func enter() -> void:
 	body.jump(jump_height)
 	animator.play("jump")
-	body.set_collision_mask_value(8, false)
+	body.set_collision_mask_value(Globals.PhysicsLayers.PLATFORM, false)
 
 func exit() -> void:
-	body.set_collision_mask_value(8, true)
+	body.set_collision_mask_value(Globals.PhysicsLayers.PLATFORM, true)
 
 func update(delta: float) -> void:
 	body.velocity.x = 0
 	if body.velocity.y > 0:
 		fsm.transition_to(PlayerFallState)
 		
-	if body.disable_input:
+	if body.in_cutscene:
 		return
 		
 	var direction = Input.get_axis("move_left", "move_right")

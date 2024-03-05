@@ -51,7 +51,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_weryg"]
 shader = ExtResource("11_0p73h")
 shader_parameter/key_color = Color(0.196078, 0.117647, 0.0588235, 1)
-shader_parameter/replace_color = Color(1, 1, 1, 1)
+shader_parameter/replace_color = Color(0, 1, 0, 1)
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_amount = 0.0
 
@@ -273,7 +273,6 @@ script = ExtResource("12_2ynoo")
 [node name="player_run_state" type="Node" parent="fsm" index="1"]
 script = ExtResource("13_dg6tn")
 footstep_clip_table = ExtResource("42_cp2bi")
-run_speed = 150.0
 
 [node name="player_jump_state" type="Node" parent="fsm" index="2"]
 script = ExtResource("14_ygy2g")

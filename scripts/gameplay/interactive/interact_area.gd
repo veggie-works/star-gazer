@@ -19,7 +19,7 @@ func _input(event: InputEvent) -> void:
 ## Interact with a player
 func interact_with(body: Player) -> void:
 	interact.emit()
-	body.run(0)
+	# Force transition to idle state
 	body.get_node("fsm").transition_to(PlayerIdleState)
 	body.in_cutscene = true
 

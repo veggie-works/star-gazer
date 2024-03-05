@@ -26,6 +26,8 @@ var in_coyote_time: bool:
 func _ready() -> void:
 	UIManager.get_ui(HUD).update_health()
 	for collider: CollisionShape2D in find_children("*", "CollisionShape2D"):
+		if collider == collision:
+			continue
 		if collider.shape is RectangleShape2D:
 			collider.global_position = collision.global_position
 			collider.shape.set_size(collision.shape.size)

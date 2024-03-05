@@ -14,7 +14,7 @@ const SETTINGS_PATH: String = "user://settings.tres"
 var settings := Settings.new()
 
 ## The currently loaded save game data
-var save_data := SaveData.new()
+var save_data: SaveData
 
 ## The ID of the selected profile
 var selected_profile_id: int = 0
@@ -37,14 +37,14 @@ func load_game_data() -> SaveData:
 	if not ResourceLoader.exists(save_path):
 		print("No save data found, creating new save")
 		return default_save
-	return ResourceLoader.load(save_path)
+	return load(save_path)
 	
 ## Load settings from disk
 func load_settings() -> Settings:
 	if not ResourceLoader.exists(SETTINGS_PATH):
 		print("No settings found, creating new settings")
 		return Settings.new()
-	return ResourceLoader.load(SETTINGS_PATH)
+	return load(SETTINGS_PATH)
 
 ## Save game data and settings to disk
 func save_game() -> void:
@@ -53,6 +53,8 @@ func save_game() -> void:
 
 ## Save game data to disk
 func save_game_data() -> void:
+	if save_data == null:
+		return
 	ResourceSaver.save(save_data, save_path)
 	
 ## Save settings to disk

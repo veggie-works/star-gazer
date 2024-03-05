@@ -24,8 +24,7 @@ func load_save(save_point_data: SavePointData) -> void:
 	var player: Player = player_prefab.instantiate()
 	level_root.add_child(player)
 	player.global_position = save_point_data.save_position
-	GameCamera.targets.clear()
-	GameCamera.add_target(player)
+	GameCamera.set_target(player)
 	
 ## Save the game
 func save() -> void:

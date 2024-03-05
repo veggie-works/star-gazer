@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://byf21g036g36h"]
+[gd_scene load_steps=9 format=3 uid="uid://byf21g036g36h"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_tftho"]
 [ext_resource type="Resource" uid="uid://b7xpyw37rvn2" path="res://resources/music_tracks/level0.tres" id="2_4r7nn"]
@@ -8,9 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://b3e1pdirdrmas" path="res://scenes/gameplay/environment/test/test_platform.tscn" id="7_3n237"]
 [ext_resource type="PackedScene" uid="uid://ca4hofmt5120j" path="res://scenes/actors/npcs/npc.tscn" id="7_qy8ep"]
 [ext_resource type="TileSet" uid="uid://dm4qttwlwkcjx" path="res://resources/tilesets/test_tile_set.tres" id="8_tx37h"]
-[ext_resource type="Script" path="res://scenes/levels/jump_trigger.gd" id="9_1mv6u"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcxvm"]
 
 [node name="level0" instance=ExtResource("1_tftho")]
 music_track = ExtResource("2_4r7nn")
@@ -21,7 +18,7 @@ position = Vector2(-220, 120)
 collision_mask = 2
 
 [node name="door_right" parent="doors" index="0" instance=ExtResource("3_c4d54")]
-position = Vector2(304, 96)
+position = Vector2(304, 102)
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level1.tscn"
 target_name = "door_left"
@@ -30,15 +27,18 @@ target_name = "door_left"
 position = Vector2(-41, 0)
 
 [node name="door_bottom" parent="doors" index="1" instance=ExtResource("3_c4d54")]
-position = Vector2(-480, 224)
+position = Vector2(-480, 192)
 rotation = 1.5708
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level2.tscn"
 target_name = "door_top"
 enter_direction = "down"
 
+[node name="collision" parent="doors/door_bottom" index="0"]
+position = Vector2(0, 0)
+
 [node name="target" parent="doors/door_bottom" index="1"]
-position = Vector2(-69.0002, -23.9999)
+position = Vector2(-34.0002, -31.4999)
 
 [node name="save_point" parent="save_points" index="0" instance=ExtResource("4_ky82b")]
 position = Vector2(59, 109)
@@ -57,22 +57,13 @@ layer_0/tile_data = PackedInt32Array(524288, 65536, 0, 524289, 65536, 0, 524290,
 position = Vector2(-77, 99)
 scale = Vector2(0.106995, 0.451069)
 
-[node name="test_platform" parent="." index="7" instance=ExtResource("7_3n237")]
+[node name="wall2" parent="." index="7" instance=ExtResource("7_3n237")]
+position = Vector2(-360, 99)
+scale = Vector2(0.106995, 0.451069)
+
+[node name="test_platform" parent="." index="8" instance=ExtResource("7_3n237")]
 position = Vector2(64, 56)
 scale = Vector2(1, -0.0399988)
-
-[node name="Area2D" type="Area2D" parent="." index="8"]
-position = Vector2(22, 119)
-collision_layer = 0
-script = ExtResource("9_1mv6u")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
-shape = SubResource("RectangleShape2D_pcxvm")
-
-[node name="jump_target" type="Marker2D" parent="." index="9"]
-position = Vector2(85, 36)
-
-[connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 
 [editable path="doors/door_right"]
 [editable path="doors/door_bottom"]

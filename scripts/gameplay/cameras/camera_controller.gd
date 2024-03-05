@@ -58,7 +58,12 @@ func add_target(target: Node2D, immediate: bool = true, recursive: bool = false)
 		global_position = get_target_pos()
 		zoom = Vector2.ONE * get_target_zoom()
 		tracking = false
-	
+
+## Set a single target for the camera
+func set_target(target: Node2D, recursive: bool = false) -> void:
+	targets.clear()
+	add_target(target, true, recursive)
+
 ## Shake the camera
 func shake(amount: float, duration: float) -> void:
 	if shaker:

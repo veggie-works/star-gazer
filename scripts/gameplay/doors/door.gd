@@ -33,37 +33,37 @@ func _ready() -> void:
 ## Walk the player from this door into the scene
 func enter_from() -> void:
 	var player: Player = player_prefab.instantiate()
-	player.in_cutscene = true
-	collision.disabled = true
-	level_root.add_child(player)
 	player.global_position = global_position
-	GameCamera.targets.clear()
-	GameCamera.add_target(player)
-	if enter_direction == "left" or enter_direction == "right":
-		var target_sign: float
-		match enter_direction:
-			"left":
-				target_sign = -1
-			"right":
-				target_sign = 1
-		var target_x = target.global_position.x
-		player.move_to(target_x)
-		await player.arrived
-	elif enter_direction == "up" or enter_direction == "down":
-		if enter_direction == "up":
+	collision.disabled = true
+	player.in_cutscene = true
+	level_root.add_child(player)
+	GameCamera.set_target(player)
+	match enter_direction:
+		"left", "right":
+			var target_x = target.global_position.x
+			print("RUN OUT DOOR")
+			player.run_to(target_x)
+			await player.arrived
+		"up":
+			while not player.is_grounded(): 
+				await get_tree().process_frame
+		# The enter direction for a door is the target door's direction, not its own, so a target 
+		# direction of "down" would mean the player enters from the bottom and must jump out
+		"down":
 			var target_pos: Vector2 = target.global_position
-			player.jump_to(target_pos, 200, 1)
-		await player.landed
+			player.jump_to(target_pos)
+			while not player.is_grounded(): 
+				await get_tree().process_frame
 	collision.disabled = false
-	player.in_cutscene = false
+	player.set_deferred("in_cutscene", false)
 
 func _on_area_entered(area: Area2D) -> void:
-	if area.get_collision_mask_value(3):
+	if area.get_collision_mask_value(Globals.PhysicsLayers.INTERACTIVE):
 		var body: Node = area.get_owner()
 		if body is Player:
 			body.in_cutscene = true
 			if enter_direction == "left" or enter_direction == "right":
 				var target_sign: float = sign(global_position.x - body.global_position.x)
 				var target_x: float = global_position.x + target_sign * (collision.shape.get_rect().size.x / 2 + body.get_node("collision").shape.get_rect().size.x / 2 + 64)
-				body.move_to(target_x)
+				body.run_to(target_x)
 			SceneManager.change_scene_between_doors(target_scene, target_name)
