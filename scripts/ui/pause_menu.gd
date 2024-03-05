@@ -25,26 +25,20 @@ var can_toggle: bool:
 func _ready() -> void:
 	var viewport_texture: ViewportTexture = get_viewport().get_texture()
 	background_blur.texture = ImageTexture.create_from_image(viewport_texture.get_image())
-	
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("ui_cancel"):
-		if not can_toggle:
-			return
-			
-		if visible:
-			settings_ui.hide()
-			margin_container.show()
-			close()
-		else:
-			open()
 			
 func open() -> void:
+	if not can_toggle:
+		return
 	super.open()
 	pause()
 	animator.play("open")
 	
 func close() -> void:
+	if not can_toggle:
+		return
 	animator.play("close")
+	settings_ui.hide()
+	_on_quit_warning_quit_canceled()
 
 ## Pause or unpause the game
 func pause(do_pause: bool = true) -> void:

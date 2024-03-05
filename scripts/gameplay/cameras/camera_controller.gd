@@ -15,8 +15,8 @@ class TargetRanges:
 ## The base zoom factor
 const BASE_ZOOM: float = 4
 
-## The speed at which the camera tracks its targets, in pixels per second
-@export var tracking_speed: float = 150
+## The speed at which the camera lerps to its targets
+@export var tracking_speed: float = 5
 ## A list of targets to track
 @export var targets: Array[Node2D] = []
 ## The maximum distance that the camera has to be from its target position before it stops tracking
@@ -58,7 +58,12 @@ func add_target(target: Node2D, immediate: bool = true, recursive: bool = false)
 		global_position = get_target_pos()
 		zoom = Vector2.ONE * get_target_zoom()
 		tracking = false
-	
+
+## Set a single target for the camera
+func set_target(target: Node2D, recursive: bool = false) -> void:
+	targets.clear()
+	add_target(target, true, recursive)
+
 ## Shake the camera
 func shake(amount: float, duration: float) -> void:
 	if shaker:
@@ -68,8 +73,7 @@ func shake(amount: float, duration: float) -> void:
 func track(delta: float) -> void:
 	if (global_position - get_target_pos()).length() <= end_tracking_threshold:
 		tracking = false
-	var diff: Vector2 = get_target_pos() - global_position
-	global_position += diff.normalized() * tracking_speed * delta
+	global_position = global_position.lerp(get_target_pos(), tracking_speed * delta)
 	zoom = Vector2.ONE * get_target_zoom()
 
 ## Fetch the position that the camera should track to

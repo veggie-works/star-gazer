@@ -1,3 +1,4 @@
+## Manages game audio and music
 extends Node
 
 const AUDIO_OFF_DB: float = -60
@@ -45,12 +46,12 @@ var time_to_next_beat: float:
 ## Music volume combined with master volume
 var music_volume: float:
 	get:
-		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.music_volume, 0.0, 1.0, -32, 0)
+		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.music_volume, 0.0, 1.0, AUDIO_OFF_DB, 0)
 	
 ## SFX volume combined with master volume
 var sfx_volume: float:
 	get:
-		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.sfx_volume, 0.0, 1.0, -32, 0)
+		return Globals.map(SaveManager.settings.master_volume * SaveManager.settings.sfx_volume, 0.0, 1.0, AUDIO_OFF_DB, 0)
 
 func _ready() -> void:
 	update_music_volume()

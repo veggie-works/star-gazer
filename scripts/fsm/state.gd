@@ -12,6 +12,10 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
-## Update the state
+## Update the state every process frame
 func update(delta: float) -> void:
+	pass
+
+## Update the state every physics frame
+func fixed_update(delta) -> void:
 	pass

@@ -1,0 +1,16 @@
+[gd_scene load_steps=5 format=3 uid="uid://ctfvbdbss0ly"]
+
+[ext_resource type="Material" uid="uid://cxe6uiw28rvwa" path="res://resources/materials/flash.tres" id="1_0xbj8"]
+[ext_resource type="Script" path="res://scripts/ui/map_ui/map_level.gd" id="2_kmf36"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="3_2mr77"]
+[ext_resource type="Script" path="res://scripts/actors/behaviors/pulser.gd" id="4_x7qyj"]
+
+[node name="map_level" type="Sprite2D"]
+material = ExtResource("1_0xbj8")
+script = ExtResource("2_kmf36")
+
+[node name="flasher" type="Node2D" parent="."]
+script = ExtResource("3_2mr77")
+
+[node name="pulser" type="Node2D" parent="."]
+script = ExtResource("4_x7qyj")

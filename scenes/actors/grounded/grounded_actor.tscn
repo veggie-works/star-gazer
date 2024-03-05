@@ -1,14 +1,25 @@
-[gd_scene load_steps=3 format=3 uid="uid://x1nnrls1fmdm"]
+[gd_scene load_steps=5 format=3 uid="uid://x1nnrls1fmdm"]
 
 [ext_resource type="PackedScene" uid="uid://dwibdkrqgbotj" path="res://scenes/actors/actor.tscn" id="1_y7557"]
+[ext_resource type="Shader" path="res://resources/shaders/flash.gdshader" id="2_idhg5"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/grounded_actor.gd" id="2_lvnct"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_583ll"]
+resource_local_to_scene = true
+shader = ExtResource("2_idhg5")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
+
 [node name="grounded_actor" instance=ExtResource("1_y7557")]
+material = SubResource("ShaderMaterial_583ll")
 script = ExtResource("2_lvnct")
 gravity_scale = 4.0
 falling_gravity_scale = 8.0
 run_speed = 600.0
 terminal_velocity = 600.0
+
+[node name="sprite" parent="." index="1"]
+use_parent_material = true
 
 [node name="ground_raycasts" type="Node2D" parent="." index="3"]
 editor_description = "Container for all ground ray casts."

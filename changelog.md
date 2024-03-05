@@ -1,5 +1,20 @@
 # Star Gazer Change log
 
+## [0.0.5] - 2024-03-05
+
+### Added
+
+- Vertical scene transitions
+- World map
+
+### Fixed
+
+- Enemies not flashing when damaged
+
+### Changed
+
+- UIs close in stacked fashion
+
 ## [0.0.4] - 2024-03-01
 
 ### Added

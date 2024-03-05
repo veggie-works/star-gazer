@@ -47,6 +47,13 @@ func is_grounded() -> bool:
 			return true
 	return false
 
+## Whether the actor is fully grounded (all ground raycasts are colliding)
+func is_fully_grounded() -> bool:
+	for child in ground_raycasts.get_children():
+		if child is RayCast2D and not child.is_colliding():
+			return false
+	return true
+
 ## Check if the actor is colliding with a wall
 func is_colliding_with_wall() -> bool:
 	for child in wall_raycasts.get_children():
@@ -60,36 +67,29 @@ func jump(height: float) -> void:
 	velocity.y = -sqrt(2 * Globals.gravity * gravity_scale * height);
 
 ## Jump from the actor's starting position to a target position
-func jump_to(target_position: Vector2, apex_height: float, jump_time: float) -> void:
+func jump_to(target_position: Vector2) -> void:
 	var diff = target_position - global_position
-	velocity.x = diff.x / jump_time
-	var rising_gravity: float = Globals.gravity * gravity_scale
-	var falling_gravity: float = Globals.gravity * falling_gravity_scale
-	var final_velocity_y: float = sqrt(abs(2 * falling_gravity * (diff.y - apex_height)))
-	print("Final Y: ", final_velocity_y)
-	var denom_term1: float = final_velocity_y / rising_gravity
-	var denom_term2: float = (2 * (diff.y - apex_height)) / final_velocity_y
-	velocity.y = sqrt(2 * rising_gravity * apex_height)
-	print("Velocity: ", velocity)
+	velocity.x = diff.x
+	velocity.y = -sqrt(abs(2 * Globals.gravity * falling_gravity_scale * diff.y))
 	await landed
 	velocity.x = 0
 
 ## Perform a land
 func land() -> void:
 	landed.emit()
-
+ 
 ## Have the actor run in the given horizontal direction
 func run(direction: float) -> void:
-	move(Vector2(direction * run_speed, 0))
+	move(Vector2(direction * run_speed, velocity.y))
 
 ## Move to a target x position
-func move_to(target_x: float) -> void:
+func run_to(target_x: float) -> void:
 	var direction = sign(target_x - global_position.x)
 	run(direction)
 	while (direction < 0 and global_position.x > target_x) or \
 		(direction > 0 and global_position.x < target_x):
 		if not is_inside_tree():
-			break
+			return
 		await get_tree().process_frame
 	arrived.emit()
 

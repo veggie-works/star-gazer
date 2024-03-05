@@ -1,17 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dwibdkrqgbotj"]
+[gd_scene load_steps=9 format=3 uid="uid://dwibdkrqgbotj"]
 
+[ext_resource type="Material" uid="uid://cxe6uiw28rvwa" path="res://resources/materials/flash.tres" id="1_ifh6s"]
 [ext_resource type="Script" path="res://scripts/actors/actor.gd" id="1_qymhu"]
-[ext_resource type="Shader" path="res://resources/shaders/color_key_flash.gdshader" id="1_vlh6d"]
 [ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="3_1bv52"]
 [ext_resource type="Script" path="res://scripts/fsm/state_machine.gd" id="3_cgdik"]
 [ext_resource type="PackedScene" uid="uid://cjp2np3c242rp" path="res://scenes/actors/state_debug_label.tscn" id="5_iat4a"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_tf50f"]
-shader = ExtResource("1_vlh6d")
-shader_parameter/key_color = Color(1, 0, 1, 1)
-shader_parameter/replace_color = Color(1, 1, 1, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_amount = 0.0
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xuhk8"]
 
@@ -22,7 +15,8 @@ size = Vector2(128, 128)
 
 [node name="actor" type="CharacterBody2D"]
 editor_description = "Base controller for all actors, e.g. players, enemies, NPCs."
-material = SubResource("ShaderMaterial_tf50f")
+visibility_layer = 4
+material = ExtResource("1_ifh6s")
 collision_layer = 16
 collision_mask = 130
 script = ExtResource("1_qymhu")
@@ -47,6 +41,7 @@ shape = SubResource("RectangleShape2D_6k56w")
 script = ExtResource("3_cgdik")
 
 [node name="state_debug_label" parent="." instance=ExtResource("5_iat4a")]
+visible = false
 offset_top = -64.0
 offset_bottom = -38.0
 label_settings = SubResource("LabelSettings_ydra3")

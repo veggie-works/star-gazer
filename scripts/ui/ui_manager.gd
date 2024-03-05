@@ -7,6 +7,13 @@ extends Control
 ## The UI canvas layer that will hold all child UIs
 @onready var ui_layer: CanvasLayer = $ui_layer
 
+## UIs that cannot be closed by pressing "ui_cancel"
+var non_closeable_uis: Array[GDScript] = [
+	DebugPanel,
+	Fader,
+	HUD,
+]
+
 ## A list of all instantiated UIs
 var instantiated_uis: Array[BaseUI] = []
 
@@ -15,13 +22,39 @@ var opened_uis: Array[BaseUI]:
 	get:
 		return instantiated_uis.filter(func(ui): return ui.visible)
 
+## The UI that is being shown on top of all others
+var top_ui: BaseUI:
+	get:
+		var last_index: int = len(opened_uis) - 1
+		if last_index < 0:
+			return null
+		return opened_uis[last_index]
+
+func _input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		if top_ui != null and not non_closeable_uis.any(func(ui): return top_ui.get_script() == ui):
+			if non_closeable_uis.has(top_ui.get_script()):
+				ui_layer.move_child(top_ui, 0)
+			else:
+				top_ui.close()
+		else:
+			var pause_menu: PauseMenu = get_ui(PauseMenu)
+			if pause_menu:
+				if pause_menu.visible:
+					pause_menu.close()
+				else:
+					pause_menu.open()
+			else:
+				open_ui(PauseMenu)
+
 ## Close a UI
 func close_ui(ui: GDScript) -> void:
 	var found_uis = opened_uis.filter(func(opened_ui):
 		return opened_ui.get_script() == ui
 	)
 	for found_ui in found_uis:
-		found_ui.close()
+		if not non_closeable_uis.any(func(ui): return ui == found_ui):
+			found_ui.close()
 
 ## Create a new instance of a UI
 func create_ui(ui: GDScript, start_closed: bool = false) -> BaseUI:
@@ -69,9 +102,11 @@ func open_ui(ui: GDScript) -> BaseUI:
 	if ui_to_open == null:
 		ui_to_open = create_ui(ui)
 	ui_to_open.open()
+	ui_layer.move_child(ui_to_open, ui_layer.get_child_count() - 1)
 	return ui_to_open
 
 ## Close all open UIs
 func close_all_uis() -> void:
 	for ui in opened_uis:
-		ui.close()
+		if not non_closeable_uis.any(func(non_closeable_ui): return non_closeable_ui == ui):
+			ui.close()

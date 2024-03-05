@@ -4,6 +4,19 @@ extends Node
 ## The default gravity value, in pixels per second squared
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+## Enumeration of named 2D physics layers
+enum PhysicsLayers {
+	PLAYER = 1,
+	TERRAIN,
+	INTERACTIVE,
+	DOOR,
+	ENEMY,
+	PLAYER_ATTACK,
+	ENEMY_ATTACK,
+	PLATFORM,
+	CAMERA_TARGET_BODY = 32,
+}
+
 ## Recursively load scenes and fetch the one whose script that matches the script parameter
 func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> PackedScene:
 	var dir := DirAccess.open(search_dir)
@@ -23,15 +36,15 @@ func find_scene_by_type(type: GDScript, search_dir: String = "res://") -> Packed
 						return packed_scene
 	return null
 
-## Get the closest object
-func get_closest(object: Node2D, targets: Array):
+## Get the closest object to a target
+func get_closest(target: Node2D, objects: Array):
 	var min_distance: float = INF
 	var closest: Node2D = null
-	for target in targets:
-		var distance: float = (target.global_position - object.global_position).length()
+	for object in objects:
+		var distance: float = (object.global_position - target.global_position).length()
 		if distance <= min_distance:
 			min_distance = distance
-			closest = target
+			closest = object
 	return closest
 
 ## Map a range of inputs to another
