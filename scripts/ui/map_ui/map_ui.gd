@@ -1,6 +1,11 @@
 ## Displays the world map
 class_name MapUI extends BaseUI
 
+## The color that the current level's pulser will pulse at
+const PULSE_COLOR := Color(1.0, 1.0, 1.0, 0.25)
+## The rate that the current level's pulser will pulse at
+const PULSE_RATE: float = 0.5
+
 ## The game map data to use
 @export var map_data: GameMap
 ## Prefab to instantiate for every level
@@ -26,6 +31,8 @@ var current_level: MapLevel:
 
 func _ready() -> void:
 	init_map()
+	SceneManager.scene_changed.connect(on_scene_change)
+	current_level.get_node("pulser").start_pulse(PULSE_COLOR, PULSE_RATE)
 	
 func _process(delta: float) -> void:
 	player_location.position = get_player_position_on_map()
@@ -54,3 +61,12 @@ func get_player_position_on_map() -> Vector2:
 		var player_pos: Vector2 = player.global_position + offset
 		return player_pos
 	return Vector2.ZERO
+
+func on_scene_change(_old_scene: String, _new_scene: String) -> void:
+	for level in levels.get_children():
+		if level is MapLevel:
+			var pulser: Pulser = level.get_node("pulser")
+			if level == current_level:
+				pulser.start_pulse(PULSE_COLOR, PULSE_RATE)
+			elif pulser.is_pulsing:
+				pulser.stop_pulse()

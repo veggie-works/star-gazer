@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scripts/editor/map_level_data.gd" id="2_oi1h3"]
 [ext_resource type="Script" path="res://scripts/editor/game_map.gd" id="3_yda4g"]
 
-[sub_resource type="Resource" id="Resource_d0acj"]
+[sub_resource type="Resource" id="Resource_t2yx1"]
 script = ExtResource("1_28gxv")
 door_name = "door_right"
 door_position = Vector2(304, 102)
@@ -12,7 +12,7 @@ door_scene = "res://scenes/levels/level0.tscn"
 target_door_name = "door_left"
 target_door_scene = "res://scenes/levels/level1.tscn"
 
-[sub_resource type="Resource" id="Resource_hscr6"]
+[sub_resource type="Resource" id="Resource_0gqw3"]
 script = ExtResource("1_28gxv")
 door_name = "door_bottom"
 door_position = Vector2(-480, 192)
@@ -20,14 +20,14 @@ door_scene = "res://scenes/levels/level0.tscn"
 target_door_name = "door_top"
 target_door_scene = "res://scenes/levels/level2.tscn"
 
-[sub_resource type="Resource" id="Resource_ask8k"]
+[sub_resource type="Resource" id="Resource_mglvj"]
 script = ExtResource("2_oi1h3")
 image_file_path = "res://assets/map/level0.png"
 level_name = "level0"
 rect_in_map = Rect2(0, 0, 1056, 288)
-doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_d0acj"), SubResource("Resource_hscr6")])
+doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_t2yx1"), SubResource("Resource_0gqw3")])
 
-[sub_resource type="Resource" id="Resource_odto1"]
+[sub_resource type="Resource" id="Resource_g4hxg"]
 script = ExtResource("1_28gxv")
 door_name = "door_left"
 door_position = Vector2(16, 102)
@@ -35,14 +35,14 @@ door_scene = "res://scenes/levels/level1.tscn"
 target_door_name = "door_right"
 target_door_scene = "res://scenes/levels/level0.tscn"
 
-[sub_resource type="Resource" id="Resource_wa6gu"]
+[sub_resource type="Resource" id="Resource_moq3v"]
 script = ExtResource("2_oi1h3")
 image_file_path = "res://assets/map/level1.png"
 level_name = "level1"
 rect_in_map = Rect2(1024, 0, 304, 256)
-doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_odto1")])
+doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_g4hxg")])
 
-[sub_resource type="Resource" id="Resource_e33xl"]
+[sub_resource type="Resource" id="Resource_3kxi6"]
 script = ExtResource("1_28gxv")
 door_name = "door_top"
 door_position = Vector2(0, 16)
@@ -50,13 +50,13 @@ door_scene = "res://scenes/levels/level2.tscn"
 target_door_name = "door_bottom"
 target_door_scene = "res://scenes/levels/level0.tscn"
 
-[sub_resource type="Resource" id="Resource_evq1n"]
+[sub_resource type="Resource" id="Resource_dfjne"]
 script = ExtResource("2_oi1h3")
 image_file_path = "res://assets/map/level2.png"
 level_name = "level2"
 rect_in_map = Rect2(48, 224, 432, 208)
-doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_e33xl")])
+doors = Array[ExtResource("1_28gxv")]([SubResource("Resource_3kxi6")])
 
 [resource]
 script = ExtResource("3_yda4g")
-levels = Array[ExtResource("2_oi1h3")]([SubResource("Resource_ask8k"), SubResource("Resource_wa6gu"), SubResource("Resource_evq1n")])
+levels = Array[ExtResource("2_oi1h3")]([SubResource("Resource_mglvj"), SubResource("Resource_moq3v"), SubResource("Resource_dfjne")])

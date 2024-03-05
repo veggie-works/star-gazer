@@ -13,7 +13,8 @@ var is_pulsing: bool
 
 func _process(delta: float) -> void:
 	if is_pulsing and not flasher.is_flashing:
-		flasher.flash(pulse_color, 1.0, pulse_rate / 2, pulse_rate / 2)
+		var flash_color := Color(pulse_color.r, pulse_color.g, pulse_color.b, 1.0)
+		flasher.flash(flash_color, pulse_color.a, pulse_rate / 2, pulse_rate / 2)
 
 ## Start pulsing the object.
 func start_pulse(color := Color.BLACK, pulse_rate: float = 0.25) -> void:

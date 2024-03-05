@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bacb1bjpvjj2r"]
+
+[ext_resource type="Script" path="res://scripts/ui/map_ui/map_ui.gd" id="1_spe6e"]
+[ext_resource type="Resource" uid="uid://cp580gs68vs02" path="res://resources/map/game_map.tres" id="2_gi8xm"]
+[ext_resource type="PackedScene" uid="uid://ctfvbdbss0ly" path="res://scenes/ui/map_ui/map_level.tscn" id="3_xp4vm"]
+[ext_resource type="Texture2D" uid="uid://esc1ep35hgb2" path="res://icon.svg" id="4_owtaa"]
+
+[node name="map_ui" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_spe6e")
+map_data = ExtResource("2_gi8xm")
+level_prefab = ExtResource("3_xp4vm")
+
+[node name="panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="levels" type="Node2D" parent="panel"]
+
+[node name="player_location_sprite" type="Sprite2D" parent="panel"]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("4_owtaa")

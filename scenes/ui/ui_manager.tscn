@@ -7,7 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://d0kwotaty7nke" path="res://scenes/ui/hud.tscn" id="5_ans1r"]
 [ext_resource type="PackedScene" uid="uid://d255w6bca6ikd" path="res://scenes/ui/dialog_ui.tscn" id="6_hhuok"]
 [ext_resource type="PackedScene" uid="uid://df8vtivmt0f63" path="res://scenes/ui/fast_travel_ui.tscn" id="7_13jar"]
-[ext_resource type="PackedScene" uid="uid://bacb1bjpvjj2r" path="res://scenes/ui/map_ui.tscn" id="8_insq2"]
+[ext_resource type="PackedScene" uid="uid://bacb1bjpvjj2r" path="res://scenes/ui/map_ui/map_ui.tscn" id="8_insq2"]
 
 [node name="ui_manager" type="Control"]
 process_mode = 3

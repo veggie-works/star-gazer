@@ -1,7 +1,8 @@
-[gd_scene load_steps=59 format=3 uid="uid://bmqoaf40cddce"]
+[gd_scene load_steps=58 format=3 uid="uid://bmqoaf40cddce"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_bb35l"]
 [ext_resource type="Script" path="res://scripts/actors/grounded/player/player.gd" id="2_d5awl"]
+[ext_resource type="Material" uid="uid://chuhb4r0n6i3o" path="res://resources/materials/flash_color_key.tres" id="2_v06t7"]
 [ext_resource type="Texture2D" uid="uid://pj1qkgfccy18" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_0.png" id="4_nxbpc"]
 [ext_resource type="Texture2D" uid="uid://dhc70m5k3v65e" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_1.png" id="5_xnqlw"]
 [ext_resource type="Texture2D" uid="uid://cvw2bxnvek48d" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_2.png" id="6_15f6q"]
@@ -10,7 +11,6 @@
 [ext_resource type="Texture2D" uid="uid://cj2jnxibib8oi" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_5.png" id="9_vwxn8"]
 [ext_resource type="Texture2D" uid="uid://heykjfnxwcqo" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_6.png" id="10_2atxa"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_fsm.gd" id="10_q18np"]
-[ext_resource type="Shader" path="res://resources/shaders/color_key_flash.gdshader" id="11_0p73h"]
 [ext_resource type="Texture2D" uid="uid://b0ucvdtk10nhl" path="res://assets/art/actors/player/Idle/HeroKnight_Idle_7.png" id="11_eujky"]
 [ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="11_xerj3"]
 [ext_resource type="Script" path="res://scripts/fsm/actors/player/player_idle_state.gd" id="12_2ynoo"]
@@ -47,13 +47,6 @@
 [ext_resource type="Texture2D" uid="uid://dirm6onim56fl" path="res://assets/art/actors/player/Hurt/HeroKnight_Hurt_1.png" id="29_r11vq"]
 [ext_resource type="Texture2D" uid="uid://we52wo75176p" path="res://assets/art/actors/player/Hurt/HeroKnight_Hurt_2.png" id="30_jp3mp"]
 [ext_resource type="Resource" uid="uid://wik7l4lbr1dv" path="res://resources/random_clips/footstep_grass.tres" id="42_cp2bi"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_weryg"]
-shader = ExtResource("11_0p73h")
-shader_parameter/key_color = Color(0.196078, 0.117647, 0.0588235, 1)
-shader_parameter/replace_color = Color(0, 1, 0, 1)
-shader_parameter/flash_color = Color(1, 1, 1, 1)
-shader_parameter/flash_amount = 0.0
 
 [sub_resource type="Animation" id="Animation_04ier"]
 resource_name = "fall"
@@ -195,7 +188,7 @@ size = Vector2(0, 0)
 
 [node name="player" groups=["players"] instance=ExtResource("1_bb35l")]
 z_index = 1
-material = SubResource("ShaderMaterial_weryg")
+material = ExtResource("2_v06t7")
 collision_layer = 1
 script = ExtResource("2_d5awl")
 gravity_scale = 1.0

@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://r28wdqjlisvt"]
+[gd_scene load_steps=16 format=3 uid="uid://r28wdqjlisvt"]
 
 [ext_resource type="PackedScene" uid="uid://x1nnrls1fmdm" path="res://scenes/actors/grounded/grounded_actor.tscn" id="1_w2i0m"]
+[ext_resource type="Shader" path="res://resources/shaders/flash.gdshader" id="2_i03g2"]
 [ext_resource type="PackedScene" uid="uid://bda0m15iq5yhd" path="res://scenes/actors/behaviors/health_manager.tscn" id="2_k1k5w"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/flasher.gd" id="3_futby"]
 [ext_resource type="Script" path="res://scripts/actors/behaviors/shaker.gd" id="4_gp7c3"]
@@ -13,10 +14,17 @@
 [ext_resource type="Resource" uid="uid://24b54tb75xym" path="res://resources/weapons/test_enemy_damager.tres" id="11_x27lj"]
 [ext_resource type="PackedScene" uid="uid://cyx5odv1hxxeo" path="res://scenes/actors/enemies/line_of_sight.tscn" id="12_0ldor"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8iqxu"]
+resource_local_to_scene = true
+shader = ExtResource("2_i03g2")
+shader_parameter/flash_color = Color(1, 1, 1, 1)
+shader_parameter/flash_amount = 0.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_22msy"]
 size = Vector2(128, 128)
 
 [node name="test_enemy" instance=ExtResource("1_w2i0m")]
+material = SubResource("ShaderMaterial_8iqxu")
 scale = Vector2(0.25, 0.25)
 gravity_scale = 1.0
 falling_gravity_scale = 2.0

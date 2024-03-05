@@ -62,6 +62,7 @@ func _on_area_entered(area: Area2D) -> void:
 	if area.get_collision_mask_value(Globals.PhysicsLayers.INTERACTIVE):
 		var body: Node = area.get_owner()
 		if body is Player:
+			UIManager.close_all_uis()
 			body.in_cutscene = true
 			if enter_direction == "left" or enter_direction == "right":
 				var target_sign: float = sign(global_position.x - body.global_position.x)
