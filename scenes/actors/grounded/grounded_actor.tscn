@@ -18,6 +18,9 @@ falling_gravity_scale = 8.0
 run_speed = 600.0
 terminal_velocity = 600.0
 
+[node name="sprite" parent="." index="1"]
+use_parent_material = true
+
 [node name="ground_raycasts" type="Node2D" parent="." index="3"]
 editor_description = "Container for all ground ray casts."
 

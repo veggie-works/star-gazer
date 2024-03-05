@@ -201,7 +201,6 @@ libraries = {
 }
 
 [node name="sprite" parent="." index="1"]
-use_parent_material = true
 position = Vector2(0, -7)
 texture = ExtResource("25_lgruc")
 
