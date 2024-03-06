@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="GameMap" load_steps=11 format=3]
+[gd_resource type="Resource" script_class="GameMap" load_steps=11 format=3 uid="uid://dgocm8e88blnm"]
 
 [ext_resource type="Script" path="res://scripts/gameplay/doors/door_data.gd" id="1_jr4yc"]
 [ext_resource type="Script" path="res://scripts/editor/map_level_data.gd" id="2_ck71t"]

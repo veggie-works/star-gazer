@@ -5,7 +5,7 @@ class_name BaseLevel extends Node
 @export var music_track: MusicTrack
 
 ## The level's tile map
-@onready var tile_map: TileMap = $tile_map
+@onready var tile_map: TileMap = get_node_or_null("tile_map")
 
 func _ready() -> void:
 	open_uis()
@@ -18,6 +18,8 @@ func _exit_tree() -> void:
 		UIManager.close_ui(DebugPanel)
 
 func _input(event: InputEvent) -> void:
+	if self is MainMenu:
+		return
 	if event.is_action_pressed("inventory"):
 		var map_ui: MapUI = UIManager.get_ui(MapUI)
 		if map_ui == null or not map_ui.visible:
