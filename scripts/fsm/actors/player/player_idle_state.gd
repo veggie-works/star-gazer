@@ -2,7 +2,7 @@
 class_name PlayerIdleState extends PlayerState
 
 func enter() -> void:
-	if abs(body.velocity.x) > 0 and body.disable_input:
+	if abs(body.velocity.x) > 0 and body.in_cutscene:
 		while abs(body.velocity.x) > 0:
 			await get_tree().process_frame
 	animator.play("idle")

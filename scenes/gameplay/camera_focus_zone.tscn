@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://dd60g6q8wcw7"]
+
+[ext_resource type="Script" path="res://scripts/gameplay/camera_focus_zone.gd" id="1_p4q33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n4w73"]
+resource_local_to_scene = true
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm2pd"]
+resource_local_to_scene = true
+size = Vector2(512, 256)
+
+[node name="camera_focus_zone" type="Node2D"]
+script = ExtResource("1_p4q33")
+
+[node name="trigger" type="Area2D" parent="."]
+position = Vector2(0, 112)
+collision_layer = 0
+
+[node name="collision" type="CollisionShape2D" parent="trigger"]
+shape = SubResource("RectangleShape2D_n4w73")
+
+[node name="focus_area" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_fm2pd")
+
+[connection signal="body_entered" from="trigger" to="." method="_on_trigger_body_entered"]
+[connection signal="body_exited" from="trigger" to="." method="_on_trigger_body_exited"]

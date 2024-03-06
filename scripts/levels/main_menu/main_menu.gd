@@ -13,8 +13,6 @@ class_name MainMenu extends BaseLevel
 func _ready() -> void:
 	AudioManager.stop_music()
 	GameCamera.enabled = false
-	if OS.is_debug_build():
-		UIManager.delete_ui(DebugPanel)
 	if OS.get_name() == "Web":
 		exit_button.hide()
 

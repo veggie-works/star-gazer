@@ -11,9 +11,15 @@ class_name Player extends GroundedActor
 ## Whether input should be disabled
 var disable_input: bool
 
+## Backing field for the in_cutscene variable
+var _in_cutscene_backing_field: bool
+
 ## Whether the player is currently in a cutscene
 var in_cutscene: bool:
+	get:
+		return _in_cutscene_backing_field
 	set(value):
+		_in_cutscene_backing_field = value
 		disable_input = value
 		for collider: CollisionShape2D in colliders:
 			collider.set_deferred("disabled", value)
