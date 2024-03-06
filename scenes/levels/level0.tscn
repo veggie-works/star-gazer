@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://byf21g036g36h"]
+[gd_scene load_steps=14 format=3 uid="uid://byf21g036g36h"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_tftho"]
 [ext_resource type="Resource" uid="uid://b7xpyw37rvn2" path="res://resources/music_tracks/level0.tres" id="2_4r7nn"]
@@ -15,6 +15,14 @@ resource_local_to_scene = true
 shader = ExtResource("4_uvcsh")
 shader_parameter/flash_color = Color(1, 1, 1, 1)
 shader_parameter/flash_amount = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gjqi1"]
+resource_local_to_scene = true
+size = Vector2(8, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujg4o"]
+resource_local_to_scene = true
+size = Vector2(8, 32)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bpobw"]
 resource_local_to_scene = true
@@ -36,11 +44,14 @@ scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level1.tscn"
 target_name = "door_left"
 
+[node name="collision" parent="doors/door_right" index="0"]
+shape = SubResource("RectangleShape2D_gjqi1")
+
 [node name="target" parent="doors/door_right" index="1"]
 position = Vector2(-41, 0)
 
 [node name="door_bottom" parent="doors" index="1" instance=ExtResource("3_c4d54")]
-position = Vector2(-480, 192)
+position = Vector2(-480, 176)
 rotation = 1.5708
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level2.tscn"
@@ -49,9 +60,10 @@ enter_direction = "down"
 
 [node name="collision" parent="doors/door_bottom" index="0"]
 position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_ujg4o")
 
 [node name="target" parent="doors/door_bottom" index="1"]
-position = Vector2(-34.0002, -31.4999)
+position = Vector2(-25.0002, -31.4999)
 
 [node name="save_point" parent="save_points" index="0" instance=ExtResource("4_ky82b")]
 position = Vector2(59, 109)

@@ -67,6 +67,7 @@ func on_scene_change(_old_scene: String, _new_scene: String) -> void:
 		if level is MapLevel:
 			var pulser: Pulser = level.get_node("pulser")
 			if level == current_level:
+				print("START PULSE FOR LEVEL ", level.name)
 				pulser.start_pulse(PULSE_COLOR, PULSE_RATE)
 			elif pulser.is_pulsing:
 				pulser.stop_pulse()
