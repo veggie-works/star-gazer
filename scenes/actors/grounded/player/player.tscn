@@ -307,7 +307,7 @@ collision_mask = 4
 position = Vector2(-1, 0)
 shape = SubResource("RectangleShape2D_ttbdg")
 
-[node name="state_debug_label" parent="." index="9"]
+[node name="state_debug_label" parent="." index="8"]
 offset_left = -32.0
 offset_top = -44.0
 offset_right = 34.0
