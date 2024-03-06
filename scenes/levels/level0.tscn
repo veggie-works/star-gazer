@@ -51,7 +51,7 @@ shape = SubResource("RectangleShape2D_gjqi1")
 position = Vector2(-41, 0)
 
 [node name="door_bottom" parent="doors" index="1" instance=ExtResource("3_c4d54")]
-position = Vector2(-480, 176)
+position = Vector2(-480, 192)
 rotation = 1.5708
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level2.tscn"
@@ -63,7 +63,7 @@ position = Vector2(0, 0)
 shape = SubResource("RectangleShape2D_ujg4o")
 
 [node name="target" parent="doors/door_bottom" index="1"]
-position = Vector2(-25.0002, -31.4999)
+position = Vector2(-37.0002, -27.9999)
 
 [node name="save_point" parent="save_points" index="0" instance=ExtResource("4_ky82b")]
 position = Vector2(59, 109)

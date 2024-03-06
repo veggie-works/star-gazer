@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://co2q0qvqhoxrv"]
+[gd_scene load_steps=9 format=3 uid="uid://co2q0qvqhoxrv"]
 
 [ext_resource type="PackedScene" uid="uid://b5cisyivpic2s" path="res://scenes/levels/base_level.tscn" id="1_l04lq"]
 [ext_resource type="PackedScene" uid="uid://dd60g6q8wcw7" path="res://scenes/gameplay/camera_focus_zone.tscn" id="2_c3pnk"]
+[ext_resource type="Resource" uid="uid://jcppw47o844h" path="res://resources/music_tracks/level2.tres" id="2_icc61"]
 [ext_resource type="PackedScene" uid="uid://da7mkw7n7ptqn" path="res://scenes/gameplay/doors/door.tscn" id="2_ir6e3"]
 [ext_resource type="TileSet" uid="uid://dm4qttwlwkcjx" path="res://resources/tilesets/test_tile_set.tres" id="3_nohs2"]
 
@@ -18,6 +19,7 @@ resource_local_to_scene = true
 size = Vector2(8, 32)
 
 [node name="level2" instance=ExtResource("1_l04lq")]
+music_track = ExtResource("2_icc61")
 
 [node name="camera_focus_zone" parent="camera_focus_zones" index="0" instance=ExtResource("2_c3pnk")]
 z_index = 1
@@ -32,7 +34,7 @@ position = Vector2(8, 28)
 shape = SubResource("RectangleShape2D_bag10")
 
 [node name="door_top" parent="doors" index="0" instance=ExtResource("2_ir6e3")]
-position = Vector2(0, 16)
+position = Vector2(0, 32)
 rotation = 1.5708
 scale = Vector2(1, 2)
 target_scene = "res://scenes/levels/level0.tscn"
