@@ -37,4 +37,6 @@ func _on_input_bindings_panel_hidden() -> void:
 
 func _on_hidden() -> void:
 	margin_container.show()
+	accessibility_settings_panel.hide()
+	audio_settings_panel.hide()
 	input_bindings_panel.hide()

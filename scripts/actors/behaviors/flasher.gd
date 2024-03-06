@@ -22,7 +22,10 @@ var current_ramp_up_time: float
 var current_ramp_down_time: float
 
 ## Whether the object is flashing
-var is_flashing: bool
+var is_flashing: bool:
+	set(value):
+		if not value:
+			owner_material.set_shader_parameter("flash_amount", 0)
 
 func _ready() -> void:
 	is_flashing = false

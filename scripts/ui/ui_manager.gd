@@ -37,7 +37,7 @@ func _input(event: InputEvent) -> void:
 				ui_layer.move_child(top_ui, 0)
 			else:
 				top_ui.close()
-		else:
+		elif get_tree().current_scene.name != "main_menu":
 			var pause_menu: PauseMenu = get_ui(PauseMenu)
 			if pause_menu:
 				if pause_menu.visible:
