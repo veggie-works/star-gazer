@@ -16,8 +16,9 @@ func exit() -> void:
 
 func update(delta: float) -> void:
 	body.velocity.x = 0
-	if body.velocity.y > 0:
+	if body.velocity.y >= 0:
 		fsm.transition_to(PlayerFallState)
+		return
 		
 	if body.in_cutscene:
 		return

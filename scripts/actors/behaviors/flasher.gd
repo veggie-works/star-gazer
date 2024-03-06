@@ -21,8 +21,17 @@ var current_ramp_up_time: float
 ## The current time ramping down to transparent
 var current_ramp_down_time: float
 
+## Backing field for the is_flashing variable
+var _is_flashing_backing_field: bool
+
 ## Whether the object is flashing
-var is_flashing: bool
+var is_flashing: bool:
+	get:
+		return _is_flashing_backing_field
+	set(value):
+		_is_flashing_backing_field = value
+		if not value:
+			owner_material.set_shader_parameter("flash_amount", 0)
 
 func _ready() -> void:
 	is_flashing = false

@@ -31,6 +31,17 @@ const BASE_ZOOM: float = 4
 ## The root window containing this camera
 @onready var root_window: Window = get_tree().get_root()
 
+## Backing field for the locked variable
+var _locked_backing_field: bool
+
+## Whether the camera is locked to a position
+var locked: bool:
+	get:
+		return _locked_backing_field
+	set(value):
+		_locked_backing_field = value
+		tracking = not value
+
 ## Whether the camera is tracking
 var tracking: bool
 
@@ -39,10 +50,9 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	if targets.all(func(target): return target != null):
-		var target_position: Vector2 = get_target_pos()
 		var deadzone_size: Vector2 = deadzone_collision.get_shape().get_rect().size
 		var rect := Rect2(global_position - deadzone_size / 2, deadzone_size)
-		if not rect.has_point(target_position):
+		if not locked and not rect.has_point(get_target_pos()):
 			tracking = true
 		if tracking:
 			track(delta)
@@ -65,16 +75,21 @@ func set_target(target: Node2D, recursive: bool = false) -> void:
 	add_target(target, true, recursive)
 
 ## Shake the camera
-func shake(amount: float, duration: float) -> void:
+func shake(amount: float, duration: float, x: bool = true, y: bool = true) -> void:
 	if shaker:
-		shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
+		if x and y:
+			shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
+		elif x and not y:
+			shaker.shake_x(amount * SaveManager.settings.screen_shake_intensity, duration)
+		elif not x and y:
+			shaker.shake_y(amount * SaveManager.settings.screen_shake_intensity, duration)
 
 ## Track targets
 func track(delta: float) -> void:
 	if (global_position - get_target_pos()).length() <= end_tracking_threshold:
 		tracking = false
 	global_position = global_position.lerp(get_target_pos(), tracking_speed * delta)
-	zoom = Vector2.ONE * get_target_zoom()
+	zoom = zoom.lerp(Vector2.ONE * get_target_zoom(), tracking_speed * delta)
 
 ## Fetch the position that the camera should track to
 func get_target_pos() -> Vector2:

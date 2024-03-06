@@ -4,6 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://bmqoaf40cddce" path="res://scenes/actors/grounded/player/player.tscn" id="2_3k2lv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jk1gj"]
+resource_local_to_scene = true
 size = Vector2(8, 32)
 
 [node name="door" type="Area2D" groups=["doors"]]

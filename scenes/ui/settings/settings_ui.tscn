@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=3 uid="uid://d5l2m2e8q2x4"]
+[gd_scene load_steps=6 format=3 uid="uid://d5l2m2e8q2x4"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings/settings_ui.gd" id="1_cgc55"]
 [ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_62b7l"]
+[ext_resource type="PackedScene" uid="uid://ctdhbbmiflojf" path="res://scenes/ui/settings/accessibility_settings_panel.tscn" id="3_3u03r"]
 [ext_resource type="PackedScene" uid="uid://ce5k56rlqcob4" path="res://scenes/ui/settings/input_bindings_panel/input_bindings_panel.tscn" id="3_cynhj"]
+[ext_resource type="PackedScene" uid="uid://bo1bwedhgdekd" path="res://scenes/ui/settings/audio_settings_panel.tscn" id="4_6x2d0"]
 
 [node name="settings_ui" type="Control"]
 layout_mode = 3
@@ -31,69 +33,13 @@ layout_mode = 2
 theme_override_constants/separation = 8
 alignment = 1
 
-[node name="master_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
+[node name="accessibility_settings_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
 layout_mode = 2
+text = "Accessibility"
 
-[node name="master_volume_label" type="Label" parent="margin_container/menu_buttons/master_volume_container"]
+[node name="audio_settings_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
 layout_mode = 2
-text = "Master Volume "
-
-[node name="master_volume_slider" type="HSlider" parent="margin_container/menu_buttons/master_volume_container"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="value_label" type="Label" parent="margin_container/menu_buttons/master_volume_container"]
-layout_mode = 2
-
-[node name="music_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
-layout_mode = 2
-
-[node name="music_volume_label" type="Label" parent="margin_container/menu_buttons/music_volume_container"]
-layout_mode = 2
-text = "Music Volume  "
-
-[node name="music_volume_slider" type="HSlider" parent="margin_container/menu_buttons/music_volume_container"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="value_label" type="Label" parent="margin_container/menu_buttons/music_volume_container"]
-layout_mode = 2
-
-[node name="sfx_volume_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
-layout_mode = 2
-
-[node name="sfx_volume_label" type="Label" parent="margin_container/menu_buttons/sfx_volume_container"]
-layout_mode = 2
-text = "SFX Volume    "
-
-[node name="sfx_volume_slider" type="HSlider" parent="margin_container/menu_buttons/sfx_volume_container"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="value_label" type="Label" parent="margin_container/menu_buttons/sfx_volume_container"]
-layout_mode = 2
-
-[node name="screen_shake_intensity_container" type="HBoxContainer" parent="margin_container/menu_buttons"]
-layout_mode = 2
-
-[node name="screen_shake_intensity_label" type="Label" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
-layout_mode = 2
-text = "Screen Shake  "
-
-[node name="screen_shake_intensity_slider" type="HSlider" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
-layout_mode = 2
-size_flags_horizontal = 3
-max_value = 1.0
-step = 0.01
-
-[node name="value_label" type="Label" parent="margin_container/menu_buttons/screen_shake_intensity_container"]
-layout_mode = 2
+text = "Audio"
 
 [node name="input_bindings_button" parent="margin_container/menu_buttons" instance=ExtResource("2_62b7l")]
 layout_mode = 2
@@ -107,15 +53,23 @@ size_flags_vertical = 3
 layout_mode = 2
 text = "Back"
 
+[node name="accessibility_settings_panel" parent="." instance=ExtResource("3_3u03r")]
+visible = false
+layout_mode = 1
+
+[node name="audio_settings_panel" parent="." instance=ExtResource("4_6x2d0")]
+visible = false
+layout_mode = 1
+
 [node name="input_bindings_panel" parent="." instance=ExtResource("3_cynhj")]
 visible = false
 layout_mode = 1
 
 [connection signal="hidden" from="." to="." method="_on_hidden"]
-[connection signal="value_changed" from="margin_container/menu_buttons/master_volume_container/master_volume_slider" to="." method="_on_master_volume_slider_value_changed"]
-[connection signal="value_changed" from="margin_container/menu_buttons/music_volume_container/music_volume_slider" to="." method="_on_music_volume_slider_value_changed"]
-[connection signal="value_changed" from="margin_container/menu_buttons/sfx_volume_container/sfx_volume_slider" to="." method="_on_sfx_volume_slider_value_changed"]
-[connection signal="value_changed" from="margin_container/menu_buttons/screen_shake_intensity_container/screen_shake_intensity_slider" to="." method="_on_screen_shake_intensity_slider_value_changed"]
+[connection signal="pressed" from="margin_container/menu_buttons/accessibility_settings_button" to="." method="_on_accessibility_settings_button_pressed"]
+[connection signal="pressed" from="margin_container/menu_buttons/audio_settings_button" to="." method="_on_audio_settings_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/input_bindings_button" to="." method="_on_input_bindings_button_pressed"]
 [connection signal="pressed" from="margin_container/menu_buttons/back_button" to="." method="_on_back_button_pressed"]
+[connection signal="hidden" from="accessibility_settings_panel" to="." method="_on_accessibility_settings_panel_hidden"]
+[connection signal="hidden" from="audio_settings_panel" to="." method="_on_audio_settings_panel_hidden"]
 [connection signal="hidden" from="input_bindings_panel" to="." method="_on_input_bindings_panel_hidden"]

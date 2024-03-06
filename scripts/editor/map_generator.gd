@@ -16,7 +16,7 @@ const MAX_TEXTURE_SIZE: int = 16384
 var map_resource: GameMap
 
 func _ready() -> void:
-	# Load default game so an empty save isn't saved when exiting the gamez
+	# Load default game so an empty save isn't saved when exiting the game
 	SaveManager.load_game()
 	generate_map()
 
@@ -39,6 +39,7 @@ func generate_map() -> void:
 		await RenderingServer.frame_post_draw
 		var image_file_path: String = "res://assets/map/%s.png" % level_root.name
 		var frame_image: Image = frame.get_texture().get_image()
+		frame_image.data
 		if frame_image.save_png(image_file_path) != OK:
 			printerr("Failed to save frame image to ", image_file_path)
 			continue
@@ -117,5 +118,6 @@ func generate_whole_map_image() -> void:
 		#canvas_image.blit_rect_mask(level_image, level_image, image_rect, adjusted_position)
 		canvas_image.blit_rect(level_image, image_rect, level_data.rect_in_map.position)
 			
-	canvas_image.resize(canvas_image.get_width() / scale, canvas_image.get_height() / scale)
-	canvas_image.save_png("user://generated_map.png")
+	canvas_image.resize(canvas_image.get_width() / scale, canvas_image.get_height() / scale, Image.INTERPOLATE_NEAREST)
+	if canvas_image.save_png("user://generated_map.png") != OK:
+		printerr("Failed to save generated map")

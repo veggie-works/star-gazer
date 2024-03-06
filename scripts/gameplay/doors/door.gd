@@ -10,7 +10,7 @@ class_name Door extends Area2D
 ## The name of the door that this door leads to in the next scene
 @export var target_name: String
 
-## The direction the player should enter from this door
+## The direction the player should walk, jump, or fall when entering from the target door
 @export_enum("left", "right", "up", "down") var enter_direction = "left"
 
 ## The door's collision shape
@@ -48,7 +48,7 @@ func enter_from(enter_scale: float) -> void:
 			while not player.is_grounded(): 
 				await get_tree().process_frame
 		# The enter direction for a door is the target door's direction, not its own, so a target 
-		# direction of "down" would mean the player enters from the bottom and must jump out
+		# direction of "down" would mean the player enters this door from the bottom and must jump out
 		"down":
 			var target_diff_x: float = abs(target.global_position.x - global_position.x)
 			var target_pos := Vector2(global_position.x + target_diff_x * enter_scale, target.global_position.y)

@@ -68,6 +68,15 @@ chase_state = NodePath("../chase_state")
 script = ExtResource("9_346ga")
 chase_speed = 75.0
 
+[node name="state_debug_label" parent="." index="6"]
+visible = true
+visibility_layer = 2
+offset_left = -132.0
+offset_top = -132.0
+offset_right = 0.0
+offset_bottom = -106.0
+scale = Vector2(2, 2)
+
 [node name="damage_area" parent="." index="7" instance=ExtResource("10_riphe")]
 weapon = ExtResource("11_x27lj")
 attack_force = 200.0
@@ -76,14 +85,5 @@ attack_angle = 110.0
 [node name="line_of_sight" parent="." index="8" instance=ExtResource("12_0ldor")]
 unique_name_in_owner = true
 sight_length = 1000.0
-
-[node name="state_debug_label" parent="." index="9"]
-visible = true
-visibility_layer = 2
-offset_left = -132.0
-offset_top = -132.0
-offset_right = 0.0
-offset_bottom = -106.0
-scale = Vector2(2, 2)
 
 [editable path="behaviors/health_manager"]

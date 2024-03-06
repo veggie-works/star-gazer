@@ -4,6 +4,7 @@
 
 [node name="base_level" type="Node2D"]
 editor_description = "Base level for all levels."
+texture_filter = 1
 script = ExtResource("1_4jkmw")
 
 [node name="enemies" type="Node2D" parent="."]
