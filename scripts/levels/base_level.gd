@@ -5,7 +5,7 @@ class_name BaseLevel extends Node
 @export var music_track: MusicTrack
 
 ## The level's tile map
-@onready var tile_map: TileMap = get_node_or_null("tile_map")
+@onready var tile_map: TileMap = $tile_map
 
 func _ready() -> void:
 	open_uis()
@@ -44,7 +44,7 @@ func play_music() -> void:
 	if music_track:
 		AudioManager.play_music(music_track)
 
-## Set up the game camear for this specific level
+## Set up the game camera for this specific level
 func setup_camera() -> void:
 	GameCamera.enabled = true
 	if tile_map == null:

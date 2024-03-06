@@ -70,6 +70,7 @@ func jump(height: float) -> void:
 func jump_to(target_position: Vector2) -> void:
 	var diff = target_position - global_position
 	velocity.x = diff.x
+	# Sorry, not doing Runge-Kutta for this shit
 	velocity.y = -sqrt(abs(2 * Globals.gravity * falling_gravity_scale * diff.y))
 	await landed
 	velocity.x = 0

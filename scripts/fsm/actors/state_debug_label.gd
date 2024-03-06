@@ -2,10 +2,11 @@
 extends Label
 
 ## The FSM that this label will pull information from
-@onready var fsm: StateMachine = $"../fsm"
+@onready var fsm: StateMachine = get_node_or_null("../fsm")
 
 func _ready() -> void:
-	fsm.state_changed.connect(on_state_change)
+	if fsm:
+		fsm.state_changed.connect(on_state_change)
 	update_label()
 	
 ## Update the label text

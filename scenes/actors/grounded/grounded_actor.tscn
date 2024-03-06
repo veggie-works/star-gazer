@@ -41,17 +41,3 @@ editor_description = "The third ground ray cast, or the rightmost one if the pla
 position = Vector2(64, 64)
 target_position = Vector2(0, 1)
 collision_mask = 130
-
-[node name="wall_raycasts" type="Node2D" parent="." index="6"]
-
-[node name="raycast0" type="RayCast2D" parent="wall_raycasts" index="0"]
-editor_description = "The 1st wall ray cast, used for wall jumping"
-position = Vector2(32, 0)
-target_position = Vector2(1, 0)
-collision_mask = 2
-
-[node name="raycast1" type="RayCast2D" parent="wall_raycasts" index="1"]
-editor_description = "The 2th wall ray cast, used for wall jumping"
-position = Vector2(-32, 0)
-target_position = Vector2(-1, 0)
-collision_mask = 2
