@@ -53,7 +53,6 @@ func _process(delta: float) -> void:
 		var deadzone_size: Vector2 = deadzone_collision.get_shape().get_rect().size
 		var rect := Rect2(global_position - deadzone_size / 2, deadzone_size)
 		if not locked and not rect.has_point(get_target_pos()):
-			print("Locked: ", locked, ",\tRect has point: ", rect.has_point(get_target_pos()))
 			tracking = true
 		if tracking:
 			track(delta)

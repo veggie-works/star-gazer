@@ -1,5 +1,5 @@
 ## Panel for changing input bindings
-class_name InputBindingsPanel extends Control
+extends Control
 
 ## The input rebinder prefab to spawn for each input binding
 @export var input_rebinder_prefab: PackedScene

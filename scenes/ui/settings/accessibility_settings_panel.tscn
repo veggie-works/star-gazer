@@ -1,0 +1,80 @@
+[gd_scene load_steps=2 format=3 uid="uid://ctdhbbmiflojf"]
+
+[ext_resource type="Script" path="res://scripts/ui/settings/accessibility_settings_panel.gd" id="1_41jhd"]
+
+[node name="accessibility_settings_panel" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -242.0
+offset_right = -400.0
+offset_bottom = -242.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_41jhd")
+
+[node name="panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 800.0
+offset_bottom = 480.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="margin_container" type="MarginContainer" parent="panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="accessibility_settings_list" type="VBoxContainer" parent="panel/margin_container"]
+editor_description = "Main control node containing rebinding controls."
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="title" type="Label" parent="panel/margin_container/accessibility_settings_list"]
+layout_mode = 2
+text = "Accessibility"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="screen_shake_intensity_container" type="HBoxContainer" parent="panel/margin_container/accessibility_settings_list"]
+layout_mode = 2
+
+[node name="screen_shake_intensity_label" type="Label" parent="panel/margin_container/accessibility_settings_list/screen_shake_intensity_container"]
+layout_mode = 2
+text = "Screen Shake  "
+
+[node name="screen_shake_intensity_slider" type="HSlider" parent="panel/margin_container/accessibility_settings_list/screen_shake_intensity_container"]
+layout_mode = 2
+size_flags_horizontal = 3
+max_value = 1.0
+step = 0.01
+
+[node name="value_label" type="Label" parent="panel/margin_container/accessibility_settings_list/screen_shake_intensity_container"]
+layout_mode = 2
+
+[node name="spacer" type="Control" parent="panel/margin_container/accessibility_settings_list"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="back_button" type="Button" parent="panel/margin_container/accessibility_settings_list"]
+layout_mode = 2
+text = "Back"
+
+[connection signal="value_changed" from="panel/margin_container/accessibility_settings_list/screen_shake_intensity_container/screen_shake_intensity_slider" to="." method="_on_screen_shake_intensity_slider_value_changed"]
+[connection signal="pressed" from="panel/margin_container/accessibility_settings_list/back_button" to="." method="_on_back_button_pressed"]
