@@ -75,9 +75,14 @@ func set_target(target: Node2D, recursive: bool = false) -> void:
 	add_target(target, true, recursive)
 
 ## Shake the camera
-func shake(amount: float, duration: float) -> void:
+func shake(amount: float, duration: float, x: bool = true, y: bool = true) -> void:
 	if shaker:
-		shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
+		if x and y:
+			shaker.shake(amount * SaveManager.settings.screen_shake_intensity, duration)
+		elif x and not y:
+			shaker.shake_x(amount * SaveManager.settings.screen_shake_intensity, duration)
+		elif not x and y:
+			shaker.shake_y(amount * SaveManager.settings.screen_shake_intensity, duration)
 
 ## Track targets
 func track(delta: float) -> void:
