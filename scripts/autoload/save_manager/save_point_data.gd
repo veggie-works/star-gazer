@@ -14,4 +14,4 @@ class_name SavePointData extends Resource
 func equals(other: SavePointData) -> bool:
 	return save_point_name == other.save_point_name and \
 		save_scene == other.save_scene and \
-		(save_position - other.save_position).length() < 1
+		save_position.distance_to(other.save_position) < 1

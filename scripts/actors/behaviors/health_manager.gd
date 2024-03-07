@@ -71,7 +71,6 @@ func take_damage(attack: Attack) -> void:
 	if shake_camera:
 		GameCamera.shake(25, 0.25)
 	if is_dead:
-		
 		die()
 		return
 	if recoil_manager:

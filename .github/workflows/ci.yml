@@ -93,19 +93,19 @@ jobs:
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           CHANNEL: windows
-          PACKAGE: Windows Desktop.zip
+          PACKAGE: windows.zip
       - name: Deploy Linux build
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           CHANNEL: linux
-          PACKAGE: LinuxX11.zip
+          PACKAGE: linux.zip
       - name: Deploy macOS build
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           CHANNEL: osx
-          PACKAGE: macOS.zip
+          PACKAGE: macos.zip
       - name: Deploy web build
         uses: josephbmanley/butler-publish-itchio-action@master
         env:
           CHANNEL: html5
-          PACKAGE: Web.zip
+          PACKAGE: web.zip

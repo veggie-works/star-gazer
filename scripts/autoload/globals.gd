@@ -41,7 +41,7 @@ func get_closest(target: Node2D, objects: Array):
 	var min_distance: float = INF
 	var closest: Node2D = null
 	for object in objects:
-		var distance: float = (object.global_position - target.global_position).length()
+		var distance: float = object.global_position.distance_to(target.global_position)
 		if distance <= min_distance:
 			min_distance = distance
 			closest = object

@@ -1,5 +1,16 @@
 # Star Gazer Change log
 
+## [0.0.6] - 2024-03-07
+
+### Fixed
+
+- Fixed some UI and gameplay edge case bugs
+
+### Changed
+
+- Remove "Exit Game" button from main menu in web export
+- Modified some export settings
+
 ## [0.0.5] - 2024-03-05
 
 ### Added
@@ -27,7 +38,7 @@
 
 - Expanded tilemap in first room
 
-## [0.0.3] - 2024-27-02
+## [0.0.3] - 2024-02-27
 
 ### Added
 
@@ -42,19 +53,19 @@
 
 - Fixed music transitions
 
-## [0.0.2] - 22-02-2024
+## [0.0.2] - 2024-02-22
 
 ### Added
 
 - Too many changes to list
 
-## [0.0.1] - 2024-20-02
+## [0.0.1] - 2024-02-20
 
 ### Added
 
 - Created settings UI
 
-## [0.0.0] - 2024-20-02
+## [0.0.0] - 2024-02
 
 ### Added
 

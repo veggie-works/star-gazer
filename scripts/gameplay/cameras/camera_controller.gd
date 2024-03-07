@@ -86,7 +86,7 @@ func shake(amount: float, duration: float, x: bool = true, y: bool = true) -> vo
 
 ## Track targets
 func track(delta: float) -> void:
-	if (global_position - get_target_pos()).length() <= end_tracking_threshold:
+	if global_position.distance_to(get_target_pos())<= end_tracking_threshold:
 		tracking = false
 	global_position = global_position.lerp(get_target_pos(), tracking_speed * delta)
 	zoom = zoom.lerp(Vector2.ONE * get_target_zoom(), tracking_speed * delta)

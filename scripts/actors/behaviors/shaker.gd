@@ -18,15 +18,19 @@ var current_shake_vector: Vector2
 var current_shake_magnitude: float
 ## The current time that the object has been offset for during a shake
 var current_shake_time: float
+## Whether to shake the object in place
+var shake_in_place: bool
 
-func _physics_process(delta: float) -> void:
+func _process(delta: float) -> void:
 	if current_shake_magnitude > 0:
 		current_shake_time += delta
 		if current_shake_time >= shake_interval:
 			update_shake()
+	elif shake_in_place and global_position.distance_to(original_position) > 1:
+		global_position = original_position
 
 ## Set shake values
-func _shake_internal(amount: float, duration) -> void:
+func _shake_internal(amount: float, duration, in_place: bool = false) -> void:
 	original_position = owner.global_position
 	current_shake_magnitude = amount
 	if shake_horizontally:
@@ -34,22 +38,23 @@ func _shake_internal(amount: float, duration) -> void:
 	if shake_vertically:
 		current_shake_vector.y = 1
 	unshake_amount = amount / duration
+	shake_in_place = in_place
 
 ## Begin object shake in all directions
-func shake(amount: float, duration: float) -> void:
-	_shake_internal(amount, duration)
+func shake(amount: float, duration: float, in_place: bool = false) -> void:
+	_shake_internal(amount, duration, in_place)
 	shake_horizontally = true
 	shake_vertically = true
 
 ## Shake object only along the x-axis	
-func shake_x(amount: float, duration) -> void:
-	_shake_internal(amount, duration)
+func shake_x(amount: float, duration, in_place: bool = false) -> void:
+	_shake_internal(amount, duration, in_place)
 	shake_horizontally = true
 	shake_vertically = false
 
 ## Shake object only along the y-axis	
-func shake_y(amount: float, duration) -> void:
-	_shake_internal(amount, duration)
+func shake_y(amount: float, duration, in_place: bool = false) -> void:
+	_shake_internal(amount, duration, in_place)
 	shake_horizontally = false
 	shake_vertically = true
 
@@ -61,6 +66,9 @@ func update_shake() -> void:
 		current_shake_vector.x = current_shake_magnitude * -sign(current_shake_vector.x)
 	elif not shake_horizontally and shake_vertically:
 		current_shake_vector.y = current_shake_magnitude * -sign(current_shake_vector.y)
-	owner.global_position += current_shake_vector
+	if shake_in_place:
+		owner.global_position = original_position + current_shake_vector
+	else:
+		owner.global_position += current_shake_vector
 	current_shake_magnitude -= unshake_amount * current_shake_time
 	current_shake_time = 0
