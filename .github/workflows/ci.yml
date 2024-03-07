@@ -44,7 +44,7 @@ jobs:
           echo "$BODY" >> $GITHUB_OUTPUT
           echo 'EOF' >> $GITHUB_OUTPUT
       - name: Unzip Web artifact
-        run: unzip ${{ steps.export.outputs.archive_directory }}/Web.zip -d web
+        run: unzip ${{ steps.export.outputs.archive_directory }}/web.zip -d web
       - name: Enable COEP/COOP headers
         run: |
           curl https://raw.githubusercontent.com/gzuidhof/coi-serviceworker/master/coi-serviceworker.min.js -o web/coi-serviceworker.js
