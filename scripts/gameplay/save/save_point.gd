@@ -31,6 +31,8 @@ func save() -> void:
 	SaveManager.save_data.last_save_point = data
 	if not SaveManager.save_data.visited_save_points.any(func(save_point_data): return save_point_data.equals(data)):
 		SaveManager.save_data.visited_save_points.append(data)
+	for player: Player in get_tree().get_nodes_in_group("players"):
+		player.health_manager.full_heal()
 
 func _on_interact_area_interact() -> void:
 	save()

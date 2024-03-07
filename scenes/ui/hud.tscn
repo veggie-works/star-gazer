@@ -1,9 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0kwotaty7nke"]
+[gd_scene load_steps=8 format=3 uid="uid://d0kwotaty7nke"]
 
 [ext_resource type="Script" path="res://scripts/ui/hud.gd" id="1_4345e"]
+[ext_resource type="Shader" path="res://resources/shaders/shear.gdshader" id="2_bunlc"]
+[ext_resource type="Texture2D" uid="uid://bhj8jdqm3jd28" path="res://assets/art/ui/hp_under.png" id="3_2u2hd"]
+[ext_resource type="Texture2D" uid="uid://dt7ya72c6ufpm" path="res://assets/art/ui/hp_over.png" id="4_mqug4"]
+[ext_resource type="Texture2D" uid="uid://dv5g381563u1q" path="res://assets/art/ui/hp_bar.png" id="5_la46n"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_37icq"]
+resource_local_to_scene = true
+shader = ExtResource("2_bunlc")
+shader_parameter/shear_x = 1.0
+shader_parameter/shear_y = 0.0
 
 [sub_resource type="LabelSettings" id="LabelSettings_axr4j"]
-font_size = 32
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
@@ -20,36 +29,52 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_bottom = 79.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(2, 2)
 theme_override_constants/margin_left = 32
 theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
-[node name="health_bar_container" type="Control" parent="margin_container"]
+[node name="health_container" type="Control" parent="margin_container"]
 layout_mode = 2
-
-[node name="health_bar" type="ProgressBar" parent="margin_container/health_bar_container"]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_bottom = 48.0
-grow_horizontal = 2
 size_flags_horizontal = 0
-value = 50.0
-rounded = true
-show_percentage = false
 
-[node name="health_label" type="Label" parent="margin_container/health_bar_container/health_bar"]
+[node name="health_bar" type="TextureProgressBar" parent="margin_container/health_container"]
+material = SubResource("ShaderMaterial_37icq")
+layout_mode = 2
+offset_right = 8.0
+offset_bottom = 17.0
+size_flags_horizontal = 0
+value = 75.0
+rounded = true
+nine_patch_stretch = true
+stretch_margin_left = 4
+stretch_margin_top = 4
+stretch_margin_right = 4
+stretch_margin_bottom = 4
+texture_under = ExtResource("3_2u2hd")
+texture_over = ExtResource("4_mqug4")
+texture_progress = ExtResource("5_la46n")
+tint_progress = Color(0.345098, 1, 0.282353, 1)
+
+[node name="health_label" type="Label" parent="margin_container/health_container/health_bar"]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 16.0
-offset_right = 16.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -18.0
+offset_top = -6.5
+offset_right = 18.0
+offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
-text = "50/100
+text = "75/100
 "
 label_settings = SubResource("LabelSettings_axr4j")
+horizontal_alignment = 1
+vertical_alignment = 1

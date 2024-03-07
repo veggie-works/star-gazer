@@ -2,7 +2,7 @@
 class_name HUD extends BaseUI
 
 ## The progress bar displaying the player health 
-@onready var health_bar: ProgressBar = $margin_container/health_bar_container/health_bar
+@onready var health_bar: TextureProgressBar = $margin_container/health_container/health_bar
 ## The label displaying the current health value out of the max health value
 @onready var health_label: Label = health_bar.get_node("health_label")
 
@@ -39,4 +39,6 @@ func on_damage(_attack: Attack) -> void:
 ## Update the health value in the HUD
 func update_health() -> void:
 	health_bar.value = health_manager.current_health
+	health_bar.size.x = health_manager.max_health + health_bar.stretch_margin_left + health_bar.stretch_margin_right
 	health_label.text = "%d/%d" % [health_manager.current_health, health_manager.max_health]
+	#health_label.position.x -= health_label.size.x / 2

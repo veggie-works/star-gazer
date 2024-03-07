@@ -1,3 +1,4 @@
+// Chroma key a specific color and flash a specific color
 shader_type canvas_item;
 
 // The color of the pixels to be replaced

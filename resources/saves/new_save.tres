@@ -13,3 +13,5 @@ save_position = Vector2(59, 109)
 script = ExtResource("1_plc0g")
 last_save_point = SubResource("Resource_p3gq5")
 visited_save_points = Array[ExtResource("1_6vwvp")]([SubResource("Resource_p3gq5")])
+current_health = 100.0
+max_health = 100.0

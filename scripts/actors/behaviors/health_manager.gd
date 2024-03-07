@@ -62,6 +62,7 @@ func full_heal() -> void:
 
 ## Take damage to the actor
 func take_damage(attack: Attack) -> void:
+	print("TAKE DAMAGE: ", attack.weapon.damage)
 	owner.face(attack)
 	set_invincible()
 	var damage_amount: float = attack.weapon.damage
@@ -71,6 +72,7 @@ func take_damage(attack: Attack) -> void:
 	if shake_camera:
 		GameCamera.shake(25, 0.25)
 	if is_dead:
+		
 		die()
 		return
 	if recoil_manager:
