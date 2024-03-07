@@ -7,5 +7,5 @@ class_name PlayerState extends State
 @onready var animator: AnimationPlayer = body.get_node("animator")
 
 ## The function that the player FSM will pass inputs into
-func input(event: InputEvent) -> void:
+func input(_event: InputEvent) -> void:
 	pass

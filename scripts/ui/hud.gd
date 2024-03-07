@@ -41,4 +41,3 @@ func update_health() -> void:
 	health_bar.value = health_manager.current_health
 	health_bar.size.x = health_manager.max_health + health_bar.stretch_margin_left + health_bar.stretch_margin_right
 	health_label.text = "%d/%d" % [health_manager.current_health, health_manager.max_health]
-	#health_label.position.x -= health_label.size.x / 2

@@ -1,4 +1,4 @@
-## UI for updating accessibility settings
+## UI for modifying accessibility settings
 extends Control
 
 ## Lists out all the accessibility settings

@@ -12,7 +12,7 @@ func enter() -> void:
 func exit() -> void:
 	body.set_collision_mask_value(Globals.PhysicsLayers.PLATFORM, true)
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if body.is_grounded():
 		if abs(body.velocity.x) > 0:
 			fsm.transition_to(PlayerRunState)

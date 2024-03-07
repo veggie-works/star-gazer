@@ -26,5 +26,5 @@ func interact_with(body: Player) -> void:
 func _on_body_entered(body: Player) -> void:
 	player = body
 
-func _on_body_exited(body: Player) -> void:
+func _on_body_exited(_body: Player) -> void:
 	player = null

@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://ce5k56rlqcob4"]
+[gd_scene load_steps=4 format=3 uid="uid://ce5k56rlqcob4"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings/input_bindings_panel/input_bindings_panel.gd" id="1_6w3m7"]
 [ext_resource type="PackedScene" uid="uid://bniejhi1vxwtl" path="res://scenes/ui/settings/input_bindings_panel/input_rebinder.tscn" id="2_f86ar"]
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="3_vif1n"]
 
 [node name="input_bindings_panel" type="Control"]
 editor_description = "Panel for editing key/mouse and controller bindings."
@@ -53,7 +54,7 @@ text = "Rebind inputs"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="back_button" type="Button" parent="panel/margin_container/rebinders_container"]
+[node name="back_button" parent="panel/margin_container/rebinders_container" instance=ExtResource("3_vif1n")]
 layout_mode = 2
 text = "Back"
 

@@ -1,4 +1,4 @@
-## Controls sprite flashing of a canvas item
+## Controls flashing of a canvas item
 class_name Flasher extends Node2D
 
 ## The material of the owner of this flasher
@@ -49,11 +49,11 @@ func _process(delta: float) -> void:
 		is_flashing = false
 
 ## Flash a color for a duration of time
-func flash(color := Color.WHITE, peak_flash_amount: float = 1.0, ramp_down_time: float = 0.25, ramp_up_time: float = 0.0) -> void:
+func flash(color := Color.WHITE, new_peak_flash_amount: float = 1.0, new_ramp_down_time: float = 0.25, new_ramp_up_time: float = 0.0) -> void:
 	owner_material.set_shader_parameter("flash_color", color)
-	self.peak_flash_amount = peak_flash_amount
-	self.ramp_up_time = ramp_up_time
-	self.ramp_down_time = ramp_down_time
+	peak_flash_amount = new_peak_flash_amount
+	ramp_up_time = new_ramp_up_time
+	ramp_down_time = new_ramp_down_time
 	current_ramp_up_time = 0.0
 	current_ramp_down_time = 0.0
 	is_flashing = true

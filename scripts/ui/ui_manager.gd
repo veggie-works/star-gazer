@@ -53,7 +53,7 @@ func close_ui(ui: GDScript) -> void:
 		return opened_ui.get_script() == ui
 	)
 	for found_ui in found_uis:
-		if not non_closeable_uis.any(func(ui): return ui == found_ui):
+		if not non_closeable_uis.any(func(non_closeable_ui): return non_closeable_ui == found_ui):
 			found_ui.close()
 
 ## Create a new instance of a UI

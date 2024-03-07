@@ -7,7 +7,7 @@ class_name PlayerRunState extends PlayerState
 func enter() -> void:
 	animator.play("run")
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if not body.is_grounded():
 		fsm.transition_to(PlayerFallState)
 		return

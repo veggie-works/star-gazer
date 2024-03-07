@@ -56,7 +56,7 @@ var sfx_volume: float:
 func _ready() -> void:
 	update_music_volume()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	check_downbeat()
 
 ## Check whether to emit the downbeat signal

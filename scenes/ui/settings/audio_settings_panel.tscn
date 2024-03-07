@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://bo1bwedhgdekd"]
+[gd_scene load_steps=3 format=3 uid="uid://bo1bwedhgdekd"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings/audio_settings_panel.gd" id="1_cnjc2"]
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_e7gq6"]
 
 [node name="audio_settings_panel" type="Control"]
 layout_mode = 3
@@ -104,7 +105,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="back_button" type="Button" parent="panel/margin_container/audio_settings_list"]
+[node name="back_button" parent="panel/margin_container/audio_settings_list" instance=ExtResource("2_e7gq6")]
 layout_mode = 2
 text = "Back"
 

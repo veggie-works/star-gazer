@@ -1,3 +1,4 @@
+// Shears an object along the x- and/or y-axes
 shader_type canvas_item;
 
 // The amount to shear the canvas item horizontally

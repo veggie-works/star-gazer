@@ -7,7 +7,7 @@ func _ready() -> void:
 func enter() -> void:
 	animator.play("hurt")
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if Input.is_action_just_pressed("dodge"):
 		fsm.transition_to(PlayerRecoverState)
 

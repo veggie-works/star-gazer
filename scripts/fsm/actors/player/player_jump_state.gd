@@ -14,7 +14,7 @@ func enter() -> void:
 func exit() -> void:
 	body.set_collision_mask_value(Globals.PhysicsLayers.PLATFORM, true)
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	body.velocity.x = 0
 	if body.velocity.y >= 0:
 		fsm.transition_to(PlayerFallState)

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ctdhbbmiflojf"]
+[gd_scene load_steps=3 format=3 uid="uid://ctdhbbmiflojf"]
 
 [ext_resource type="Script" path="res://scripts/ui/settings/accessibility_settings_panel.gd" id="1_41jhd"]
+[ext_resource type="PackedScene" uid="uid://xmhpn38awq6d" path="res://scenes/ui/menu_button.tscn" id="2_sfxln"]
 
 [node name="accessibility_settings_panel" type="Control"]
 layout_mode = 3
@@ -72,7 +73,7 @@ layout_mode = 2
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="back_button" type="Button" parent="panel/margin_container/accessibility_settings_list"]
+[node name="back_button" parent="panel/margin_container/accessibility_settings_list" instance=ExtResource("2_sfxln")]
 layout_mode = 2
 text = "Back"
 

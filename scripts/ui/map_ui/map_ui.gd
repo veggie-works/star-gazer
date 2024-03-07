@@ -34,7 +34,7 @@ func _ready() -> void:
 	SceneManager.scene_changed.connect(on_scene_change)
 	current_level.get_node("pulser").start_pulse(PULSE_COLOR, PULSE_RATE)
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	player_location.position = get_player_position_on_map()
 
 ## Initialize the game map UI
@@ -62,12 +62,12 @@ func get_player_position_on_map() -> Vector2:
 		return player_pos
 	return Vector2.ZERO
 
+## Callback for when the current scene changes
 func on_scene_change(_old_scene: String, _new_scene: String) -> void:
 	for level in levels.get_children():
 		if level is MapLevel:
 			var pulser: Pulser = level.get_node("pulser")
 			if level == current_level:
-				print("START PULSE FOR LEVEL ", level.name)
 				pulser.start_pulse(PULSE_COLOR, PULSE_RATE)
 			elif pulser.is_pulsing:
 				pulser.stop_pulse()

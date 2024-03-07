@@ -8,7 +8,7 @@ func enter() -> void:
 	animator.play("idle")
 	body.velocity.x = 0
 
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if not body.is_grounded():
 		fsm.transition_to(PlayerFallState)
 		return

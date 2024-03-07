@@ -1,3 +1,4 @@
+## A UI menu button that plays a click sound when pressed
 extends Button
 
 ## The audio when clicking the button

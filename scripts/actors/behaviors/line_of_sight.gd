@@ -15,7 +15,7 @@ signal seen(target: Node2D)
 ## The closest target that is being tracked
 var closest_target: Node
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if len(target_group) > 0:
 		all_targets = get_tree().get_nodes_in_group(target_group)
 	var closest: Node2D = Globals.get_closest(self, all_targets)

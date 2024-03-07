@@ -1,4 +1,4 @@
-// Flash all non-transparent pixels a specific color
+// Flash the non-transparent pixels of a canvas item
 shader_type canvas_item;
 
 // The color when flashing
