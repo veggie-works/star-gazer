@@ -14,12 +14,16 @@ var action_map: Dictionary:
 		return map
 
 func _ready() -> void:
-	var events: Dictionary = SaveManager.settings.input_events
-	for action in InputMap.get_actions().filter(func(action): return not action.contains("ui_")):
-		if events.has(action):
-			InputMap.action_erase_events(action)
-			for event in events[action]:
-				InputMap.action_add_event(action, event)
+	var saved_events: Dictionary = SaveManager.settings.input_events
+	for action: String in InputMap.get_actions().filter(func(action): return not action.contains("ui_")):
+		var default_input_events: Array[InputEvent] = InputMap.action_get_events(action)
+		if saved_events.has(action):
+			for saved_event in saved_events.get(action):
+				var matching_default_events: Array[InputEvent] = default_input_events.filter(func(default_event):
+					return default_event.is_match(saved_event))
+				for matching_event: InputEvent in matching_default_events:
+					InputMap.action_erase_event(action, matching_event)
+				InputMap.action_add_event(action, saved_event)
 
 func _notification(what: int) -> void:
 	match what:

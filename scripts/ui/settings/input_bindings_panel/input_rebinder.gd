@@ -1,6 +1,16 @@
 ## UI for rebinding an input action
 class_name InputRebinder extends Control
 
+## The maximum amount of characters that a rebinding button can have.
+const MAX_BUTTON_TEXT_CHARS: int = 32
+
+## Emitted when the key event is rebound
+signal key_rebound(action_name: String, key: InputEventKey)
+## Emitted when the mouse button event is rebound
+signal mouse_rebound(action_name: String, button: InputEventMouseButton)
+## Emitted when the joypad event is rebound
+signal joypad_rebound(action_name: String, button: InputEventJoypadButton)
+
 ## The name of the input action that this UI will rebind
 var action_name: StringName
 
@@ -24,21 +34,20 @@ func _ready() -> void:
 	var action_events = InputMap.action_get_events(action_name);
 	var key_or_mouse_input_actions = action_events.filter(func(event): return event is InputEventKey or event is InputEventMouseButton)
 	if len(key_or_mouse_input_actions) <= 0:
-		rebind_key_or_mouse_button.text = "No key/mouse binding found."
+		rebind_key_or_mouse_button.text = "None"
 	elif key_or_mouse_input_actions[0] is InputEventKey:
-		rebind_key_or_mouse_button.text = key_or_mouse_input_actions[0].as_text_key_label()
+		rebind_key_or_mouse_button.text = OS.get_keycode_string(key_or_mouse_input_actions[0].physical_keycode)
 	elif key_or_mouse_input_actions[0] is InputEventMouseButton:
 		rebind_key_or_mouse_button.text = key_or_mouse_input_actions[0].as_text()
 		
 	var joypad_input_actions = action_events.filter(func(event): return event is InputEventJoypadButton)
 	if len(joypad_input_actions) <= 0:
-		rebind_joy_button.text = "No joypad binding found."
+		rebind_joy_button.text = "None"
 	elif joypad_input_actions[0] is InputEventJoypadButton:
 		rebind_joy_button.text = joypad_input_actions[0].as_text()
 
 func _input(event: InputEvent) -> void:
-	if event is InputEventKey and event.keycode == KEY_ESCAPE or \
-		event is InputEventJoypadButton and event.button_index == JOY_BUTTON_BACK:
+	if event.is_action_pressed("ui_cancel"):
 		rebinding_key_or_mouse_button = false
 		rebinding_joypad_button = false
 		enable_rebind_buttons()
@@ -57,14 +66,23 @@ func _input(event: InputEvent) -> void:
 
 ## Clear the current key or mouse button bindings
 func clear_key_and_mouse_bindings() -> void:
-	var events = InputMap.action_get_events(action_name)
-	var current_keys = events.filter(func(action): return action is InputEventKey)
-	var current_mouse_buttons = events.filter(func(action): return action is InputEventMouseButton)
-	for key in current_keys:
+	var events: Array[InputEvent] = InputMap.action_get_events(action_name)
+	var current_keys: Array[InputEvent] = events.filter(func(action): return action is InputEventKey)
+	var current_mouse_buttons: Array[InputEvent] = events.filter(func(action): return action is InputEventMouseButton)
+	for key: InputEventKey in current_keys:
 		InputMap.action_erase_event(action_name, key)
-	for button in current_mouse_buttons:
+	for button: InputEventMouseButton in current_mouse_buttons:
 		InputMap.action_erase_event(action_name, button)
-		
+	rebind_key_or_mouse_button.text = "None"
+
+## Clear the current joypad button bindings
+func clear_joypad_bindings() -> void:
+	var events: Array[InputEvent] = InputMap.action_get_events(action_name)
+	var current_joypad_buttons: Array[InputEvent] = events.filter(func(action): return action is InputEventJoypadButton)
+	for button: InputEventJoypadButton in current_joypad_buttons:
+		InputMap.action_erase_event(action_name, button)
+	rebind_joy_button.text = "None"
+
 ## Enable or disable the rebind buttons
 func enable_rebind_buttons(enable: bool = true) -> void:
 	rebind_key_or_mouse_button.disabled = not enable
@@ -74,8 +92,9 @@ func enable_rebind_buttons(enable: bool = true) -> void:
 func rebind_key(key: InputEventKey) -> void:
 	clear_key_and_mouse_bindings()
 	InputMap.action_add_event(action_name, key)
-	rebind_key_or_mouse_button.text = key.as_text_key_label()
+	rebind_key_or_mouse_button.text = OS.get_keycode_string(key.physical_keycode)
 	enable_rebind_buttons()
+	key_rebound.emit(action_name, key)
 
 ## Rebind a button on a mouse
 func rebind_mouse_button(mouse_button: InputEventMouseButton) -> void:
@@ -83,15 +102,17 @@ func rebind_mouse_button(mouse_button: InputEventMouseButton) -> void:
 	InputMap.action_add_event(action_name, mouse_button)
 	rebind_key_or_mouse_button.text = mouse_button.as_text()
 	enable_rebind_buttons()
+	mouse_rebound.emit(action_name, mouse_button)
 
 ## Rebind a joypad button on a game controllerr
 func rebind_joypad_button(joypad_button: InputEventJoypadButton) -> void:
-	var current_joypad_buttons = InputMap.action_get_events(action_name).filter(func(action): return action is InputEventJoypadButton)
-	for button in current_joypad_buttons:
+	var current_joypad_buttons: Array[InputEvent] = InputMap.action_get_events(action_name).filter(func(action): return action is InputEventJoypadButton)
+	for button: InputEventJoypadButton in current_joypad_buttons:
 		InputMap.action_erase_event(action_name, button)
 	InputMap.action_add_event(action_name, joypad_button)
 	rebind_joy_button.text = joypad_button.as_text()
 	enable_rebind_buttons()
+	joypad_rebound.emit(action_name, joypad_button)
 
 func _on_rebind_key_or_mouse_button_pressed() -> void:
 	rebinding_key_or_mouse_button = true

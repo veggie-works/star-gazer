@@ -54,6 +54,30 @@ text = "Rebind inputs"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="labels" type="HBoxContainer" parent="panel/margin_container/rebinders_container"]
+layout_mode = 2
+
+[node name="action_label" type="Label" parent="panel/margin_container/rebinders_container/labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Action"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="key_mouse_binding_label" type="Label" parent="panel/margin_container/rebinders_container/labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Key/Mouse Binding"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="joypad_binding" type="Label" parent="panel/margin_container/rebinders_container/labels"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Gamepad binding"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="back_button" parent="panel/margin_container/rebinders_container" instance=ExtResource("3_vif1n")]
 layout_mode = 2
 text = "Back"

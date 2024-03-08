@@ -17,7 +17,6 @@ func _ready() -> void:
 		exit_button.hide()
 
 func _on_start_button_pressed() -> void:
-	
 	if OS.is_debug_build():
 		UIManager.create_ui(DebugPanel)
 	SaveManager.load_game(0)
