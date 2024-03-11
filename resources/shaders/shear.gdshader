@@ -16,7 +16,3 @@ void vertex() {
 	
 	VERTEX = (transform_matrix * vec4(VERTEX, 0.0, 1.0)).xy;
 }
-
-void fragment() {
-	// Called for every pixel the material is visible on.
-}

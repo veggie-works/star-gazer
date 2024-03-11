@@ -47,6 +47,8 @@ var tracking: bool
 
 func _ready() -> void:
 	zoom = Vector2.ONE * BASE_ZOOM
+	# Make objects in visibility layer 20 invisible
+	get_viewport().set_canvas_cull_mask_bit(20, false)
 
 func _process(delta: float) -> void:
 	if targets.all(func(target): return target != null):

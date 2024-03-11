@@ -112,6 +112,7 @@ inventory={
 2d_render/layer_1="environment"
 2d_render/layer_2="ui"
 2d_render/layer_3="actors"
+2d_render/layer_20="invisible"
 2d_physics/layer_1="player"
 2d_physics/layer_2="terrain"
 2d_physics/layer_3="interactive"

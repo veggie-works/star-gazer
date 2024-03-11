@@ -1,0 +1,24 @@
+[gd_resource type="AnimatedTexture" load_steps=7 format=3 uid="uid://k2nixdnk0sxy"]
+
+[ext_resource type="Texture2D" uid="uid://bhg4o0ysvfe8y" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_0.png" id="1_p6u6s"]
+[ext_resource type="Texture2D" uid="uid://181cesmpvn86" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_1.png" id="2_rcqmt"]
+[ext_resource type="Texture2D" uid="uid://cjtq0xhr3m36y" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_2.png" id="3_7wl1d"]
+[ext_resource type="Texture2D" uid="uid://b3t7k0h2dic2x" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_3.png" id="4_wmf7l"]
+[ext_resource type="Texture2D" uid="uid://c2wf81hcgsvs1" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_4.png" id="5_hcdpc"]
+[ext_resource type="Texture2D" uid="uid://bs4m5w16n42vx" path="res://assets/art/actors/player/Attack1/HeroKnight_Attack1_5.png" id="6_da3dt"]
+
+[resource]
+resource_local_to_scene = true
+frames = 6
+frame_0/texture = ExtResource("1_p6u6s")
+frame_0/duration = 0.08
+frame_1/texture = ExtResource("2_rcqmt")
+frame_1/duration = 0.08
+frame_2/texture = ExtResource("3_7wl1d")
+frame_2/duration = 0.08
+frame_3/texture = ExtResource("4_wmf7l")
+frame_3/duration = 0.08
+frame_4/texture = ExtResource("5_hcdpc")
+frame_4/duration = 0.08
+frame_5/texture = ExtResource("6_da3dt")
+frame_5/duration = 0.08
