@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/ui/fader.gd" id="1_adjyv"]
 [ext_resource type="Shader" path="res://resources/shaders/cutout.gdshader" id="1_hgjx5"]
-[ext_resource type="Texture2D" uid="uid://k2nixdnk0sxy" path="res://resources/textures/fader.tres" id="2_ypn5y"]
+[ext_resource type="Texture2D" uid="uid://upuc18gicea1" path="res://assets/art/ui/triangle.png" id="3_o4ofb"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_kixln"]
 viewport_path = NodePath("shape_viewport")
@@ -26,7 +26,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(25, 25), Vector2(0, 0)]
+"values": [Vector2(4, 4), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shape_viewport/shape:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 3.14159]
 }
 
 [sub_resource type="Animation" id="Animation_lxube"]
@@ -43,7 +55,19 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.25),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector2(0, 0), Vector2(25, 25)]
+"values": [Vector2(0, 0), Vector2(4, 4)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("shape_viewport/shape:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [3.14159, 6.28319]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_30yuf"]
@@ -52,7 +76,7 @@ _data = {
 "fade_out": SubResource("Animation_lxube")
 }
 
-[node name="background" type="ColorRect"]
+[node name="fader" type="ColorRect"]
 editor_description = "Handles fade-in and fade-out transitions."
 visibility_layer = 2
 material = SubResource("ShaderMaterial_jxxx5")
@@ -87,11 +111,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(1e-05, 1e-05)
+rotation = 6.28319
+scale = Vector2(4, 4)
 pivot_offset = Vector2(960, 540)
 size_flags_horizontal = 4
 size_flags_vertical = 4
-texture = ExtResource("2_ypn5y")
+texture = ExtResource("3_o4ofb")
 expand_mode = 5
 
 [connection signal="animation_finished" from="animator" to="." method="_on_animator_animation_finished"]
