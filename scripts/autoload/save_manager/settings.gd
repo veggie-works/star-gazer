@@ -1,7 +1,7 @@
 ## Represents a settings file on the user's disk
 class_name Settings extends Resource
 
-## Key/mouse and joypad input events
+## Input actions mapped to their Key/mouse and joypad events
 @export var input_events: Dictionary = {}
 
 ## The overall master volume
